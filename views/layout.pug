@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+      block head
+        title="Express Starter App"
+        link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/layout.css')
+        script(src="/javascripts/layout.js" type="module" defer)
+  body(class=`${mode}`)
+    .buttons
+      button(class="switch-stage" data-stage=0) Project Starter
+      button(class="switch-stage" data-stage=1) Auth
+      button(class="switch-stage" data-stage=2) More
+    block content
