@@ -1,0 +1,17 @@
+extends layout
+include utils.pug
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/auth.css")
+  //- add page specific js
+
+block content
+  +validationErrorSummary(errors)
+  form(action='/users/login' method='post')
+    input(type='hidden' name='_csrf' value=token)
+    +field('Username', 'username', username)
+    +field('Password', 'password', null, 'password')
+    div(class='py-4')
+      button(type='submit') Login
+      a(href='/') Cancel
