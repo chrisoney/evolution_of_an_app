@@ -6,9 +6,19 @@ html
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
         script(src="/javascripts/layout.js" type="module" defer)
-  body(class=`${mode}`)
-    .buttons
-      button(class="switch-stage" data-stage=0) Project Starter
-      button(class="switch-stage" data-stage=1) Auth
-      button(class="switch-stage" data-stage=2) More
+  body(class='background')
+    .stage-button-container
+      .stage-button-reveal Switch Stage
+        .buttons
+          button(class="switch-stage" data-stage=0) Project Starter
+          button(class="switch-stage" data-stage=1) Auth
+          button(class="switch-stage" data-stage=2) More
+    .navbar
+      if authenticated
+        form(action="/users/logout" method="post")
+          button(type="submit" class="logout-button") Logout
+      else
+        a(href="/users/login") Login
+        a(href="/users/signup") Signup
+
     block content

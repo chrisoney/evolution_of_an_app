@@ -32,19 +32,20 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   if (validatorErrors.isEmpty()) {
     // Attempt to get the user by their email address.
     const user = await User.findOne({ where: { username } });
-
+    console.log("step 1--------------------------------")
     if (user !== null) {
       // If the user exists then compare their password
       // to the provided password.
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
-
+      console.log("step 2--------------------------------")
       if (passwordMatch) {
         // If the password hashes match, then login the user
         // and redirect them to the default route.
+        console.log("-----------------TESTING------------------")
         loginUser(req, res, user);
-        req.session.save(err => {
+        return req.session.save(err => {
           if (err) next(err);
-          else res.redirect('/');
+          else return res.redirect('/');
         })
       }
     }
@@ -55,7 +56,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
     errors = validatorErrors.array().map((error) => error.msg);
   }
 
-  res.render('user-login', {
+  res.render('login', {
     username,
     errors,
     csrfToken: req.csrfToken(),
@@ -122,9 +123,9 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
     user.hashedPassword = hashedPassword;
     await user.save();
     loginUser(req, res, user);
-    req.session.save(err => {
+    return req.session.save(err => {
       if (err) next(err)
-      else res.redirect('/');
+      else return res.redirect('/');
     })
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
