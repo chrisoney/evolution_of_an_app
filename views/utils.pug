@@ -1,7 +1,7 @@
-mixin field(labelText, fieldName, fieldValue, fieldType = 'text')
+mixin field(labelText, fieldName, fieldValue, placeholder, fieldType = 'text')
   div(class='form-group')
-    label(for=fieldName)= labelText
-    input(type=fieldType id=fieldName name=fieldName value=fieldValue class='form-control')
+    label(for=fieldName class='form-label')= labelText
+    input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class='form-control')
 
 mixin validationErrorSummary(errors)
   if errors

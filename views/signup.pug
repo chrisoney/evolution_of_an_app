@@ -8,13 +8,18 @@ append head
 
 
 block content
-  +validationErrorSummary(errors)
-  form(action='/users/signup' method='post')
-    input(type='hidden' name='_csrf' value=token)
-    +field('Username', 'username', user.username)
-    +field('Email Address', 'email', user.email)
-    +field('Password', 'password', user.password, 'password')
-    +field('Confirm Password', 'confirmPassword', '', 'password')
-    div(class='py-4')
-      button(type='submit') Signup
-      a(href='/') Cancel
+  div(class="form-container")
+    h1.auth-title Sign up for RoyalReads
+    +validationErrorSummary(errors)
+    form(action='/users/signup' method='post')
+      input(type='hidden' name='_csrf' value=token)
+      +field('Username', 'username', user.username, 'my-username')
+      +field('Email Address', 'email', user.email, 'me@me.io')
+      +field('Password', 'password', null, null, 'password')
+      +field('Confirm Password', 'confirmPassword', null, null, 'password')
+      div(class="form-buttons")
+        button(type='submit' class="positive-button") Sign Up
+        a(href='/' class="neutral-link") Cancel
+    div(class="auth-bottom-nav")
+      span Already a member?
+      a(href="/users/login" class="neutral-link") Sign in

@@ -8,11 +8,15 @@ append head
 
 block content
   div(class="form-container")
+    h1.auth-title Sign in to RoyalReads
     +validationErrorSummary(errors)
     form(action='/users/login' method='post')
       input(type='hidden' name='_csrf' value=token)
-      +field('Username', 'username', username)
-      +field('Password', 'password', null, 'password')
-      div(class='py-4')
-        button(type='submit') Login
-        a(href='/') Cancel
+      +field('Username', 'username', username, 'me@me.io')
+      +field('Password', 'password', null, null, 'password')
+      div(class="form-buttons")
+        button(type='submit' class="positive-button") Sign in
+        a(href='/' class="neutral-link") Cancel
+    div(class="auth-bottom-nav")
+      span Not a member?
+      a(href="/users/signup" class="neutral-link") Sign up
