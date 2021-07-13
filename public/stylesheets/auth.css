@@ -72,6 +72,7 @@
   background-color: #F4F1EA;
   line-height: 1;
   padding: 12px 24px;
+  margin-right: 10px;
 }
 
 .positive-button:hover {
@@ -79,7 +80,6 @@
 }
 
 .neutral-link {
-  margin-left: 10px;
   text-decoration: none;
   color: #00635d;
   font-size: 13px;
