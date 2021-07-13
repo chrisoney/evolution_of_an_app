@@ -7,6 +7,8 @@ const { asyncHandler, csrfProtection, pageChecker } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
 const { User } = require('../db/models')
 
+router.use(pageChecker)
+
 const loginValidators = [
   check('username')
     .exists({ checkFalsy: true })
@@ -16,7 +18,7 @@ const loginValidators = [
     .withMessage('Please provide a value for Password'),
 ];
 
-router.get('/login', pageChecker, csrfProtection, (req, res, next) => {
+router.get('/login', csrfProtection, (req, res, next) => {
   res.render('login', { token: req.csrfToken(), mode: 'auth-background' });
 });
 
@@ -144,7 +146,7 @@ router.post('/demo', asyncHandler( async (req, res, next) => {
 }))
 
 
-router.post('/logout', pageChecker, (req, res, next) => {
+router.post('/logout', (req, res, next) => {
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {

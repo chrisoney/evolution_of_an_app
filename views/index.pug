@@ -12,8 +12,30 @@ block content
       h1= title
       p Welcome to your Project Skeleton
     when '1'
-      .logo-container
-        a(href='/' class="logo-link")
-          img(src='/images/logo.png' class="auth-logo")
+      if authenticated
+        .logo-container
+          a(href='/' class="logo-link")
+            img(src='/images/logo.png' class="auth-logo")
+        form(action="/users/logout" method="post")
+            button(type="submit" class="logout-button") Logout
+      else
+        .logo-container
+          a(href='/' class="logo-link")
+            img(src='/images/logo.png' class="auth-logo")
+        .header
+          img(src='/images/royal.jpg' class="header-image")
+          .auth-container
+            div.auth-container-title Discover and Read More
+            form(action='/users/demo' method='post')
+              button(type="submit" class="demo-button") Demo Login
+            a(href="/users/signup" class="signup-button") Sign up with email
+            div.auth-container-description
+              | By creating an account, you agree to 
+              b nothing 
+              | and are beholden to 
+              b no one.
+            .login-container
+              div.login-description Already a member?
+              a(href='/users/login' class="login-text") Sign in
     when '2'
       p Getting some features, eh?
