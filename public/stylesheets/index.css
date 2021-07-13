@@ -1,3 +1,18 @@
 h1 {
-    color: #555555;
+	color: #8d1212;
+}
+
+.logo-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	background-color: #F4F2E9;
+}
+.logo-link{
+	text-decoration: none;
+	padding: 20px 10px;
+}
+.auth-logo{
+	height: 45px;
+	width: auto;
 }

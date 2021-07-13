@@ -3,26 +3,41 @@ html
   head
       block head
         title="Express Starter App"
+        script(src="https://kit.fontawesome.com/a229c5b13d.js" crossorigin="anonymous")
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
         script(src="/javascripts/layout.js" type="module" defer)
-  body(class='background')
+  body(class=mode)
     .stage-button-container
       .stage-button-reveal Switch Stage
         .buttons
           button(class="switch-stage" data-stage=0) Project Starter
           button(class="switch-stage" data-stage=1) Auth
           button(class="switch-stage" data-stage=2) More
-    if mode !== '0'
-      .navbar
-        if authenticated
-          form(action="/users/logout" method="post")
-            button(type="submit" class="logout-button") Logout
-        else
-          a(href="/users/login") Login
-          a(href="/users/signup") Signup
+    //- if mode !== '0'
+    //-   .navbar
+    //-     if authenticated
+    //-       form(action="/users/logout" method="post")
+    //-         button(type="submit" class="logout-button") Logout
+    //-     else
+    //-       a(href="/users/login") Login
+    //-       a(href="/users/signup") Signup
 
     block content
 
     if mode !== '0'
       .footer-container
+        .footer-left
+          span(class="connect-title") Connect
+          .connect-buttons
+            a(href="https://github.com/chrisoney" class='button-container')
+              i(class='o-link-button fab fa-github')
+            a(href="https://www.linkedin.com/in/christopher-oney-317b84132/" class='button-container')
+              i(class='o-link-button fab fa-linkedin')
+            a(href="https://angel.co/u/christopher-oney" class='button-container')
+              i(class='o-link-button fab fa-angellist')
+            a(href="https://www.chrisoney.com" class='button-container')
+              i(class='o-link-button fas fa-smile')
+        .footer-right
+          span(class='footer-info') 2021 RoyalReads
+          span(class='footer-info') Only version

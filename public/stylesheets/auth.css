@@ -1,13 +1,28 @@
-.navbar {
+.navbar, .footer-container {
   display: none;
+}
+body {
+  display: flex;
+  justify-content: center;
+}
+.logo-container{
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+.auth-logo {
+  height: 30px;
+  width: auto;
 }
 
 .form-container {
-  position: absolute;
-  top: 50%;
+  margin-top: 20px;
+  margin-right: auto;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 600px;
+  height: fit-content;
 
   background: white;
   padding: 28px 10px 34px 10px;

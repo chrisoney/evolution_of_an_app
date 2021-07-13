@@ -1,15 +1,20 @@
-.background {
-  background-color: #F9F7F4;
+body {
+  background-color: white;
   color: black;
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.auth-background {
+  background-color: #F9F8F4;
 }
 
 .stage-button-container {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 5;
 }
 
 .stage-button-reveal {
@@ -40,4 +45,65 @@
 
 .switch-stage {
   cursor: pointer;
+}
+
+
+.footer-container {
+  position: fixed;
+  background-color: #F9F8F4;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  padding: 10px 8px;
+}
+
+.footer-left{
+  display: flex;
+  flex-direction: column;
+}
+
+.connect-title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.15;
+  margin: 12px 0;
+  text-transform: uppercase;
+  color: #767676;
+  margin-bottom: 8px;
+}
+
+.connect-buttons {
+  display: flex;
+}
+
+.button-container {
+  cursor: pointer;
+  background: #A2A19F;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.o-link-button {
+  font-size: 20px;
+  color: #F9F8F4;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-info {
+  font-size: 14px;
+  color: #181818;
+  text-align: center;
 }

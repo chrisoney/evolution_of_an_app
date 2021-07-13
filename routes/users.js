@@ -17,7 +17,7 @@ const loginValidators = [
 ];
 
 router.get('/login', pageChecker, csrfProtection, (req, res, next) => {
-  res.render('login', { token: req.csrfToken() });
+  res.render('login', { token: req.csrfToken(), mode: 'auth-background' });
 });
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res, next) => {
@@ -63,7 +63,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 
 router.get('/signup', csrfProtection, (req, res, next) => {
   const user = User.build()
-  res.render('signup', { token: req.csrfToken(), user });
+  res.render('signup', { token: req.csrfToken(), user, mode: 'auth-background' });
 });
 
 
