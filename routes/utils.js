@@ -10,7 +10,11 @@ const pageChecker = (req, res, next) => {
   const url = req.originalUrl;
   if (authPages.includes(url) && res.locals.mode === '0') {
     res.render('page-not-made')
-  } else {
+  }
+  else if (req.method === 'POST' && res.locals.mode === '0') {
+    res.render('page-not-made', {alert: 'alert("This version of the app didn\'t have this functionality. Switch to a newer version to see it")</script>'})
+  }
+  else {
     next()
   }
 }

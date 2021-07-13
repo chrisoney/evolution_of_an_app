@@ -32,16 +32,13 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   if (validatorErrors.isEmpty()) {
     // Attempt to get the user by their email address.
     const user = await User.findOne({ where: { username } });
-    console.log("step 1--------------------------------")
     if (user !== null) {
       // If the user exists then compare their password
       // to the provided password.
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
-      console.log("step 2--------------------------------")
       if (passwordMatch) {
         // If the password hashes match, then login the user
         // and redirect them to the default route.
-        console.log("-----------------TESTING------------------")
         loginUser(req, res, user);
         return req.session.save(err => {
           if (err) next(err);
@@ -138,7 +135,7 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
 }))
 
 
-router.post('/logout', (req, res, next) => {
+router.post('/logout', pageChecker, (req, res, next) => {
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {
