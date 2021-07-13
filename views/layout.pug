@@ -14,14 +14,11 @@ html
           button(class="switch-stage" data-stage=0) Project Starter
           button(class="switch-stage" data-stage=1) Auth
           button(class="switch-stage" data-stage=2) More
-    //- if mode !== '0'
-    //-   .navbar
-    //-     if authenticated
-    //-       form(action="/users/logout" method="post")
-    //-         button(type="submit" class="logout-button") Logout
-    //-     else
-    //-       a(href="/users/login") Login
-    //-       a(href="/users/signup") Signup
+    if mode !== '0' && authenticated
+      //- This is where I'm going to be putting the navbar
+      .navbar
+        form(action="/users/logout" method="post")
+          button(type="submit" class="logout-button") Logout
 
     block content
 

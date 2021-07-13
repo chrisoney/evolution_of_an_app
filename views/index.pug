@@ -13,11 +13,10 @@ block content
       p Welcome to your Project Skeleton
     when '1'
       if authenticated
-        .logo-container
+        //- This area should be solely for content on the home page
+        //- .logo-container
           a(href='/' class="logo-link")
             img(src='/images/logo.png' class="auth-logo")
-        form(action="/users/logout" method="post")
-            button(type="submit" class="logout-button") Logout
       else
         .logo-container
           a(href='/' class="logo-link")
