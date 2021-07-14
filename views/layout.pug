@@ -22,8 +22,8 @@ html
             img(src='/images/logo.png' class="nav-logo")
         .nav-icon-container
           div(class="icon-background")
-            i(class="fas fa-book-reader nav-right-icon")
-            .user-options
+            i(class="fas fa-book-reader nav-right-icon user-dropdown-button")
+            .user-options.hidden
               form(action="/users/logout" method="post")
                 button(type="submit" class="logout-button") Logout
 
