@@ -16,13 +16,22 @@ buttons.forEach((button) => button.addEventListener('click', async (e) => {
 const user_menu_toggle_button = document.querySelector('.user-dropdown-button');
 const user_menu = document.querySelector('.user-options');
 
-user_menu_toggle_button.addEventListener('click', (e) => {
-  user_menu.classList.toggle('hidden')
-})
+if (user_menu_toggle_button) {
+  user_menu_toggle_button.addEventListener('click', (e) => {
+    user_menu.classList.toggle('hidden')
+  })
+}
 
 const stage_selector_button = document.querySelector('.burger');
 const grandparent = stage_selector_button.parentElement.parentElement;
 stage_selector_button.addEventListener('click', (e) => {
   grandparent.classList.toggle('slide-out')
   grandparent.classList.toggle('slide-in')
+})
+
+stage_selector_button.addEventListener('dragend', (e) => {
+  const currTop = getComputedStyle(grandparent).top
+  const newTop = `calc(${currTop} + ${e.offsetY}px)`;
+  console.log(newTop)
+  grandparent.style.top = newTop;
 })
