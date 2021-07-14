@@ -13,23 +13,29 @@ body {
 .stage-button-container {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 50%;
+  transform: translateX(50%);
   z-index: 5;
 }
 
+
 .stage-button-reveal {
-  width: 100px;
-  height: 100px;
-  background-color: blue;
+  background-color: black;
   padding: 10px;
   color: white;
-  border-radius: 50%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   cursor: pointer;
+  width: 50px;
+}
+.burger {
+  color: white;
+  font-size: 20px
 }
 
 .buttons {
@@ -59,7 +65,51 @@ body {
   margin: 5px 16px 5px 15px;
   height: 40px;
   width: auto;
+}
 
+.nav-icon-container {
+  display: flex;
+  margin-right: 8px;
+}
+
+.icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 53px;
+  width: 53px;
+  position: relative;
+}
+
+.icon-background:hover {
+  color: #FFFFFF;
+  background-color: #382110;
+}
+
+.nav-right-icon {
+  color: #F9F7F4;
+  background-color: #DBD3BF;
+  font-size: 24px;
+  line-height: 32px;
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+}
+
+.user-options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
+.fa-book-reader {
 }
 
 

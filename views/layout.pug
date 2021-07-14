@@ -9,7 +9,8 @@ html
         script(src="/javascripts/layout.js" type="module" defer)
   body(class=mode)
     .stage-button-container
-      .stage-button-reveal Switch Stage
+      .stage-button-reveal
+        i(class="fas fa-bars burger" title="Switch version")
         .buttons
           button(class="switch-stage" data-stage=0) Project Starter
           button(class="switch-stage" data-stage=1) Auth
@@ -20,8 +21,11 @@ html
           a(href='/' class="nav-logo-link")
             img(src='/images/logo.png' class="nav-logo")
         .nav-icon-container
-          form(action="/users/logout" method="post")
-            button(type="submit" class="logout-button") Logout
+          div(class="icon-background")
+            i(class="fas fa-book-reader nav-right-icon")
+            .user-options
+              form(action="/users/logout" method="post")
+                button(type="submit" class="logout-button") Logout
 
     block content
 
