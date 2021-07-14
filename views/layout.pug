@@ -15,10 +15,13 @@ html
           button(class="switch-stage" data-stage=1) Auth
           button(class="switch-stage" data-stage=2) More
     if mode !== '0' && authenticated
-      //- This is where I'm going to be putting the navbar
       .navbar
-        form(action="/users/logout" method="post")
-          button(type="submit" class="logout-button") Logout
+        .nav-logo-container
+          a(href='/' class="nav-logo-link")
+            img(src='/images/logo.png' class="nav-logo")
+        .nav-icon-container
+          form(action="/users/logout" method="post")
+            button(type="submit" class="logout-button") Logout
 
     block content
 
