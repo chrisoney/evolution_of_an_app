@@ -19,3 +19,10 @@ const user_menu = document.querySelector('.user-options');
 user_menu_toggle_button.addEventListener('click', (e) => {
   user_menu.classList.toggle('hidden')
 })
+
+const stage_selector_button = document.querySelector('.burger');
+const grandparent = stage_selector_button.parentElement.parentElement;
+stage_selector_button.addEventListener('click', (e) => {
+  grandparent.classList.toggle('slide-out')
+  grandparent.classList.toggle('slide-in')
+})
