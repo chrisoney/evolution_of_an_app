@@ -137,7 +137,7 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
 }))
 
 router.post('/demo', asyncHandler( async (req, res, next) => {
-  const user = await User.findOne({ where: { username: 'chris' } });
+  const user = await User.findOne({ where: { username: 'Main_Character' } });
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);
