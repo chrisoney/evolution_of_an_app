@@ -5,8 +5,8 @@ html
         title="Express Starter App"
         script(src="https://kit.fontawesome.com/a229c5b13d.js" crossorigin="anonymous")
         link(rel='stylesheet' href='/stylesheets/reset.css')
-        link(rel='stylesheet' href='/stylesheets/layout.css')
         script(src="/javascripts/layout.js" type="module" defer)
+        link(rel='stylesheet' href='/stylesheets/layout.css')
   body(class=mode)
     .stage-button-container
       .stage-button-reveal
@@ -24,8 +24,10 @@ html
           div(class="icon-background")
             i(class="fas fa-book-reader nav-right-icon user-dropdown-button")
             .user-options.hidden
-              form(action="/users/logout" method="post")
-                button(type="submit" class="logout-button") Logout
+              div(class="dropdown-username")= user.username
+              .user-menu-bottom-section
+                form(action="/users/logout" method="post")
+                  button(type="submit" class="logout-button user-menu-option") Sign out
 
     block content
 
