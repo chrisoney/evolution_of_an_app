@@ -14,7 +14,7 @@ html
         .buttons
           button(class="switch-stage" data-stage=0) Project Starter
           button(class="switch-stage" data-stage=1) Auth
-          button(class="switch-stage" data-stage=2) More
+          button(class="switch-stage" data-stage=2) Bookshelves
     if mode !== '0' && authenticated
       .navbar
         .nav-logo-container
@@ -28,6 +28,9 @@ html
               .user-menu-bottom-section
                 form(action="/users/logout" method="post")
                   button(type="submit" class="logout-button user-menu-option") Sign out
+    if mode === '2' && authenticated
+      .navbar-lower
+        a(href=`/users/${user.id}/bookshelves` class="navbar-text-link") My Books
 
     block content
 

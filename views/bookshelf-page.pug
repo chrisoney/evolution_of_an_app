@@ -1,0 +1,15 @@
+extends layout.pug
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/bookshelf_page.css")
+  //- add page specific js
+  //- script(src="/javascripts/bookshelf_page.js" type="module" defer)
+
+block content
+  .bookshelf-header
+    h3 My Stories
+  .page-content
+    .sidebar
+    
+    .main-content

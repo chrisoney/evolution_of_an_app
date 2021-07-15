@@ -12,6 +12,7 @@ block content
       h1= title
       p Welcome to your Project Skeleton
     when '1'
+    when '2'
       if authenticated
         //- This area should be solely for content on the home page
         //- .logo-container
@@ -36,5 +37,3 @@ block content
             .login-container
               div.login-description Already a member?
               a(href='/users/login' class="login-text") Sign in
-    when '2'
-      p Getting some features, eh?

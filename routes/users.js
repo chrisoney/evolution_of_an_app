@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const { asyncHandler, csrfProtection, pageChecker } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
-const { User } = require('../db/models')
+const { User, Bookshelf } = require('../db/models')
 
 router.use(pageChecker)
 
@@ -156,5 +156,15 @@ router.post('/logout', (req, res, next) => {
     }
   })
 })
+
+router.get('/:id/bookshelves', asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ['hashedPassword']},
+    include: Bookshelf
+  })
+  res.render('bookshelf-page', { user })
+  // res.json({ user })
+}))
 
 module.exports = router;

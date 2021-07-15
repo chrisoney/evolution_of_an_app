@@ -5,9 +5,16 @@ const csrfProtection = csrf({ cookie: true });
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
 const authPages = ['/users/login', '/users/signup']
+const bookShelfPages = [/users\/\d+\/bookshelves/,]
 
 const pageChecker = (req, res, next) => {
   const url = req.originalUrl;
+  if (parseInt(res.locals.mode) < 2) {
+    for (let i = 0; i < bookShelfPages.length; i++){
+      const regex = bookShelfPages[i];
+      if (regex.exec(url)) return res.render('page-not-made')
+    }
+  }
   if (authPages.includes(url) && res.locals.mode === '0') {
     res.render('page-not-made')
   }

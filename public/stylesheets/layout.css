@@ -81,11 +81,13 @@ body {
   cursor: pointer;
 }
 
-.navbar {
+/* Navbar stuff */
+.navbar, .navbar-lower {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #F4F1EA;
+  z-index: 2;
   box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
 }
 
@@ -175,6 +177,30 @@ body {
   width: 100%;
   border-top: 1px solid #D8D8D8;
 }
+
+.navbar-lower {
+  border-top: 2px solid rgb(0 0 0 / 15%);;
+  justify-content: center;
+  z-index: 1;
+}
+
+.navbar-text-link {
+  display: inline-block;
+  color: #382110;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 16px;
+  line-height: 50px;
+  padding: 0 30px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-text-link:hover {
+  color: #FFFFFF;
+  background-color: #382110;
+}
+
+/* Footer stuff */
 
 .footer-container {
   position: fixed;
