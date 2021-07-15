@@ -30,3 +30,20 @@
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 18px;
 }
+
+.sidebar > h6 {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.bookshelf-selector {
+  color: #00635d;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+}
+
+.bookshelf-selector:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

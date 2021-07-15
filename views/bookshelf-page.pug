@@ -11,5 +11,8 @@ block content
     h3 My Stories
   .page-content
     .sidebar
-    
+      h6 Bookshelves
+      div(class='bookshelf-selector') All
+      each bookshelf in user.Bookshelves
+        div(class='bookshelf-selector' id=bookshelf.id) #{bookshelf.name} (#{0})
     .main-content
