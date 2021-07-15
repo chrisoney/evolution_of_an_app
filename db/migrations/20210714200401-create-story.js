@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       warnings: {
-        type: Sequelize.JSONB
+        type: Sequelize.JSON
       },
       status: {
         type: Sequelize.STRING(30)
