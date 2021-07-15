@@ -5,8 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     description: DataTypes.TEXT,
     pageCount: DataTypes.INTEGER,
+    linkUrl: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
-    warnings: DataTypes.STRING,
+    warnings: DataTypes.JSONB,
     status: DataTypes.STRING
   }, {});
   Story.associate = function(models) {

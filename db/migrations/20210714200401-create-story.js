@@ -23,11 +23,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      linkUrl: {
+        type: Sequelize.STRING
+      },
       imageUrl: {
         type: Sequelize.STRING
       },
       warnings: {
-        type: Sequelize.STRING(100)
+        type: Sequelize.JSONB
       },
       status: {
         type: Sequelize.STRING(30)

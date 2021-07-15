@@ -37,6 +37,11 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
+const { Story } = require('./db/models')
+app.get('/collecting-data', async (req, res) => {
+  const stories = await Story.findAll()
+  res.json({stories})
+})
 
 app.use(restoreUser)
 app.use('/', indexRouter);
