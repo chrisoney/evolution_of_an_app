@@ -23,7 +23,7 @@ const restoreUser = async (req, res, next) => {
   if (req.session.ui) {
     res.locals.mode = req.session.ui.mode
   } else {
-    res.locals.mode = 0
+    res.locals.mode = '0'
   }
 
   if (req.session.auth) {
