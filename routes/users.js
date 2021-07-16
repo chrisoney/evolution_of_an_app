@@ -137,17 +137,17 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
 }))
 
 router.post('/demo', asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ where: { username: 'Main_Character' }});
-  // const user = await User.create({
-  //   username: faker.name.findName(),
-  //   email: faker.internet.email(),
-  //   hashedPassword: bcrypt.hashSync('hunter12')
-  // });
-  // const choices = ['Read', 'Currently Reading', 'Want To Read']
-  // for (let i = 0; i < choices.length; i++){
-  //   const name = choices[i];
-  //   await Bookshelf.create({ name, userId: user.id })
-  // }
+  // const user = await User.findOne({ where: { username: 'Main_Character' }});
+  const user = await User.create({
+    username: faker.name.findName(),
+    email: faker.internet.email(),
+    hashedPassword: bcrypt.hashSync('hunter12')
+  });
+  const choices = ['Read', 'Currently Reading', 'Want To Read']
+  for (let i = 0; i < choices.length; i++){
+    const name = choices[i];
+    await Bookshelf.create({ name, userId: user.id })
+  }
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);
@@ -157,8 +157,8 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
 
 
 router.post('/logout', asyncHandler(async(req, res, next) => {
-  // const user = await User.findByPk(req.session.auth.userId)
-  // await user.destroy();
+  const user = await User.findByPk(req.session.auth.userId)
+  await user.destroy();
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {

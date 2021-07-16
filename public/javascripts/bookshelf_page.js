@@ -14,7 +14,7 @@ new_bookshelf_submit_button.addEventListener('click', async (e) => {
   const otherNames = Array.prototype.slice.call(document.querySelectorAll('.bookshelf-selector')).map(ele => ele.innerText);
   if (name === '' || otherNames.includes(name)) {
     alert("Shelf couldn't be created. Shelf name is either invalid or a duplicate.");
-    return
+    return;
   }
   const res = await fetch('/api/bookshelves', {
     method: 'POST',
