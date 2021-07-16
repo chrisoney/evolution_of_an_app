@@ -4,7 +4,7 @@ const faker = require('faker')
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const { asyncHandler, csrfProtection, pageChecker } = require('./utils');
-const { loginUser, logoutUser } = require('../auth');
+const { loginUser, logoutUser, requireAuth } = require('../auth');
 const { User, Bookshelf } = require('../db/models')
 
 router.use(pageChecker)
@@ -136,17 +136,18 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
   }
 }))
 
-router.post('/demo', asyncHandler( async (req, res, next) => {
-  const user = await User.create({
-    username: faker.name.findName(),
-    email: faker.internet.email(),
-    hashedPassword: bcrypt.hashSync('hunter12')
-  });
-  const choices = ['Read', 'Currently Reading', 'Want To Read']
-  for (let i = 0; i < choices.length; i++){
-    const name = choices[i];
-    await Bookshelf.create({ name, userId: user.id })
-  }
+router.post('/demo', asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ where: { username: 'Main_Character' }});
+  // const user = await User.create({
+  //   username: faker.name.findName(),
+  //   email: faker.internet.email(),
+  //   hashedPassword: bcrypt.hashSync('hunter12')
+  // });
+  // const choices = ['Read', 'Currently Reading', 'Want To Read']
+  // for (let i = 0; i < choices.length; i++){
+  //   const name = choices[i];
+  //   await Bookshelf.create({ name, userId: user.id })
+  // }
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);
@@ -156,8 +157,8 @@ router.post('/demo', asyncHandler( async (req, res, next) => {
 
 
 router.post('/logout', asyncHandler(async(req, res, next) => {
-  const user = await User.findByPk(req.session.auth.userId)
-  await user.destroy();
+  // const user = await User.findByPk(req.session.auth.userId)
+  // await user.destroy();
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {
@@ -168,7 +169,7 @@ router.post('/logout', asyncHandler(async(req, res, next) => {
   })
 }))
 
-router.get('/:id/bookshelves', asyncHandler(async (req, res) => {
+router.get('/:id/bookshelves', requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
   const user = await User.findByPk(id, {
     attributes: { exclude: ['hashedPassword']},

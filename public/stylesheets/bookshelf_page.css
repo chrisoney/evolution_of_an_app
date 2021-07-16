@@ -37,6 +37,11 @@
   font-weight: bold;
 }
 
+.bookshelves-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .bookshelf-selector {
   color: #00635d;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -47,3 +52,74 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.bookshelf-selector:last-of-type{
+  margin-bottom: 10px;
+}
+
+.add-new-bookshelf-button{
+  color: #333333;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  border: 1px solid #D6D0C4;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #F4F1EA;
+  line-height: 1;
+}
+
+.add-new-bookshelf-form-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+.add-new-bookshelf-title {
+  font-weight: bold;
+  margin-right: 3px;
+  vertical-align: baseline;
+  font-size: 14px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  color: #181818;
+}
+
+.add-new-bookshelf-input-section {
+  display: flex;
+}
+
+.add-new-bookshelf-input {
+  width: 100px;
+  background: #FFFFFF;
+  border-radius: 3px;
+  border: #DCD6CC 1px solid;
+  color: #333333;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  resize: none;
+  min-height: 15px;
+  padding: 2px;
+  margin-right: 5px;
+}
+
+.add-new-bookshelf-input:focus {
+  outline: none;
+}
+
+.add-new-bookshelf-submit-button {
+  border-radius: 3px;
+  border: 1px solid #D6D0C4;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  background-color: #F4F1EA;
+  line-height: 1;
+  font-size: 11px;
+  padding: 4px 12px;
+}
+.hidden { display: none }
