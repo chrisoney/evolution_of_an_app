@@ -37,6 +37,20 @@
   font-weight: bold;
 }
 
+.bookshelf-edit-link {
+  font-size: 11px;
+  line-height: 14px;
+  color: #00635d;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+.bookshelf-edit-link:hover {
+  text-decoration: underline;
+}
+
 .bookshelves-container {
   display: flex;
   flex-direction: column;

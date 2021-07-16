@@ -12,6 +12,7 @@ block content
   .page-content
     .sidebar
       h6 Bookshelves
+        a(href='/bookshelves/edit' class='bookshelf-edit-link') (edit)
       div(class='bookshelves-container')
         div(class='bookshelf-selector' id=0) All
         each bookshelf in user.Bookshelves
