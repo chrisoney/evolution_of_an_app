@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const uiRouter = require('./uiApi')
+const apiUiRouter = require('./uiApi');
+const apiBookshelfRouter = require('./bookshelfApi')
 
-router.use('/ui', uiRouter)
+router.use('/ui', apiUiRouter)
+router.use('/bookshelves', apiBookshelfRouter)
 
 module.exports = router;
