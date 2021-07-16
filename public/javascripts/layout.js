@@ -25,8 +25,13 @@ if (user_menu_toggle_button) {
 const stage_selector_button = document.querySelector('.burger');
 const grandparent = stage_selector_button.parentElement.parentElement;
 stage_selector_button.addEventListener('click', (e) => {
-  grandparent.classList.toggle('slide-out')
-  grandparent.classList.toggle('slide-in')
+  if (!grandparent.classList.contains('slide-out') &&
+      !grandparent.classList.contains('slide-in')) {
+    grandparent.classList.add('slide-out')
+  } else {
+    grandparent.classList.toggle('slide-out')
+    grandparent.classList.toggle('slide-in')
+  }
 })
 
 stage_selector_button.addEventListener('dragend', (e) => {
