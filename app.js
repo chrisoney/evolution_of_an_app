@@ -2,8 +2,11 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cron = require('node-cron')
+const moment = require('moment')
 const logger = require('morgan');
-const { sequelize } = require('./db/models');
+const { sequelize, User } = require('./db/models');
+const { Op } = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
@@ -42,6 +45,24 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
+
+cron.schedule('0 0 0 * * *', async () => {
+  try {
+    const users = await User.findAll({
+      where: {
+        createdAt: {
+          [Op.lte]: moment().subtract(1, 'day').toDate()
+        },
+        demo: true
+      }
+    })
+    for (let i = 0; i < users.length; i++){
+      await users[i].destroy()
+    }
+  } catch(err) {
+    console.log( err)
+  }
+})
 
 app.use(restoreUser)
 app.use('/', indexRouter);

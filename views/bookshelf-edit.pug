@@ -7,3 +7,9 @@ append head
   script(src="/javascripts/bookshelf_edit.js" type="module" defer)
 
 block content
+  div(class='bookshelf-edit-path')
+    div(class='path-no-link') My Profile
+    div(class='path-no-link') >
+    a(href=`/users/${user.id}/bookshelves` class='path-link') My Books
+    div(class='path-no-link') >
+    div(class='path-no-link') Edit Shelves
