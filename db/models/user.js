@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.Bookshelf, { foreignKey: 'userId' });
+    User.hasMany(models.Bookshelf, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
   };
   return User;
 };

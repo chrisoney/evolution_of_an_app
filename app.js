@@ -24,7 +24,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set up session middleware
-const store = new SequelizeStore({ db: sequelize });
+const store = new SequelizeStore({
+  db: sequelize,
+  checkExpirationInterval: 15 * 60 * 1000,
+  expiration: 24 * 60 * 60 * 1000
+});
 
 app.use(
   session({

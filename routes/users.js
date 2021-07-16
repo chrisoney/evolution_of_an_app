@@ -142,11 +142,10 @@ router.post('/demo', asyncHandler( async (req, res, next) => {
     email: faker.internet.email(),
     hashedPassword: bcrypt.hashSync('hunter12')
   });
-  console.log(user)
   const choices = ['Read', 'Currently Reading', 'Want To Read']
   for (let i = 0; i < choices.length; i++){
     const name = choices[i];
-    await user.addBookshelf({ name })
+    await Bookshelf.create({ name, userId: user.id })
   }
   loginUser(req, res, user);
   return req.session.save(err => {
