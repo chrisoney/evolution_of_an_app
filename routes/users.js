@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const faker = require('faker')
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const { asyncHandler, csrfProtection, pageChecker } = require('./utils');
@@ -113,7 +113,7 @@ const userValidators = [
 router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, res, next) => {
   const { email, username, password } = req.body;
 
-  const user = User.build({ email, username });
+  const user = User.build({ email, username, demo: false });
 
   const validatorErrors = validationResult(req);
 
@@ -137,7 +137,17 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
 }))
 
 router.post('/demo', asyncHandler( async (req, res, next) => {
-  const user = await User.findOne({ where: { username: 'Main_Character' } });
+  const user = await User.create({
+    username: faker.name.findName(),
+    email: faker.internet.email(),
+    hashedPassword: bcrypt.hashSync('hunter12')
+  });
+  console.log(user)
+  const choices = ['Read', 'Currently Reading', 'Want To Read']
+  for (let i = 0; i < choices.length; i++){
+    const name = choices[i];
+    await user.addBookshelf({ name })
+  }
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);
@@ -146,7 +156,9 @@ router.post('/demo', asyncHandler( async (req, res, next) => {
 }))
 
 
-router.post('/logout', (req, res, next) => {
+router.post('/logout', asyncHandler(async(req, res, next) => {
+  const user = await User.findByPk(req.session.auth.userId)
+  await user.destroy();
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {
@@ -155,7 +167,7 @@ router.post('/logout', (req, res, next) => {
       res.redirect('/users/login')
     }
   })
-})
+}))
 
 router.get('/:id/bookshelves', asyncHandler(async (req, res) => {
   const id = req.params.id;

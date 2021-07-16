@@ -11,43 +11,53 @@ module.exports = {
     return queryInterface.bulkInsert('Bookshelves', [
       {
         userId: 1,
-        name: 'Read'
+        name: 'Read',
+        deleteAllowed: false
       },
       {
         userId: 1,
-        name: 'Currently Reading'
+        name: 'Currently Reading',
+        deleteAllowed: false,
       },
       {
         userId: 1,
-        name: 'Want To Read'
+        name: 'Want To Read',
+        deleteAllowed: false,
       },
       {
         userId: 2,
-        name: 'Read'
+        name: 'Read',
+        deleteAllowed: false,
       },
       {
         userId: 2,
-        name: 'Currently Reading'
+        name: 'Currently Reading',
+        deleteAllowed: false,
       },
       {
         userId: 2,
-        name: 'Want To Read'
+        name: 'Want To Read',
+        deleteAllowed: false,
       },
       {
         userId: 2,
-        name: 'Favorites'
+        name: 'Favorites',
+        deleteAllowed: true
       },
       {
         userId: 3,
-        name: 'Read'
+        name: 'Read',
+        deleteAllowed: false,
       },
       {
         userId: 3,
-        name: 'Currently Reading'
+        name: 'Currently Reading',
+        deleteAllowed: false,
       },
       {
         userId: 3,
-        name: 'Want To Read'
+        name: 'Want To Read',
+        deleteAllowed: false,
       },
     ], {});
   },
