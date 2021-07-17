@@ -27,7 +27,10 @@ block content
         tr
           td
             if shelf.deleteAllowed
-              i(class='fas fa-times delete-shelf')
+              i(class='fas fa-times delete-shelf' id=shelf.id)
           td(class='shelf-name')=shelf.name
           td(class="editable-container")
             i(class=`editable fas ${shelf.deleteAllowed ? 'fa-check' : 'fa-times'}`)
+  div(class='lower-bookshelf-buttons')
+    div(class='delete-all') delete all my shelves
+    button(class='backtrack') I'm Done
