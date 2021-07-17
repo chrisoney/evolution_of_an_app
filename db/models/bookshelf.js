@@ -2,7 +2,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Bookshelf = sequelize.define('Bookshelf', {
     userId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [1, 30]
+      }
+    },
     deleteAllowed: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
