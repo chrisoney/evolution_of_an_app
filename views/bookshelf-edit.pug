@@ -13,3 +13,21 @@ block content
     a(href=`/users/${user.id}/bookshelves` class='path-link') My Books
     div(class='path-no-link') >
     div(class='path-no-link') Edit Shelves
+  div(class='new-shelf-section')
+    input(type='text' class='new-shelf-input' placeholder='Add a Shelf')
+    button(class='new-shelf-submit') Add
+  table(class="shelf-table")
+    thead
+      tr
+        th
+        th shelf
+        th editable
+    tbody
+      each shelf in bookshelves
+        tr
+          td
+            if shelf.deleteAllowed
+              i(class='fas fa-times delete-shelf')
+          td(class='shelf-name')=shelf.name
+          td(class="editable-container")
+            i(class=`editable fas ${shelf.deleteAllowed ? 'fa-check' : 'fa-times'}`)

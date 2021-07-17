@@ -146,7 +146,7 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
   const choices = ['Read', 'Currently Reading', 'Want To Read']
   for (let i = 0; i < choices.length; i++){
     const name = choices[i];
-    await Bookshelf.create({ name, userId: user.id })
+    await Bookshelf.create({ name, userId: user.id, deleteAllowed: false })
   }
   loginUser(req, res, user);
   return req.session.save(err => {
