@@ -4,7 +4,7 @@ const existing_shelves = document.querySelectorAll('.shelf-name');
 const table_body = document.querySelector('tbody');
 
 const delete_all_button = document.querySelector('.delete-all');
-
+const shelf_rows = document.querySelectorAll('.shelf-row')
 
 add_button.addEventListener('click', async (e) => {
   const newName = new_input_field.value;
@@ -33,5 +33,11 @@ add_button.addEventListener('click', async (e) => {
 })
 
 delete_all_button.addEventListener('click', async (e) => {
-  
+  const ans = confirm("This will delete all your shelves. This will only delete non-exclusive shelves. Are you sure?")
+  if (!ans) return;
+
+  const newArr = Array.prototype.slice.call(shelf_rows).filter((row) => {
+    return row.dataset.editable === 'true'
+  })
+  console.log(newArr)
 })

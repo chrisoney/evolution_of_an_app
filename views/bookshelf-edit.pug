@@ -24,7 +24,7 @@ block content
         th editable
     tbody
       each shelf in bookshelves
-        tr(data-editable=shelf.deleteAllowed data-shelf-id=shelf.id)
+        tr(class='shelf-row' data-editable=`${shelf.deleteAllowed ? true : false}` data-shelf-id=shelf.id)
           td
             if shelf.deleteAllowed
               i(class='fas fa-times delete-shelf' id=shelf.id)
