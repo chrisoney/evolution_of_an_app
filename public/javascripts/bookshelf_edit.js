@@ -1,7 +1,11 @@
 const add_button = document.querySelector('.new-shelf-submit');
 const new_input_field = document.querySelector('.new-shelf-input');
 const existing_shelves = document.querySelectorAll('.shelf-name');
-const tableBody = document.querySelector('tbody')
+const table_body = document.querySelector('tbody');
+
+const delete_all_button = document.querySelector('.delete-all');
+
+
 add_button.addEventListener('click', async (e) => {
   const newName = new_input_field.value;
   if (Array.prototype.slice.call(existing_shelves).map(shelf => shelf.name).includes(newName)) {
@@ -25,5 +29,9 @@ add_button.addEventListener('click', async (e) => {
       </td>
     </tr>
   `
-  tableBody.innerHTML = tableBody.innerHTML + newRow;
+  table_body.innerHTML = table_body.innerHTML + newRow;
+})
+
+delete_all_button.addEventListener('click', async (e) => {
+  
 })
