@@ -6,6 +6,8 @@ const table_body = document.querySelector('tbody');
 const delete_all_button = document.querySelector('.delete-all');
 const shelf_rows = document.querySelectorAll('.shelf-row')
 
+const single_delete_buttons = document.querySelectorAll('.delete-shelf');
+
 add_button.addEventListener('click', async (e) => {
   const newName = new_input_field.value;
   if (Array.prototype.slice.call(existing_shelves).map(shelf => shelf.name).includes(newName)) {
@@ -49,3 +51,14 @@ delete_all_button.addEventListener('click', async (e) => {
     }
   }
 })
+
+single_delete_buttons
+  .forEach((button) => button.addEventListener('click', async (e) => {
+    const id = e.target.id;
+    const res = await fetch(`/api/bookshelves/${id}`, {
+      method: 'DELETE',
+    })
+    if (res.ok) {
+      e.target.parentElement.parentElement.remove()
+    }
+  }))

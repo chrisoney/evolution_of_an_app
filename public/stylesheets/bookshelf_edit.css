@@ -158,6 +158,7 @@
   background-color: #F4F1EA;
   line-height: 1;
   padding: 8px 12px;
+  text-decoration: none;
 }
 
 .backtrack:hover {
