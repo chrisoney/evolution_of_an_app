@@ -11,6 +11,14 @@ router.post('/', asyncHandler(async (req, res) => {
   res.json({ bookshelf })
 }))
 
+router.put('/:id', asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name } = req.body;
+  const bookshelf = await Bookshelf.findByPk(id);
+  await bookshelf.update({ name });
+  res.json( { bookshelf })
+}))
+
 router.delete('/:id', asyncHandler(async(req, res) => {
   const id = parseInt(req.params.id, 10);
   const bookshelf = await Bookshelf.findByPk(id);

@@ -28,7 +28,12 @@ block content
           td
             if shelf.deleteAllowed
               i(class='fas fa-times delete-shelf' id=shelf.id)
-          td(class='shelf-name')=shelf.name
+          td(class='shelf-name')
+            div=shelf.name
+            div(class='shelf-name-update-container hidden')
+              input(type='text' class='shelf-name-update-input')
+              button(class='shelf-name-update-submit') Save
+              button(class='shelf-name-update-cancel') Cancel
           td(class="editable-container")
             i(class=`editable fas ${shelf.deleteAllowed ? 'fa-check' : 'fa-times'}`)
   div(class='lower-bookshelf-buttons')

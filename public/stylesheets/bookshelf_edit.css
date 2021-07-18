@@ -126,6 +126,7 @@
 
 .editable.fa-check {
   color: green;
+  cursor: pointer;
 }
 
 

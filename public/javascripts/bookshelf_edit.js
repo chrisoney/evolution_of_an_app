@@ -8,6 +8,10 @@ const shelf_rows = document.querySelectorAll('.shelf-row')
 
 const single_delete_buttons = document.querySelectorAll('.delete-shelf');
 
+const edit_start_buttons = document.querySelectorAll('.editable.fa-check');
+const edit_submit_buttons = document.querySelectorAll('.shelf-name-update-submit');
+const edit_cancel_buttons = document.querySelectorAll('.shelf-name-update-cancel');
+
 add_button.addEventListener('click', async (e) => {
   const newName = new_input_field.value;
   if (Array.prototype.slice.call(existing_shelves).map(shelf => shelf.name).includes(newName)) {
@@ -61,4 +65,29 @@ single_delete_buttons
     if (res.ok) {
       e.target.parentElement.parentElement.remove()
     }
+  }))
+
+edit_start_buttons
+  .forEach((button) => button.addEventListener('click', (e) => {
+    const otherDetail = e.target.parentElement.previousSibling;
+    const currentName = otherDetail.children[0];
+    const editContainer = otherDetail.children[1];
+    currentName.classList.toggle('hidden');
+    editContainer.classList.toggle('hidden');
+
+    if (editContainer.classList.contains('hidden')) {
+      editContainer.children[0].value = ''
+    }
+  }))
+
+
+edit_cancel_buttons
+  .forEach((button) => button.addEventListener('click', (e) => {
+    const input = e.target.previousSibling.previousSibling;
+    input.value = '';
+    console.log(input)
+    const parent = e.target.parentElement;
+    const parentSibling = parent.previousSibling;
+    parent.classList.toggle('hidden')
+    parentSibling.classList.toggle('hidden')
   }))
