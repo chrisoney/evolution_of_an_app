@@ -39,5 +39,13 @@ delete_all_button.addEventListener('click', async (e) => {
   const newArr = Array.prototype.slice.call(shelf_rows).filter((row) => {
     return row.dataset.editable === 'true'
   })
-  console.log(newArr)
+  for (let i = 0; i < newArr.length; i++){
+    const shelf = newArr[i];
+    const res = await fetch(`/api/bookshelves/${shelf.dataset.shelfId}`, {
+      method: 'DELETE',
+    })
+    if (res.ok) {
+      shelf.remove()
+    }
+  }
 })

@@ -11,4 +11,12 @@ router.post('/', asyncHandler(async (req, res) => {
   res.json({ bookshelf })
 }))
 
+router.delete('/:id', asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const bookshelf = await Bookshelf.findByPk(id);
+  await bookshelf.destroy()
+
+  res.json({ success: 'success' })
+}))
+
 module.exports = router;
