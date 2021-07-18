@@ -26,16 +26,83 @@ add_button.addEventListener('click', async (e) => {
     body: JSON.stringify({name:newName})
   })
   const { bookshelf } = await res.json();
-  const newRow = `
-    <tr>
-      <td>${bookshelf.deleteAllowed ? `<i class="fas fa-times delete-shelf" id=${bookshelf.id} />` : ''}</td>
-      <td class='shelf-name'>${bookshelf.name}</td>
-      <td class="editable-container">
-        <i class="editable fas ${bookshelf.deleteAllowed ? 'fa-check' : 'fa-times'}"/>
-      </td>
-    </tr>
-  `
-  table_body.innerHTML = table_body.innerHTML + newRow;
+
+  // New Row
+  const newRowEle = document.createElement('tr');
+  newRowEle.className = 'shelf-row';
+  newRowEle.dataset.editable = bookshelf.deleteAllowed ? 'true' : 'false';
+  newRowEle.dataset.shelfId = bookshelf.id;
+
+  // First table detail
+  const firstTableDetail = document.createElement('td');
+  firstTableDetail.className = 'delete-shelf-container';
+  if (bookshelf.deleteAllowed) {
+    const firstIcon = document.createElement('i');
+    firstIcon.className = 'fas fa-times delete-shelf';
+    firstIcon.id = bookshelf.id;
+    firstTableDetail.appendChild(firstIcon);
+  }
+
+  // Second table detail
+  const secondTableDetail = document.createElement('td');
+  secondTableDetail.className = 'shelf-name';
+  const nameDiv = document.createElement('div')
+  nameDiv.innerText = bookshelf.name;
+  const containerDiv = document.createElement('div');
+  containerDiv.className = 'shelf-name-update-container hidden';
+  const newInput = document.createElement('input');
+  newInput.type = 'text';
+  newInput.className = 'shelf-name-update-input';
+  newInput.id = bookshelf.id;
+  const submitButton = document.createElement('button');
+  submitButton.className = 'shelf-name-update-submit';
+  submitButton.id = bookshelf.id;
+  submitButton.innerText = 'Save';
+  const cancelButton = document.createElement('button');
+  cancelButton.className = 'shelf-name-update-cancel';
+  cancelButton.innerText = 'Cancel'
+
+  containerDiv.appendChild(newInput);
+  containerDiv.appendChild(submitButton);
+  containerDiv.appendChild(cancelButton);
+  secondTableDetail.appendChild(nameDiv)
+  secondTableDetail.appendChild(containerDiv)
+
+  // Third table detail
+  const thirdTableDetail = document.createElement('td');
+  thirdTableDetail.className = 'editable-container';
+  const secondIcon = document.createElement('i');
+  secondIcon.className = `editable fas ${bookshelf.deleteAllowed ? 'fa-check' : 'fa-times'}`;
+  thirdTableDetail.appendChild(secondIcon);
+
+  newRowEle.appendChild(firstTableDetail);
+  newRowEle.appendChild(secondTableDetail);
+  newRowEle.appendChild(thirdTableDetail);
+
+  // const newRow = `
+  //   <tr
+  //     class='shelf-row'
+  //     data-editable=${bookshelf.deleteAllowed ? 'true' : 'false'}
+  //     data-shelf-id=${bookshelf.id}
+  //   >
+  //     <td>${bookshelf.deleteAllowed ? `<i class="fas fa-times delete-shelf" id=${bookshelf.id} />` : ''}</td>
+  //     <td class='shelf-name'>
+  //       <div>${bookshelf.name}</div>
+  //       <div class='shelf-name-update-container hidden'>
+  //         <input type='text' class='shelf-name-update-input' id=${bookshelf.id} />
+  //         <button class='shelf-name-update-submit' id=${bookshelf.id}>
+  //           Save
+  //         </button>
+  //         <button class='shelf-name-update-cancel'>Cancel</button>
+  //       </div>
+  //     </td>
+  //     <td class="editable-container">
+  //       <i class="editable fas ${bookshelf.deleteAllowed ? 'fa-check' : 'fa-times'}"/>
+  //     </td>
+  //   </tr>
+  // `
+  // Going to need to refactor here for the event listeners
+  table_body.appendChild(newRowEle);
 })
 
 delete_all_button.addEventListener('click', async (e) => {
@@ -76,7 +143,33 @@ edit_start_buttons
     editContainer.classList.toggle('hidden');
 
     if (editContainer.classList.contains('hidden')) {
-      editContainer.children[0].value = ''
+      editContainer.children[0].value = currentName.innerText;
+    }
+  }))
+
+
+edit_submit_buttons
+  .forEach((button) => button.addEventListener('click', async (e) => {
+    const id = e.target.id;
+    let name = e.target.previousSibling.value;
+    if (name === '') return;
+    else if (name.length > 30) name = name.slice(0, 30);
+
+    const res = await fetch(`/api/bookshelves/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name })
+    })
+
+    if (res.ok) {
+      const { bookshelf } = await res.json();
+      const parent = e.target.parentElement;
+      const shelfNameEle = parent.previousSibling;
+      shelfNameEle.innerText = bookshelf.name;
+      parent.classList.toggle('hidden')
+      shelfNameEle.classList.toggle('hidden')
     }
   }))
 
@@ -84,10 +177,9 @@ edit_start_buttons
 edit_cancel_buttons
   .forEach((button) => button.addEventListener('click', (e) => {
     const input = e.target.previousSibling.previousSibling;
-    input.value = '';
-    console.log(input)
     const parent = e.target.parentElement;
     const parentSibling = parent.previousSibling;
+    input.value = parentSibling.innerText;
     parent.classList.toggle('hidden')
     parentSibling.classList.toggle('hidden')
   }))
