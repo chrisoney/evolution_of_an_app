@@ -162,9 +162,20 @@ add_button.addEventListener('click', async (e) => {
   secondIcon.addEventListener('click', editStartFunction)
   thirdTableDetail.appendChild(secondIcon);
 
+  // Fourth table detail
+  const fourthTableDetail = document.createElement('td');
+  fourthTableDetail.className = 'story-count-container';
+  const storyNumDiv = document.createElement('div')
+  storyNumDiv.className = 'story-count';
+  storyNumDiv.innerText = '0';
+  fourthTableDetail.appendChild(storyNumDiv);
+
   newRowEle.appendChild(firstTableDetail);
   newRowEle.appendChild(secondTableDetail);
   newRowEle.appendChild(thirdTableDetail);
+  
+  const mode = document.querySelector('.mode-container').id;
+  if (parseInt(mode) > 2) newRowEle.appendChild(fourthTableDetail);
 
   table_body.appendChild(newRowEle);
 })

@@ -22,6 +22,8 @@ block content
         th
         th shelf
         th editable
+        if parseInt(mode) > 2
+          th stories
     tbody
       each shelf in bookshelves
         tr(class='shelf-row' data-editable=`${shelf.deleteAllowed ? true : false}` data-shelf-id=shelf.id)
@@ -35,6 +37,9 @@ block content
               button(class='shelf-name-update-cancel') Cancel
           td(class="editable-container")
             i(class=`editable fas ${shelf.deleteAllowed ? 'fa-check' : 'fa-times'}`)
+          if parseInt(mode) > 2
+            td(class='story-count-container')
+              div(class='story-count')= shelf.Stories.length
   div(class='lower-bookshelf-buttons')
     div(class='delete-all') delete all my shelves
     a(href=`/users/${user.id}/bookshelves` class='backtrack') I'm Done

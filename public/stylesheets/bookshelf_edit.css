@@ -188,6 +188,11 @@
   cursor: pointer;
 }
 
+.story-count-container {
+  display: flex;
+  justify-content: center;
+}
+
 /* Lower bookshelf buttons */
 .lower-bookshelf-buttons {
   font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
