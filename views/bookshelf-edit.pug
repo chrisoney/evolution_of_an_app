@@ -26,8 +26,7 @@ block content
       each shelf in bookshelves
         tr(class='shelf-row' data-editable=`${shelf.deleteAllowed ? true : false}` data-shelf-id=shelf.id)
           td(class='delete-shelf-container')
-            if shelf.deleteAllowed
-              i(class='fas fa-times delete-shelf' id=shelf.id)
+            i(class=`fas fa-times delete-shelf ${shelf.deleteAllowed ? 'allow' : ''}` id=shelf.id)
           td(class='shelf-name')
             div=shelf.name
             div(class='shelf-name-update-container hidden')

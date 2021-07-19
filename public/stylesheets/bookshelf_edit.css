@@ -92,16 +92,23 @@
   padding: 5px;
 }
 
+.delete-shelf-container {
+  display: block;
+}
 
 .delete-shelf {
-  color: #888;
+  color: transparent;
   text-decoration: none;
-  cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
   vertical-align: center;
   /* line-height: 18px; */
   font-weight: bold;
+}
+
+.delete-shelf.allow {
+  color: #888;
+  cursor: pointer;
 }
 
 .shelf-name{
@@ -116,6 +123,58 @@
   text-decoration: underline;
 }
 
+
+/* Updating a shelf name 'form' */
+
+.shelf-name-update-container {
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+}
+.shelf-name-update-input {
+  background: #FFFFFF;
+  border-radius: 3px;
+  border: #DCD6CC 1px solid;
+  color: #333333;
+  resize: none;
+  width: 150px;
+  height: 16px;
+  padding: 1px 2px;
+}
+
+.shelf-name-update-submit {
+  border-radius: 3px;
+  border: 1px solid #D6D0C4;
+  appearance: none;
+  cursor: pointer;
+  /* display: inline-block; */
+  text-decoration: none;
+  color: #333333;
+  background-color: #F4F1EA;
+  line-height: 1;
+  font-size: 11px;
+  padding: 4px 12px;
+}
+
+.shelf-name-update-submit:hover {
+  background-color: #ede6d6;
+}
+
+.shelf-name-update-cancel {
+  font-size: 12px;
+  padding: 4px 12px;
+  display: inline-block;
+  color: #181818;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  line-height: 1;
+  text-transform: capitalize;
+  border: 0;
+  background: none;
+  font-weight: normal;
+  border-spacing: 2px;
+}
+
 .editable-container{
   text-align: center;
 }
@@ -128,7 +187,6 @@
   color: green;
   cursor: pointer;
 }
-
 
 /* Lower bookshelf buttons */
 .lower-bookshelf-buttons {

@@ -1,11 +1,11 @@
 const add_button = document.querySelector('.new-shelf-submit');
 const new_input_field = document.querySelector('.new-shelf-input');
-const existing_shelves = document.querySelectorAll('.shelf-name');
+
 const table_body = document.querySelector('tbody');
 
 const delete_all_button = document.querySelector('.delete-all');
 
-const single_delete_buttons = document.querySelectorAll('.delete-shelf');
+const single_delete_buttons = document.querySelectorAll('.delete-shelf.allow');
 
 const edit_start_buttons = document.querySelectorAll('.editable.fa-check');
 const edit_submit_buttons = document.querySelectorAll('.shelf-name-update-submit');
@@ -98,6 +98,7 @@ edit_cancel_buttons
 
 add_button.addEventListener('click', async (e) => {
   const newName = new_input_field.value;
+  const existing_shelves = document.querySelectorAll('.shelf-name');
   if (Array.prototype.slice.call(existing_shelves).map(shelf => shelf.name).includes(newName)) {
     alert("Shelf couldn't be created. Shelf name is either invalid or a duplicate.");
     return;
@@ -120,13 +121,11 @@ add_button.addEventListener('click', async (e) => {
   // First table detail
   const firstTableDetail = document.createElement('td');
   firstTableDetail.className = 'delete-shelf-container';
-  if (bookshelf.deleteAllowed) {
-    const firstIcon = document.createElement('i');
-    firstIcon.className = 'fas fa-times delete-shelf';
-    firstIcon.id = bookshelf.id;
-    firstIcon.addEventListener('click', singleDeleteFunction);
-    firstTableDetail.appendChild(firstIcon);
-  }
+  const firstIcon = document.createElement('i');
+  firstIcon.className = `fas fa-times delete-shelf ${bookshelf.deleteAllowed ? 'allow' : ''}`;
+  firstIcon.id = bookshelf.id;
+  firstIcon.addEventListener('click', singleDeleteFunction);
+  firstTableDetail.appendChild(firstIcon);
 
   // Second table detail
   const secondTableDetail = document.createElement('td');
