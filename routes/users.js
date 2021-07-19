@@ -3,7 +3,7 @@ const router = express.Router();
 const faker = require('faker')
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const { asyncHandler, csrfProtection, pageChecker } = require('./utils');
+const { asyncHandler, csrfProtection, pageChecker, addStories } = require('./utils');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 const { User, Bookshelf } = require('../db/models')
 
@@ -144,10 +144,18 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
     hashedPassword: bcrypt.hashSync('hunter12')
   });
   const choices = ['Read', 'Currently Reading', 'Want To Read']
+  const bookshelves = [];
   for (let i = 0; i < choices.length; i++){
     const name = choices[i];
-    await Bookshelf.create({ name, userId: user.id, deleteAllowed: false })
+    const newShelf = await Bookshelf.create({ name, userId: user.id, deleteAllowed: false })
+    bookshelves.push(newShelf)
   }
+  const newEditShelf = await Bookshelf.create({ name: 'Favorites', userId: user.id, deleteAllowed: true })
+  bookshelves.push(newEditShelf);
+  
+  
+  await addStories(bookshelves, 5)
+
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);

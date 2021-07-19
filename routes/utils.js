@@ -1,5 +1,5 @@
 const csrf = require('csurf');
-
+const { Placement, Story, sequelize } = require('../db/models');
 const csrfProtection = csrf({ cookie: true });
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
@@ -27,8 +27,26 @@ const pageChecker = (req, res, next) => {
   }
 }
 
+const addStories = async (shelves, num) => {
+  const stories = await Story.findAll({
+    order: sequelize.random(),
+    limit: num + 6
+  })
+  const distribution = [1,3,2,num]
+  for (let i = 0; i < shelves.length; i++){
+    let shelf = shelves[i];
+    let numStories = distribution[i];
+    while (numStories > 0) {
+      const story = stories.shift();
+      await Placement.create({ bookshelfId: shelf.id, storyId: story.id })
+      numStories -= 1;
+    }
+  }
+}
+
 module.exports = {
   csrfProtection,
   asyncHandler,
-  pageChecker
+  pageChecker,
+  addStories
 };
