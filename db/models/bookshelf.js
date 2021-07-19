@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Bookshelf.associate = function(models) {
     Bookshelf.belongsTo(models.User, { foreignKey: 'userId' });
+    Bookshelf.hasMany(models.Placement, { foreignKey: 'bookshelfId', onDelete: 'CASCADE', hooks: true })
+
+    const columnMapping = {
+      through: 'Placement',
+      foreignKey: 'bookshelfId',
+      otherKey: 'storyId'
+    }
+    Bookshelf.belongsToMany(models.Story, columnMapping)
   };
   return Bookshelf;
 };

@@ -11,7 +11,14 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING
   }, {});
   Story.associate = function(models) {
-    // associations can be defined here
+    Story.hasMany(models.Placement, { foreignKey: 'storyId', onDelete: 'CASCADE', hooks: true })
+    
+    const columnMapping = {
+      through: 'Placement',
+      foreignKey: 'storyId',
+      otherKey: 'bookshelfId'
+    }
+    Story.belongsToMany(models.Bookshelf, columnMapping)
   };
   return Story;
 };
