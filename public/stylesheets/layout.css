@@ -11,7 +11,7 @@ body {
 }
 
 .stage-button-container {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: -120px;
   transform: translateY(-50%);

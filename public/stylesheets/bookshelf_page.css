@@ -1,3 +1,9 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
 .bookshelf-header {
   margin-top: 15px;
   margin-left: 5px;
@@ -6,6 +12,7 @@
   padding-bottom: 5px;
   border-bottom: 1px solid #EBE8D5;
   color: #BBB596;
+  width: 970px;
 }
 
 .bookshelf-header > h3 {
@@ -19,7 +26,7 @@
 .page-content{ 
   display: flex;
   margin-left: 5px;
-  /* margin: auto; */
+  width: 970px;
 }
 
 .sidebar {
@@ -138,13 +145,48 @@
 }
 .hidden { display: none }
 
-
 .stories-list-table {
   overflow-y: scroll;
+  margin-bottom: 90px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.stories-list-table th {
+  font-weight: bold;
+  padding: 12px 5px 5px 0;
+  border-bottom: 2px solid #EBE8D5;
+  color: #382110;
+  font-size: 12px;
+  line-height: 18px;
+  vertical-align: bottom;
+}
+
+.stories-list-table td {
+  padding: 12px 5px 5px 0;
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: top;
+}
+
+.title-header {
+  width: 25%;
+}
+
+.story-row {
+  border-bottom: 1px solid #eee;
 }
 
 .image-preview {
   width: 50px;
   height: 75px;
   object-fit: cover;
+}
+
+.story-title, .story-author, .story-shelf-list {
+  color: #00635d;
+  text-decoration: none;
+}
+
+.story-date-read {
+  color: #999;
 }
