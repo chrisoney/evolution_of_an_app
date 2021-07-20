@@ -16,7 +16,7 @@ block content
       div(class='bookshelves-container')
         div(class='bookshelf-selector' id=0) All 
           if parseInt(mode) >= 3
-            |(#{allArr.length})
+            |(#{allCount})
         each bookshelf in user.Bookshelves
           div(class='bookshelf-selector' id=bookshelf.id) #{bookshelf.name} 
             if parseInt(mode) >= 3
@@ -28,4 +28,29 @@ block content
           input(type='text' class='add-new-bookshelf-input')
           button(class='add-new-bookshelf-submit-button') add
     .main-content
-      
+      if parseInt(mode) >= 3
+        table(class='stories-list-table')
+          thead
+            tr
+              th cover
+              th title
+              th author
+              // This number may change based on review completion
+              if parseInt(mode) >= 4
+                th avg rating
+                th rating
+              th shelves
+              th date read
+              th date added
+          tbody
+            each story in loadedStories
+              tr
+                td: img(src=story.imageUrl class='image-preview')
+                td=story.title
+                td=story.author
+                //- if parseInt(mode) >= 4 // This number may change based on review completion
+                //-   td=story.avg_rating
+                //-   th=story.rating
+                td=story.Bookshelves.map(shelf => shelf.name).join(', ')
+                td Not set
+                td=story.Placements[0].createdAt.toString().slice(4, 16)
