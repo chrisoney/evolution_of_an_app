@@ -14,7 +14,6 @@ const usersRouter = require('./routes/users');
 const bookshelvesRouter = require('./routes/bookshelves');
 const storiesRouter = require('./routes/stories');
 const apiRouter = require('./routes/api')
-const apiRouter = require('./routes/api')
 
 const { restoreUser } = require('./auth')
 
