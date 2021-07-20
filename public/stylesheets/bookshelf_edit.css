@@ -1,3 +1,7 @@
+.bookshelf-edit-page-container{
+  display: flex;
+}
+
 .bookshelf-edit-path{
   display: flex;
   margin-top: 15px;
@@ -39,7 +43,7 @@
   width: 525px;
   padding: 5px;
   font-size: 120%;
-  vertical-align: center;
+  vertical-align: middle;
   margin-right: 0.5em;
   background: #FFFFFF;
   border-radius: 3px;
@@ -74,7 +78,7 @@
 .shelf-table > tr {
   border-bottom: 1px solid #d7d7d7;
   padding: 5px;
-  zoom: 1;
+  line-height: 19px;
 }
 
 .shelf-table th {
@@ -90,6 +94,7 @@
 .shelf-table td {
   border-bottom: 1px solid #E8E8E8;
   padding: 5px;
+  height: 100%;
 }
 
 .delete-shelf-container {
@@ -101,9 +106,10 @@
   text-decoration: none;
   font-size: 16px;
   margin-right: 10px;
-  vertical-align: center;
-  /* line-height: 18px; */
+  vertical-align: middle;
+  /* line-height: 19px; */
   font-weight: bold;
+  /* padding-bottom: 1px; */
 }
 
 .delete-shelf.allow {
@@ -112,7 +118,7 @@
 }
 
 .shelf-name{
-  vertical-align: center;
+  vertical-align: middle;
   width: 390px;
   color: #00635d;
   text-decoration: none;
@@ -191,6 +197,7 @@
 .story-count-container {
   display: flex;
   justify-content: center;
+  min-height: 26px;
 }
 
 /* Lower bookshelf buttons */
@@ -199,7 +206,8 @@
   display: flex;
   justify-content: space-between;
   margin-left: 20px;
-  width: 475px;
+  /* width: 475px; */
+  width: 85%;
 }
 
 .delete-all {
@@ -227,4 +235,41 @@
 
 .backtrack:hover {
   background-color: #ede6d6;
+}
+
+.bookshelf-edit-page-right {
+  width: 300px;
+  display: inline;
+  margin-left: 8px;
+  margin-top: 60px;
+  font-size: 12px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.bookshelf-tips-title {
+  color: #000000;
+  font-size: 16px;
+}
+
+.bookshelf-tips-list {
+  list-style: disc;
+  padding: 2px;
+  line-height: 18px;
+  margin-top: 8px;
+}
+
+.bookshelf-tips-list-item {
+  margin-left: 17px;
+  margin-bottom: 10px;
+}
+
+span.bolded {
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.fa-check.example {
+  color: green;
+  margin-right: 3px;
+  margin-left: 3px;
 }

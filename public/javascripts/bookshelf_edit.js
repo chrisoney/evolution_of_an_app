@@ -111,7 +111,7 @@ add_button.addEventListener('click', async (e) => {
     body: JSON.stringify({name:newName})
   })
   const { bookshelf } = await res.json();
-
+  if (res.ok) new_input_field.value = '';
   // New Row
   const newRowEle = document.createElement('tr');
   newRowEle.className = 'shelf-row';
