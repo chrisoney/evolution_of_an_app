@@ -7,4 +7,14 @@ append head
   script(src="/javascripts/story_page.js" type="module" defer)
 
 block content
-  h1 Story Page
+  .page-container
+    .story-page-left-side
+      .story-sticky-section
+        img(src=story.imageUrl class='story-image')
+        div.bookshelf-button Placeholder
+    .story-page-right-side
+      .story-details-container
+        .story-title= story.title
+        .story-author= story.author
+        //- Review section
+        .story-description.shortened= story.description

@@ -184,7 +184,14 @@
 
 .story-title, .story-author, .story-shelf-list {
   color: #00635d;
+}
+
+.story-title > a {
   text-decoration: none;
+}
+
+.story-title > a:hover {
+  text-decoration: underline;
 }
 
 .story-date-read {

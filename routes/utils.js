@@ -6,11 +6,18 @@ const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).ca
 
 const authPages = ['/users/login', '/users/signup']
 const bookShelfPages = [/users\/\d+\/bookshelves/,/bookshelves\/edit/]
+const storiesPages = [/stories\/\d+/]
 
 const pageChecker = (req, res, next) => {
   const url = req.originalUrl;
   console.log('hit')
-  if (parseInt(res.locals.mode) < 2) {
+  if (parseInt(res.locals.mode) < 3) {
+    for (let i = 0; i < storiesPages.length; i++){
+      const regex = storiesPages[i];
+      if (regex.exec(url)) return res.render('page-not-made', {title: 'Page Not Made'})
+    }
+  }
+  else if (parseInt(res.locals.mode) < 2) {
     for (let i = 0; i < bookShelfPages.length; i++){
       const regex = bookShelfPages[i];
       if (regex.exec(url)) return res.render('page-not-made')

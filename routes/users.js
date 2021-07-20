@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const { asyncHandler, csrfProtection, pageChecker, addStories } = require('./utils');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
-const { User, Bookshelf, Story, Placement, sequelize } = require('../db/models')
+const { User, Bookshelf, Story, Placement } = require('../db/models')
 
 router.use(pageChecker)
 

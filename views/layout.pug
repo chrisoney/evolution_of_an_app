@@ -17,7 +17,7 @@ html
           button(class="switch-stage" data-stage=1) Auth
           button(class="switch-stage" data-stage=2) Bookshelves
           button(class="switch-stage" data-stage=3) Stories
-    if mode !== '0' && authenticated
+    if parseInt(mode) >= 1 && authenticated
       .navbar
         .nav-logo-container
           a(href='/' class="nav-logo-link")
@@ -30,7 +30,7 @@ html
               .user-menu-bottom-section
                 form(action="/users/logout" method="post")
                   button(type="submit" class="logout-button user-menu-option") Sign out
-    if parseInt(mode) >= 2 && authenticated
+    if parseInt(mode) >= 2 && authenticated && title !== 'Page Not Made'
       .navbar-lower
         a(href='/' class="navbar-text-link") Home
         a(href=`/users/${user.id}/bookshelves` class="navbar-text-link") My Books

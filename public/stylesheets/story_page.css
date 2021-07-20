@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+.page-container {
+  padding-top: 30px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: 32px;
+  margin-bottom: 40px;
+  font: 400 1.6rem/1.4375 "Proxima Nova",Montserrat,Arial,sans-serif;
+}
+
+.story-page-left-side {
+  grid-column: span 4;
+}
+
+.story-image {
+  height: 336px;
+  width: 224px;
+  object-fit: cover;
+  border-radius: 0 6% 6% 0/4%;
+  display: block;
+  margin: 0 auto 12px;
+  background-size: cover;
+  outline: 0;
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.story-page-right-side {
+  grid-column: 5 / 12;
+}
+
+.story-title {
+  font-size: 32px;
+  line-height: 42px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 600;
+}
+
+.story-author {
+  font-size: 18px;
+  line-height: 24px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  color: #4d4d4d;
+  margin-bottom: 16px;
+}
+
+.story-description {
+  line-height: 1.37;
+  font: 400 16px "Proxima Nova",Montserrat,Arial,sans-serif;
+}
+
+.story-description.shortened {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
