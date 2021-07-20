@@ -17,4 +17,6 @@ block content
         .story-title= story.title
         .story-author= story.author
         //- Review section
-        .story-description.shortened= story.description
+        .story-description-container
+          .story-description.shortened= story.description
+          button(class='expand') ...more

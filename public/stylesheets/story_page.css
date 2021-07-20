@@ -42,13 +42,18 @@
   line-height: 24px;
   font-family: 'Libre Baskerville', serif;
   font-weight: 400;
-  color: #4d4d4d;
+  color: #1E1915;
   margin-bottom: 16px;
+}
+
+.story-description-container {
+  position: relative;
 }
 
 .story-description {
   line-height: 1.37;
   font: 400 16px "Proxima Nova",Montserrat,Arial,sans-serif;
+  color: #1E1915;
 }
 
 .story-description.shortened {
@@ -58,3 +63,23 @@
   -webkit-box-orient: vertical;
   word-break: break-word;
 }
+
+.expand {
+  position: absolute;
+  background: transparent;
+  border: transparent;
+  bottom: -16px;
+  right: 0;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 10;
+  cursor: pointer;
+}
+
+
+
+
+
+/* Important styling */
+
+.hidden { display: none; }
