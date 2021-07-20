@@ -32,6 +32,7 @@ html
                   button(type="submit" class="logout-button user-menu-option") Sign out
     if parseInt(mode) >= 2 && authenticated
       .navbar-lower
+        a(href='/' class="navbar-text-link") Home
         a(href=`/users/${user.id}/bookshelves` class="navbar-text-link") My Books
 
     block content
