@@ -3,11 +3,20 @@ const router = express.Router();
 const { asyncHandler } = require('../utils');
 const { Bookshelf } = require('../../db/models');
 
+
 router.post('/', asyncHandler(async (req, res) => {
   const { name } = req.body;
   const userId = req.session.auth.userId;
   const bookshelf = await Bookshelf.create({ name, userId })
+  
+  res.json({ bookshelf })
+}))
 
+router.get('/:id', asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id);
+  const bookshelf = await Bookshelf.findByPk(id, {
+    include: Story
+  });
   res.json({ bookshelf })
 }))
 
