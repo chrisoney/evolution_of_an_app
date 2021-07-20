@@ -1,0 +1,10 @@
+extends layout
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/story_page.css")
+  //- add page specific js
+  script(src="/javascripts/story_page.js" type="module" defer)
+
+block content
+  h1 Story Page

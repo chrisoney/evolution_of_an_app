@@ -177,7 +177,7 @@ router.post('/logout', asyncHandler(async(req, res, next) => {
   })
 }))
 
-router.get('/:id/bookshelves', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
   const user = await User.findByPk(id, {
     attributes: { exclude: ['hashedPassword']},
