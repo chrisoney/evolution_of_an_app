@@ -7,19 +7,22 @@ description_expand_button.addEventListener('click', (e) => {
   button.classList.add('hidden')
 })
 
-const closeModal = () => {
-  const ele = document.querySelector('.modal-background');
+const closeModal = (e) => {
+  e.stopPropagation()
+  e.preventDefault()
+  const ele = document.querySelector('.modal-section');
   if (!ele.classList.contains('hidden')) {
-    ele.children[0].classList.add('zoom-out');
+    ele.children[1].classList.add('zoom-out');
     window.setTimeout(() => {
       ele.classList.add('hidden');
-      ele.children[0].classList.remove('zoom-out');
-      ele.children[0].innerHTML = '';
+      ele.children[1].classList.remove('zoom-out');
+      ele.children[1].innerHTML = '';
     }, 400);
   }
 }
 
 const wantToReadFunction = async (e) => {
+  e.stopPropagation()
   const bookshelfId = e.target.id;
   const storyId = document.querySelector('.story-id-container').id;
   const res = await fetch('/api/placements', {
@@ -54,6 +57,7 @@ const wantToReadFunction = async (e) => {
 }
 
 const selectBookshelf = async (e) => {
+  e.stopPropagation()
   const bookshelfId = e.target.id;
   const storyId = document.querySelector('.story-id-container').id;
   const res = await fetch('/api/placements/', {
@@ -81,6 +85,26 @@ const selectBookshelf = async (e) => {
   }
 }
 
+const switchShelfHelperEvent = async (e) => {
+  e.stopPropagation()
+  const ele = e.target;
+  if (!ele.classList.contains('modal-bookshelf-button') || ele.classList.contains('selected')) {
+    return;
+  }
+  const parent = ele.parentElement;
+  const buttons = parent.querySelectorAll('.modal-bookshelf-button');
+  for (let i = 0; i < buttons.length; i++){
+    const button = buttons[i];
+    if (button.classList.contains('selected')) {
+      button.classList.remove('selected');
+      button.children[0].remove();
+    }
+  }
+  ele.classList.add('selected');
+  ele.innerHTML = '<i class="fas fa-check"></i>' + ele.innerHTML;
+  return;
+}
+
 const firstStoryModal = (data, large) => {
   const result = [];
 
@@ -103,10 +127,14 @@ const firstStoryModal = (data, large) => {
   wantToRead.className = 'modal-bookshelf-button';
   wantToRead.id = data['Want To Read'].id;
   wantToRead.innerText = 'Want To Read';
-  wantToRead.addEventListener('click', selectBookshelf)
-  if (large && data['Want To Read'].Stories.length > 0) {
-    wantToRead.classList.add('selected');
-    wantToRead.innerHTML = '<i class="fas fa-check"></i>' + wantToRead.innerHTML;
+  if (large) {
+    wantToRead.addEventListener('click', switchShelfHelperEvent)
+    if( data['Want To Read'].Stories.length > 0) {
+      wantToRead.classList.add('selected');
+      wantToRead.innerHTML = '<i class="fas fa-check"></i>' + wantToRead.innerHTML;
+    }
+  }  else {
+    wantToRead.addEventListener('click', selectBookshelf)
   }
   result.push(wantToRead);
 
@@ -114,10 +142,14 @@ const firstStoryModal = (data, large) => {
   currentlyReading.className = 'modal-bookshelf-button';
   currentlyReading.id = data['Currently Reading'].id;
   currentlyReading.innerText = 'Currently Reading';
-  currentlyReading.addEventListener('click', selectBookshelf)
-  if (large && data['Currently Reading'].Stories.length > 0) {
-    currentlyReading.classList.add('selected');
-    currentlyReading.innerHTML = '<i class="fas fa-check"></i>' + currentlyReading.innerHTML;
+  if (large) {
+    currentlyReading.addEventListener('click', switchShelfHelperEvent)
+    if (data['Currently Reading'].Stories.length > 0) {
+      currentlyReading.classList.add('selected');
+      currentlyReading.innerHTML = '<i class="fas fa-check"></i>' + currentlyReading.innerHTML;
+    }
+  } else {
+    currentlyReading.addEventListener('click', selectBookshelf)
   }
   result.push(currentlyReading);
 
@@ -125,10 +157,14 @@ const firstStoryModal = (data, large) => {
   alreadyRead.className = 'modal-bookshelf-button';
   alreadyRead.id = data['Read'].id;
   alreadyRead.innerText = 'Read';
-  alreadyRead.addEventListener('click', selectBookshelf)
-  if (large && data['Read'].Stories.length > 0) {
-    alreadyRead.classList.add('selected');
-    alreadyRead.innerHTML = '<i class="fas fa-check"></i>' + alreadyRead.innerHTML;
+  if (large) {
+    alreadyRead.addEventListener('click', switchShelfHelperEvent)
+    if(data['Read'].Stories.length > 0) {
+      alreadyRead.classList.add('selected');
+      alreadyRead.innerHTML = '<i class="fas fa-check"></i>' + alreadyRead.innerHTML;
+    }
+  } else {
+    alreadyRead.addEventListener('click', selectBookshelf)
   }
   result.push(alreadyRead);
 
@@ -141,9 +177,10 @@ const firstStoryModal = (data, large) => {
 }
 
 const switchBookshelfChoice = async (e) => {
+  e.stopPropagation()
   const modalContainer = document.querySelector('.modal-container');
   modalContainer.parentElement.classList.remove('hidden');
-  modalContainer.parentElement.addEventListener('click', closeModal);
+  modalContainer.previousSibling.addEventListener('click', closeModal);
 
   const storyId = document.querySelector('.story-id-container').id
   const res = await fetch(`/api/bookshelves/${storyId}/standard`)
@@ -157,9 +194,10 @@ const switchBookshelfChoice = async (e) => {
 }
 
 const selectBookshelfChevronFunction = async (e) => {
+  e.stopPropagation()
   const modalContainer = document.querySelector('.modal-container');
   modalContainer.parentElement.classList.remove('hidden');
-  modalContainer.parentElement.addEventListener('click', closeModal);
+  modalContainer.previousSibling.addEventListener('click', closeModal);
 
   const storyId = document.querySelector('.story-id-container').id
   const res = await fetch(`/api/bookshelves/${storyId}/standard`)
