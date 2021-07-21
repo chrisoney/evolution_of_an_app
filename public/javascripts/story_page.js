@@ -7,9 +7,9 @@ description_expand_button.addEventListener('click', (e) => {
   button.classList.add('hidden')
 })
 
-const closeModal = (e) => {
-  const ele = e.target;
-  if (ele.classList.contains('modal-background') && !ele.classList.contains('hidden')) {
+const closeModal = () => {
+  const ele = document.querySelector('.modal-background');
+  if (!ele.classList.contains('hidden')) {
     ele.children[0].classList.add('zoom-out');
     window.setTimeout(() => {
       ele.classList.add('hidden');
@@ -21,7 +21,7 @@ const closeModal = (e) => {
 
 const wantToReadFunction = async (e) => {
   const bookshelfId = e.target.id;
-  const storyId = document.querySelector('.story-id-container').id
+  const storyId = document.querySelector('.story-id-container').id;
   const res = await fetch('/api/placements', {
     method: 'POST',
     headers: {
@@ -49,14 +49,40 @@ const wantToReadFunction = async (e) => {
     bookshelfDiv.innerText = 'Want To Read'
     parent.appendChild(bookshelfDiv);
 
-    // parent.addEventListener('click', changeBookshelfFunction)
+    parent.addEventListener('click', switchBookshelfChoice)
   }
 }
 
-const selectBookshelfChevronFunction = async (e) => {
-  const modalContainer = document.querySelector('.modal-container');
-  modalContainer.parentElement.classList.remove('hidden');
-  modalContainer.parentElement.addEventListener('click', closeModal);
+const selectBookshelf = async (e) => {
+  const bookshelfId = e.target.id;
+  const storyId = document.querySelector('.story-id-container').id;
+  const res = await fetch('/api/placements/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ bookshelfId, storyId})
+  })
+  if (res.ok) {
+    const { placement } = await res.json();
+
+    const parent = document.querySelector('.bookshelf-button-container');
+    parent.classList.add('added');
+    parent.innerHTML = ''
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-check';
+    parent.appendChild(icon);
+
+    const bookshelfDiv = document.createElement('div');
+    bookshelfDiv.className = 'bookshelf-button-added';
+    bookshelfDiv.id = e.target.id;
+    bookshelfDiv.innerText = e.target.innerText;
+    parent.appendChild(bookshelfDiv);
+  }
+}
+
+const firstStoryModal = (data, large) => {
+  const result = [];
 
   const titleContainer = document.createElement('div')
   titleContainer.className = 'modal-title-container';
@@ -64,33 +90,66 @@ const selectBookshelfChevronFunction = async (e) => {
   title.className = 'modal-title';
   title.innerText = 'Choose a shelf for this story: ';
   titleContainer.appendChild(title);
+  const closeButtonContainer = document.createElement('i');
+  closeButtonContainer.className = 'close-button-container';
+  closeButtonContainer.addEventListener('click', closeModal)
   const closeButton = document.createElement('i');
-  closeButton.className = 'fas fa-times';
-  titleContainer.appendChild(closeButton);
-  modalContainer.appendChild(titleContainer);
-
-  const res = await fetch('/api/bookshelves/')
-
-  const data = await res.json();
+  closeButton.className = 'fas fa-times close-modal';
+  closeButtonContainer.appendChild(closeButton);
+  titleContainer.appendChild(closeButtonContainer);
+  result.push(titleContainer);
   
   const wantToRead = document.createElement('button');
   wantToRead.className = 'modal-bookshelf-button';
   wantToRead.id = data['Want To Read'];
   wantToRead.innerText = 'Want To Read';
-  modalContainer.appendChild(wantToRead);
+  wantToRead.addEventListener('click', selectBookshelf)
+  result.push(wantToRead);
 
   const currentlyReading = document.createElement('button');
   currentlyReading.className = 'modal-bookshelf-button';
   currentlyReading.id = data['Currently Reading'];
   currentlyReading.innerText = 'Currently Reading';
-  modalContainer.appendChild(currentlyReading);
+  currentlyReading.addEventListener('click', selectBookshelf)
+  result.push(currentlyReading);
 
   const alreadyRead = document.createElement('button');
   alreadyRead.className = 'modal-bookshelf-button';
   alreadyRead.id = data['Read'];
   alreadyRead.innerText = 'Read';
-  modalContainer.appendChild(alreadyRead);
+  alreadyRead.addEventListener('click', selectBookshelf)
+  result.push(alreadyRead);
 
+  if (large) {
+    //bottom buttons
+  }
+
+  return result;
+}
+
+const switchBookshelfChoice = async (e) => {
+  // Same form as below
+  // Consider DRYing all this up
+  // Also need the remove and accept buttons
+  // Then a new function for the other shelves
+  // Then I'll probably need to set more shit up for backtracking
+}
+
+const selectBookshelfChevronFunction = async (e) => {
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.parentElement.classList.remove('hidden');
+  modalContainer.parentElement.addEventListener('click', closeModal);
+
+  const storyId = document.querySelector('.story-id-container').id
+  const res = await fetch(`/api/bookshelves/${storyId}/standard`)
+
+  const data = await res.json();
+  
+  const eles = firstStoryModal(data, false);
+
+  for (let i = 0; i < eles.length; i++){
+    modalContainer.appendChild(eles[i]);
+  }
 }
 
 // These will exist

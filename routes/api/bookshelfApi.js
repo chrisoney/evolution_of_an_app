@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler } = require('../utils');
-const { Bookshelf } = require('../../db/models');
+const { Bookshelf, Story } = require('../../db/models');
 
 
-router.get('/', asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/standard', asyncHandler(async (req, res) => {
   const userId = req.session.auth.userId;
+  const id = req.params.id;
   const bookshelves = await Bookshelf.findAll({
     where: {
       userId,
       deleteAllowed: false
+    },
+    include: {
+      model: Story,
+      where: { id },
+      required: false
     }
   })
   const data = {};
