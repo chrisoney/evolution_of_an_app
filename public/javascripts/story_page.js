@@ -91,17 +91,28 @@ const switchShelfHelperEvent = async (e) => {
   if (!ele.classList.contains('modal-bookshelf-button') || ele.classList.contains('selected')) {
     return;
   }
-  const parent = ele.parentElement;
-  const buttons = parent.querySelectorAll('.modal-bookshelf-button');
-  for (let i = 0; i < buttons.length; i++){
-    const button = buttons[i];
-    if (button.classList.contains('selected')) {
-      button.classList.remove('selected');
-      button.children[0].remove();
+  const bookshelfId = ele.id;
+  const storyId = document.querySelector('.story-id-container').id;
+  const res = await fetch('/api/placements', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ bookshelfId, storyId})
+  })
+  if (res.ok) {
+    const parent = ele.parentElement;
+    const buttons = parent.querySelectorAll('.modal-bookshelf-button');
+    for (let i = 0; i < buttons.length; i++){
+      const button = buttons[i];
+      if (button.classList.contains('selected')) {
+        button.classList.remove('selected');
+        button.children[0].remove();
+      }
     }
+    ele.classList.add('selected');
+    ele.innerHTML = '<i class="fas fa-check"></i>' + ele.innerHTML;
   }
-  ele.classList.add('selected');
-  ele.innerHTML = '<i class="fas fa-check"></i>' + ele.innerHTML;
   return;
 }
 
