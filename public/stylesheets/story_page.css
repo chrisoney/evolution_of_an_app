@@ -181,7 +181,7 @@
   border-radius: 30px;
 }
 
-.modal-bookshelf-button:hover {
+.modal-bookshelf-button:hover, .modal-bookshelf-button.selected {
   background-color: rgba(0,0,0,0.05);
 }
 .modal-bottom-button-container {
@@ -198,6 +198,14 @@
       rgba(0, 0, 0, 0)
     ) 10 0%;
     border-bottom: none;
+}
+
+.modal-description {
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'Libre Baskerville', serif;
+  margin-bottom: 16px;
 }
 
 .modal-cancel {

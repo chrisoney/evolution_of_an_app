@@ -8,8 +8,8 @@ description_expand_button.addEventListener('click', (e) => {
 })
 
 const closeModal = (e) => {
-  e.stopPropagation()
-  e.preventDefault()
+  // e.stopPropagation()
+  // e.preventDefault()
   const ele = document.querySelector('.modal-section');
   if (!ele.classList.contains('hidden')) {
     ele.children[1].classList.add('zoom-out');
@@ -185,11 +185,12 @@ const firstStoryModal = (data, large) => {
     bottomButtonContainer.className = 'modal-bottom-button-container';
     const cancelButton = document.createElement('button');
     cancelButton.className = 'modal-cancel';
-    cancelButton.innerText = 'Cancel';
+    cancelButton.innerText = 'Remove';
+    cancelButton.addEventListener('click', removeAllWarningEvent);
     bottomButtonContainer.appendChild(cancelButton);
     const submitButton = document.createElement('button');
     submitButton.className = 'modal-submit';
-    submitButton.innerText = 'Submit';
+    submitButton.innerText = 'Next';
     bottomButtonContainer.appendChild(submitButton);
     result.push(bottomButtonContainer);
 
@@ -200,11 +201,109 @@ const firstStoryModal = (data, large) => {
   return result;
 }
 
+const removeFromAllModal = () => {
+  const result = [];
+
+  const titleContainer = document.createElement('div')
+  titleContainer.className = 'modal-title-container';
+  const title = document.createElement('div');
+  title.className = 'modal-title';
+  title.innerText = 'Are you sure you want to remove this book from your shelves? ';
+  titleContainer.appendChild(title);
+  const closeButtonContainer = document.createElement('i');
+  closeButtonContainer.className = 'close-button-container';
+  closeButtonContainer.addEventListener('click', closeModal)
+  const closeButton = document.createElement('i');
+  closeButton.className = 'fas fa-times close-modal';
+  closeButtonContainer.appendChild(closeButton);
+  titleContainer.appendChild(closeButtonContainer);
+  result.push(titleContainer);
+
+  const warningDescription = document.createElement('div');
+  warningDescription.className = 'modal-description';
+  warningDescription.innerText = 'Removing this book will clear associated reading activity.'
+  result.push(warningDescription);
+
+  const bottomButtonContainer = document.createElement('div');
+  bottomButtonContainer.className = 'modal-bottom-button-container';
+  const cancelButton = document.createElement('button');
+  cancelButton.className = 'modal-cancel';
+  cancelButton.innerText = 'Cancel';
+  cancelButton.addEventListener('click', switchBookshelfChoice)
+  bottomButtonContainer.appendChild(cancelButton);
+  const submitButton = document.createElement('button');
+  submitButton.className = 'modal-submit';
+  submitButton.innerText = 'Remove';
+  submitButton.addEventListener('click', removeAllSubmitEvent);
+  bottomButtonContainer.appendChild(submitButton);
+  result.push(bottomButtonContainer);
+
+  return result;
+}
+
+const removeAllWarningEvent = () => {
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.innerHTML = ''
+  const eles = removeFromAllModal();
+
+  for (let i = 0; i < eles.length; i++){
+    modalContainer.appendChild(eles[i]);
+  }
+}
+
+const removeAllSubmitEvent = async () => {
+  const storyId = document.querySelector('.story-id-container').id;
+
+  const res = await fetch('/api/placements/', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ storyId })
+  })
+  if (res.ok) {
+    const otherButton = document.querySelector('.bookshelf-button-container.added')
+    otherButton.classList.remove('added');
+    otherButton.innerHTML = '';
+
+    const resTwo = await fetch(`/api/bookshelves/${storyId}/standard`)
+    const data = await resTwo.json();
+    const placeholderDiv = document.createElement('div');
+    placeholderDiv.className = 'placeholder';
+    otherButton.appendChild(placeholderDiv)
+
+    const wantToReadDiv = document.createElement('div');
+    wantToReadDiv.className = 'bookshelf-button';
+    wantToReadDiv.id = data['Want To Read'].id;
+    wantToReadDiv.innerText = 'Want To Read';
+    wantToReadDiv.addEventListener('click', wantToReadFunction);
+    otherButton.appendChild(wantToReadDiv);
+
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-chevron-down';
+    icon.addEventListener('click', selectBookshelfChevronFunction);
+    otherButton.appendChild(icon);
+
+    // div(class='bookshelf-button-container')
+      // div.placeholder
+      // div(class='bookshelf-button' id=wantToReadId) Want To Read
+      // i(class='fas fa-chevron-down')
+
+
+
+    closeModal();
+  }
+}
+
 const switchBookshelfChoice = async (e) => {
   e.stopPropagation()
   const modalContainer = document.querySelector('.modal-container');
-  modalContainer.parentElement.classList.remove('hidden');
-  modalContainer.previousSibling.addEventListener('click', closeModal);
+  if (modalContainer.parentElement.classList.contains('hidden')) {
+    modalContainer.parentElement.classList.remove('hidden');
+    modalContainer.previousSibling.addEventListener('click', closeModal);
+  } else {
+    modalContainer.innerHTML = '';
+  }
 
   const storyId = document.querySelector('.story-id-container').id
   const res = await fetch(`/api/bookshelves/${storyId}/standard`)
