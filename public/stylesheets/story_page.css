@@ -26,6 +26,62 @@
   box-shadow: 0 2px 8px 0 rgb(0 0 0 / 20%);
 }
 
+.bookshelf-button-container {
+  width: 100%;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3F8363;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.bookshelf-button-container .fa-check {
+  margin-right: 4px;
+  /* font-weight: 400; */
+}
+
+.bookshelf-button-container .fa-chevron-down {
+  border-left: 1px solid #377458;
+  padding: 12px;
+  padding-right: 15px;
+}
+
+.bookshelf-button-container .fa-chevron-down:hover {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: #409970;
+}
+
+.bookshelf-button-container.added {
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+  justify-content: center;
+}
+
+.bookshelf-button-container.added:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.bookshelf-button {
+  width: 90%;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.bookshelf-button:hover {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: #409970;
+}
+
 .story-page-right-side {
   grid-column: 5 / 12;
 }

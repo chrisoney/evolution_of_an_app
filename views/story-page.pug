@@ -11,12 +11,24 @@ block content
     .story-page-left-side
       .story-sticky-section
         img(src=story.imageUrl class='story-image')
-        div.bookshelf-button Placeholder
+        if story.Bookshelves.length > 0
+          div(class='bookshelf-button-container added')
+            i(class='fas fa-check')
+            div(class='bookshelf-button-added' id=story.Bookshelves[0].id)
+            | #{story.Bookshelves[0].name}
+        else
+          div(class='bookshelf-button-container')
+            div.placeholder
+            div(class='bookshelf-button' id=wantToReadId) Want To Read
+            i(class='fas fa-chevron-down')
     .story-page-right-side
       .story-details-container
         .story-title= story.title
         .story-author= story.author
         //- Review section
         .story-description-container
-          .story-description.shortened= story.description
-          button(class='expand') ...more
+          if story.description.length === 0
+            .story-description.none No Description Provided
+          else
+            .story-description.shortened= story.description
+            button(class='expand') ...more
