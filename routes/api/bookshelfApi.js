@@ -25,6 +25,27 @@ router.get('/:id(\\d+)/standard', asyncHandler(async (req, res) => {
   res.json(data)
 }))
 
+router.get('/:id(\\d+)/custom', asyncHandler(async (req, res) => {
+  const userId = req.session.auth.userId;
+  const id = req.params.id;
+  const bookshelves = await Bookshelf.findAll({
+    where: {
+      userId,
+      deleteAllowed: true
+    },
+    include: {
+      model: Story,
+      where: { id },
+      required: false
+    }
+  })
+  const data = {};
+  bookshelves.forEach(bookshelf => {
+    data[bookshelf.name] = bookshelf;
+  })
+  res.json(data)
+}))
+
 router.post('/', asyncHandler(async (req, res) => {
   const { name } = req.body;
   const userId = req.session.auth.userId;

@@ -181,6 +181,10 @@
   border-radius: 30px;
 }
 
+.modal-bookshelf-button > .fa-check {
+  margin-right: 4px;
+}
+
 .modal-bookshelf-button:hover, .modal-bookshelf-button.selected {
   background-color: rgba(0,0,0,0.05);
 }
@@ -206,6 +210,32 @@
   font-weight: normal;
   font-family: 'Libre Baskerville', serif;
   margin-bottom: 16px;
+}
+
+.modal-shelf-container {
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+
+.modal-custom-shelf {
+  height: 36px;
+  font-size: 14px;
+  line-height: 36px;
+  padding: 0px 12px;
+  cursor: pointer;
+  background-color: #EBF0E5;
+  color: #1E1915;
+  border-radius: 30px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 8px;
+  user-select: none;
+}
+
+.modal-custom-shelf.selected {
+  background-color: #3F8363;
+  color: #FFF;
 }
 
 .modal-cancel {

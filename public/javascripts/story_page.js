@@ -1,4 +1,6 @@
 const description_expand_button = document.querySelector('.expand');
+const selectedCustomShelves = new Set();
+
 
 description_expand_button.addEventListener('click', (e) => {
   const button = e.target;
@@ -18,6 +20,19 @@ const closeModal = (e) => {
       ele.children[1].classList.remove('zoom-out');
       ele.children[1].innerHTML = '';
     }, 400);
+  }
+}
+
+const customShelfEvent = (e) => {
+  const ele = e.target;
+  if (ele.classList.contains('modal-custom-shelf')) {
+    if (ele.classList.contains('selected')) {
+      ele.classList.remove('selected');
+      selectedCustomShelves.delete(ele.id);
+    } else {
+      ele.classList.add('selected');
+      selectedCustomShelves.add(ele.id);
+    }
   }
 }
 
@@ -79,7 +94,28 @@ const selectBookshelf = async (e) => {
     bookshelfDiv.id = e.target.id;
     bookshelfDiv.innerText = e.target.innerText;
     parent.appendChild(bookshelfDiv);
+
+    closeModal();
   }
+}
+
+const customShelfSubmitEvent = async (e) => {
+  const arr = Array.from(selectedCustomShelves)
+  for (let i = 0; i < arr.length; i++){
+    const bookshelfId = arr[i];
+    const storyId = document.querySelector('.story-id-container').id;
+    const res = await fetch('/api/placements', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ bookshelfId, storyId })
+    })
+    if (!res.ok) {
+      console.log('WHOOPS')
+    }
+  }
+  closeModal();
 }
 
 const switchShelfHelperEvent = async (e) => {
@@ -191,14 +227,61 @@ const firstStoryModal = (data, large) => {
     const submitButton = document.createElement('button');
     submitButton.className = 'modal-submit';
     submitButton.innerText = 'Next';
+    submitButton.addEventListener('click', customShelfModalDisplayEvent);
     bottomButtonContainer.appendChild(submitButton);
     result.push(bottomButtonContainer);
-
-    //bottom buttons
-    //also consider doing the :before or whatever for the check mark
   }
 
   return result;
+}
+
+const secondStoryModal = (data) => {
+  const result = [];
+
+  const titleContainer = document.createElement('div')
+  titleContainer.className = 'modal-title-container';
+  const title = document.createElement('div');
+  title.className = 'modal-title';
+  title.innerText = 'Add this story to some of your custom shelves: ';
+  titleContainer.appendChild(title);
+  const closeButtonContainer = document.createElement('i');
+  closeButtonContainer.className = 'close-button-container';
+  closeButtonContainer.addEventListener('click', closeModal)
+  const closeButton = document.createElement('i');
+  closeButton.className = 'fas fa-times close-modal';
+  closeButtonContainer.appendChild(closeButton);
+  titleContainer.appendChild(closeButtonContainer);
+  result.push(titleContainer);
+
+  const shelfContainer = document.createElement('div');
+  shelfContainer.className = 'modal-shelf-container';
+  for (let i = 0; i < Object.values(data).length; i++) {
+    const shelf = Object.values(data)[i]
+    const customShelfDiv = document.createElement('div');
+    customShelfDiv.className = 'modal-custom-shelf';
+    customShelfDiv.innerText = shelf.name;
+    customShelfDiv.id = shelf.id;
+    customShelfDiv.addEventListener('click', customShelfEvent);
+    shelfContainer.appendChild(customShelfDiv)
+  }
+  result.push(shelfContainer);
+
+  const bottomButtonContainer = document.createElement('div');
+  bottomButtonContainer.className = 'modal-bottom-button-container';
+  const cancelButton = document.createElement('button');
+  cancelButton.className = 'modal-cancel';
+  cancelButton.innerText = 'Back';
+  cancelButton.addEventListener('click', switchBookshelfChoice)
+  bottomButtonContainer.appendChild(cancelButton);
+  const submitButton = document.createElement('button');
+  submitButton.className = 'modal-submit';
+  submitButton.innerText = 'Done';
+  submitButton.addEventListener('click', customShelfSubmitEvent);
+  bottomButtonContainer.appendChild(submitButton);
+  result.push(bottomButtonContainer);
+
+  return result;
+
 }
 
 const removeFromAllModal = () => {
@@ -284,14 +367,22 @@ const removeAllSubmitEvent = async () => {
     icon.addEventListener('click', selectBookshelfChevronFunction);
     otherButton.appendChild(icon);
 
-    // div(class='bookshelf-button-container')
-      // div.placeholder
-      // div(class='bookshelf-button' id=wantToReadId) Want To Read
-      // i(class='fas fa-chevron-down')
-
-
-
     closeModal();
+  }
+}
+
+const customShelfModalDisplayEvent = async () => {
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.innerHTML = ''
+  
+  const storyId = document.querySelector('.story-id-container').id
+  const res = await fetch(`/api/bookshelves/${storyId}/custom`)
+
+  const data = await res.json();
+  const eles = secondStoryModal(data);
+
+  for (let i = 0; i < eles.length; i++){
+    modalContainer.appendChild(eles[i]);
   }
 }
 
