@@ -39,3 +39,9 @@ stage_selector_button.addEventListener('dragend', (e) => {
   const newTop = `calc(${currTop} + ${e.offsetY}px)`;
   grandparent.style.top = newTop;
 })
+
+document.querySelector('.modal-background').addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal-background')) {
+    e.target.classList.add('hidden')
+  }
+})
