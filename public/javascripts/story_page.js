@@ -36,9 +36,6 @@ const wantToReadFunction = async (e) => {
   if (res.ok) {
     const { placement } = await res.json();
 
-    // i(class='fas fa-check')
-    // div(class='bookshelf-button-added' id=story.Bookshelves[0].id)
-    // | #{story.Bookshelves[0].name}
     const parent = e.target.parentElement;
     parent.classList.add('added');
     parent.innerHTML = ''
@@ -101,6 +98,7 @@ const switchShelfHelperEvent = async (e) => {
     body: JSON.stringify({ bookshelfId, storyId})
   })
   if (res.ok) {
+    const { placement, bookshelf } = await res.json();
     const parent = ele.parentElement;
     const buttons = parent.querySelectorAll('.modal-bookshelf-button');
     for (let i = 0; i < buttons.length; i++){
@@ -112,6 +110,9 @@ const switchShelfHelperEvent = async (e) => {
     }
     ele.classList.add('selected');
     ele.innerHTML = '<i class="fas fa-check"></i>' + ele.innerHTML;
+    const otherBookshelfButton = document.querySelector('.bookshelf-button-added');
+    otherBookshelfButton.id = bookshelf.id;
+    otherBookshelfButton.innerText = bookshelf.name;
   }
   return;
 }
@@ -180,6 +181,18 @@ const firstStoryModal = (data, large) => {
   result.push(alreadyRead);
 
   if (large) {
+    const bottomButtonContainer = document.createElement('div');
+    bottomButtonContainer.className = 'modal-bottom-button-container';
+    const cancelButton = document.createElement('button');
+    cancelButton.className = 'modal-cancel';
+    cancelButton.innerText = 'Cancel';
+    bottomButtonContainer.appendChild(cancelButton);
+    const submitButton = document.createElement('button');
+    submitButton.className = 'modal-submit';
+    submitButton.innerText = 'Submit';
+    bottomButtonContainer.appendChild(submitButton);
+    result.push(bottomButtonContainer);
+
     //bottom buttons
     //also consider doing the :before or whatever for the check mark
   }

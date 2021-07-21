@@ -6,7 +6,6 @@ const { asyncHandler } = require('../utils');
 router.post('/', asyncHandler(async (req, res) => {
   const { bookshelfId, storyId } = req.body
   const bookshelf = await Bookshelf.findByPk(bookshelfId);
-  console.log(bookshelf.deleteAllowed)
   if (!bookshelf.deleteAllowed) {
     const bookshelves = await Bookshelf.findAll({
       where: {
@@ -15,7 +14,6 @@ router.post('/', asyncHandler(async (req, res) => {
       },
       include: Story
     })
-    console.log(storyId)
     for (let i = 0; i < bookshelves.length; i++) {
       const shelf = bookshelves[i];
       const storyIds = shelf.Stories.map(story => story.id);
@@ -34,7 +32,7 @@ router.post('/', asyncHandler(async (req, res) => {
     storyId
   })
 
-  res.json( { placement })
+  res.json( { placement, bookshelf })
 }))
 
 module.exports = router;
