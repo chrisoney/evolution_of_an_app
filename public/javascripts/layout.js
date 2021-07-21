@@ -41,7 +41,12 @@ stage_selector_button.addEventListener('dragend', (e) => {
 })
 
 document.querySelector('.modal-background').addEventListener('click', (e) => {
-  if (e.target.classList.contains('modal-background')) {
-    e.target.classList.add('hidden')
+  const ele = e.target;
+  if (ele.classList.contains('modal-background') && !ele.classList.contains('hidden')) {
+    ele.children[0].classList.add('zoom-up');
+    document.setTimeout(() => {
+      ele.classList.add('hidden');
+      ele.children[0].classList.remove('zoom-up');
+    }, 2000);
   }
 })
