@@ -4,6 +4,21 @@ const { asyncHandler } = require('../utils');
 const { Bookshelf } = require('../../db/models');
 
 
+router.get('/', asyncHandler(async (req, res) => {
+  const userId = req.session.auth.userId;
+  const bookshelves = await Bookshelf.findAll({
+    where: {
+      userId,
+      deleteAllowed: false
+    }
+  })
+  const data = {};
+  bookshelves.forEach(bookshelf => {
+    data[bookshelf.name] = bookshelf.id;
+  })
+  res.json(data)
+}))
+
 router.post('/', asyncHandler(async (req, res) => {
   const { name } = req.body;
   const userId = req.session.auth.userId;

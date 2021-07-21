@@ -135,8 +135,35 @@
 }
 
 
+/* Modal stuff */
+.modal-title-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px 16px 24px;
+}
 
+.modal-title {
+  font-size: 16px;
+  line-height: 1.4375;
+  font-family: 'Libre Baskerville', serif;
+}
 
+.modal-bookshelf-button {
+  background-color: transparent;
+  margin: 0 24px 12px 24px;
+  text-align: center;
+  vertical-align: middle;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 30px;
+}
+
+.modal-bookshelf-button:hover {
+  background-color: rgba(0,0,0,0.05);
+}
 
 /* Important styling */
 

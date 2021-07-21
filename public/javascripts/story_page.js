@@ -7,6 +7,18 @@ description_expand_button.addEventListener('click', (e) => {
   button.classList.add('hidden')
 })
 
+const closeModal = (e) => {
+  const ele = e.target;
+  if (ele.classList.contains('modal-background') && !ele.classList.contains('hidden')) {
+    ele.children[0].classList.add('zoom-out');
+    window.setTimeout(() => {
+      ele.classList.add('hidden');
+      ele.children[0].classList.remove('zoom-out');
+      ele.children[0].innerHTML = '';
+    }, 400);
+  }
+}
+
 const wantToReadFunction = async (e) => {
   const bookshelfId = e.target.id;
   const storyId = document.querySelector('.story-id-container').id
@@ -41,11 +53,44 @@ const wantToReadFunction = async (e) => {
   }
 }
 
-const selectBookshelfChevronFunction = (e) => {
+const selectBookshelfChevronFunction = async (e) => {
   const modalContainer = document.querySelector('.modal-container');
-  modalContainer.parent.classList.remove('hidden');
+  modalContainer.parentElement.classList.remove('hidden');
+  modalContainer.parentElement.addEventListener('click', closeModal);
 
+  const titleContainer = document.createElement('div')
+  titleContainer.className = 'modal-title-container';
+  const title = document.createElement('div');
+  title.className = 'modal-title';
+  title.innerText = 'Choose a shelf for this story: ';
+  titleContainer.appendChild(title);
+  const closeButton = document.createElement('i');
+  closeButton.className = 'fas fa-times';
+  titleContainer.appendChild(closeButton);
+  modalContainer.appendChild(titleContainer);
+
+  const res = await fetch('/api/bookshelves/')
+
+  const data = await res.json();
   
+  const wantToRead = document.createElement('button');
+  wantToRead.className = 'modal-bookshelf-button';
+  wantToRead.id = data['Want To Read'];
+  wantToRead.innerText = 'Want To Read';
+  modalContainer.appendChild(wantToRead);
+
+  const currentlyReading = document.createElement('button');
+  currentlyReading.className = 'modal-bookshelf-button';
+  currentlyReading.id = data['Currently Reading'];
+  currentlyReading.innerText = 'Currently Reading';
+  modalContainer.appendChild(currentlyReading);
+
+  const alreadyRead = document.createElement('button');
+  alreadyRead.className = 'modal-bookshelf-button';
+  alreadyRead.id = data['Read'];
+  alreadyRead.innerText = 'Read';
+  modalContainer.appendChild(alreadyRead);
+
 }
 
 // These will exist

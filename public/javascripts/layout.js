@@ -39,14 +39,3 @@ stage_selector_button.addEventListener('dragend', (e) => {
   const newTop = `calc(${currTop} + ${e.offsetY}px)`;
   grandparent.style.top = newTop;
 })
-
-document.querySelector('.modal-background').addEventListener('click', (e) => {
-  const ele = e.target;
-  if (ele.classList.contains('modal-background') && !ele.classList.contains('hidden')) {
-    ele.children[0].classList.add('zoom-up');
-    document.setTimeout(() => {
-      ele.classList.add('hidden');
-      ele.children[0].classList.remove('zoom-up');
-    }, 2000);
-  }
-})
