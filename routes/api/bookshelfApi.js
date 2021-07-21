@@ -20,7 +20,7 @@ router.get('/:id(\\d+)/standard', asyncHandler(async (req, res) => {
   })
   const data = {};
   bookshelves.forEach(bookshelf => {
-    data[bookshelf.name] = bookshelf.id;
+    data[bookshelf.name] = bookshelf;
   })
   res.json(data)
 }))

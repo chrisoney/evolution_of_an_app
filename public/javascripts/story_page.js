@@ -101,38 +101,59 @@ const firstStoryModal = (data, large) => {
   
   const wantToRead = document.createElement('button');
   wantToRead.className = 'modal-bookshelf-button';
-  wantToRead.id = data['Want To Read'];
+  wantToRead.id = data['Want To Read'].id;
   wantToRead.innerText = 'Want To Read';
   wantToRead.addEventListener('click', selectBookshelf)
+  if (large && data['Want To Read'].Stories.length > 0) {
+    wantToRead.classList.add('selected');
+    wantToRead.innerHTML = '<i class="fas fa-check"></i>' + wantToRead.innerHTML;
+  }
   result.push(wantToRead);
 
   const currentlyReading = document.createElement('button');
   currentlyReading.className = 'modal-bookshelf-button';
-  currentlyReading.id = data['Currently Reading'];
+  currentlyReading.id = data['Currently Reading'].id;
   currentlyReading.innerText = 'Currently Reading';
   currentlyReading.addEventListener('click', selectBookshelf)
+  if (large && data['Currently Reading'].Stories.length > 0) {
+    currentlyReading.classList.add('selected');
+    currentlyReading.innerHTML = '<i class="fas fa-check"></i>' + currentlyReading.innerHTML;
+  }
   result.push(currentlyReading);
 
   const alreadyRead = document.createElement('button');
   alreadyRead.className = 'modal-bookshelf-button';
-  alreadyRead.id = data['Read'];
+  alreadyRead.id = data['Read'].id;
   alreadyRead.innerText = 'Read';
   alreadyRead.addEventListener('click', selectBookshelf)
+  if (large && data['Read'].Stories.length > 0) {
+    alreadyRead.classList.add('selected');
+    alreadyRead.innerHTML = '<i class="fas fa-check"></i>' + alreadyRead.innerHTML;
+  }
   result.push(alreadyRead);
 
   if (large) {
     //bottom buttons
+    //also consider doing the :before or whatever for the check mark
   }
 
   return result;
 }
 
 const switchBookshelfChoice = async (e) => {
-  // Same form as below
-  // Consider DRYing all this up
-  // Also need the remove and accept buttons
-  // Then a new function for the other shelves
-  // Then I'll probably need to set more shit up for backtracking
+  const modalContainer = document.querySelector('.modal-container');
+  modalContainer.parentElement.classList.remove('hidden');
+  modalContainer.parentElement.addEventListener('click', closeModal);
+
+  const storyId = document.querySelector('.story-id-container').id
+  const res = await fetch(`/api/bookshelves/${storyId}/standard`)
+
+  const data = await res.json();
+  const eles = firstStoryModal(data, true);
+
+  for (let i = 0; i < eles.length; i++){
+    modalContainer.appendChild(eles[i]);
+  }
 }
 
 const selectBookshelfChevronFunction = async (e) => {
@@ -155,9 +176,11 @@ const selectBookshelfChevronFunction = async (e) => {
 // These will exist
 const want_to_read_button = document.querySelector('.bookshelf-button');
 const select_bookshelf_chevron_button = document.querySelector('.fa-chevron-down');
+// Or this will exist  
+const change_bookshelf_button = document.querySelector('.bookshelf-button-container.added');
 if (want_to_read_button && select_bookshelf_chevron_button) {
   want_to_read_button.addEventListener('click', wantToReadFunction);
   select_bookshelf_chevron_button.addEventListener('click', selectBookshelfChevronFunction);
+} else {
+  change_bookshelf_button.addEventListener('click', switchBookshelfChoice)
 }
-// Or this will exist  
-const change_bookshelf_button = document.querySelector('.bookshelf-button-container.added');
