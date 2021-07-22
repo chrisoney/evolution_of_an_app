@@ -9,6 +9,7 @@ add_bookshelf_button.addEventListener('click', (e) => {
 })
 
 new_bookshelf_submit_button.addEventListener('click', async (e) => {
+  const mode = document.querySelector('.mode-container').id;
   const name = new_bookshelf_input.value;
   // https://stackoverflow.com/questions/32765157/filter-or-map-nodelists-in-es6
   const otherNames = Array.prototype.slice.call(document.querySelectorAll('.bookshelf-selector')).map(ele => ele.innerText);
@@ -28,6 +29,7 @@ new_bookshelf_submit_button.addEventListener('click', async (e) => {
   newBookshelf.classList.add('bookshelf-selector');
   newBookshelf.id = bookshelf.id;
   newBookshelf.innerText = bookshelf.name;
+  newBookshelf.innerText = parseInt(mode) >= 3 ? bookshelf.name + " (0)" : bookshelf.name;
   bookshelf_container.appendChild(newBookshelf);
   add_bookshelf_button.classList.toggle('hidden')
   new_bookshelf_form_container.classList.toggle('hidden')

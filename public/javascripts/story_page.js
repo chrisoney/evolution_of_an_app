@@ -115,6 +115,7 @@ const customShelfSubmitEvent = async (e) => {
       console.log('WHOOPS')
     }
   }
+  selectedCustomShelves.clear();
   closeModal();
 }
 

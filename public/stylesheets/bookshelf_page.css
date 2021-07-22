@@ -194,6 +194,10 @@
   text-decoration: underline;
 }
 
+.story-shelf-list {
+  width: 80px;
+}
+
 .story-date-read {
   color: #999;
 }
