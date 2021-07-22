@@ -262,6 +262,9 @@ const secondStoryModal = (data) => {
     customShelfDiv.className = 'modal-custom-shelf';
     customShelfDiv.innerText = shelf.name;
     customShelfDiv.id = shelf.id;
+    if(shelf.Stories.length > 0) {
+      customShelfDiv.classList.add('selected');
+    }
     customShelfDiv.addEventListener('click', customShelfEvent);
     shelfContainer.appendChild(customShelfDiv)
   }
