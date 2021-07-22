@@ -7,33 +7,41 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  case mode
-    when '0'
-      h1= title
-      p Welcome to your Project Skeleton
-    when '1'
-    when '2'
-      if authenticated
-        //- This area should be solely for content on the home page
-        //- .logo-container
-          a(href='/' class="logo-link")
-            img(src='/images/logo.png' class="auth-logo")
-      else
-        .logo-container
-          a(href='/' class="logo-link")
-            img(src='/images/logo.png' class="auth-logo")
-        .header
-          img(src='/images/royal.jpg' class="header-image")
-          .auth-container
-            div.auth-container-title Discover and Read More
-            form(action='/users/demo' method='post')
-              button(type="submit" class="demo-button") Demo Login
-            a(href="/users/signup" class="signup-button") Sign up with email
-            div.auth-container-description
-              | By creating an account, you agree to 
-              b nothing 
-              | and are beholden to 
-              b no one.
-            .login-container
-              div.login-description Already a member?
-              a(href='/users/login' class="login-text") Sign in
+  if (parseInt(mode) === 0)
+    h1= title
+    p Welcome to your Project Skeleton
+  else
+    if authenticated
+      //- This area should be solely for content on the home page
+      //- .logo-container
+        a(href='/' class="logo-link")
+          img(src='/images/logo.png' class="auth-logo")
+    else
+      .logo-container
+        a(href='/' class="logo-link")
+          img(src='/images/logo.png' class="auth-logo")
+      .header
+        img(src='/images/royal.jpg' class="header-image")
+        .auth-container
+          div.auth-container-title Discover and Read More
+          form(action='/users/demo' method='post')
+            button(type="submit" class="demo-button") Demo Login
+          a(href="/users/signup" class="signup-button") Sign up with email
+          div.auth-container-description
+            | By creating an account, you agree to 
+            b nothing 
+            | and are beholden to 
+            b no one.
+          .login-container
+            div.login-description Already a member?
+            a(href='/users/login' class="login-text") Sign in
+      if(parseInt(mode) >= 3)
+        .homepage-content
+          .currently-reading-examples-container
+            div(class='currently-reading-examples-title') Here's what people are reading
+            each user in currentlyReadingUsers
+              div(class='individual-user-container')
+                div(class='individual-user-container-title') #{user.username} is currently reading
+                div(class="individual-user-images-container")
+                  each story in user.Bookshelves[0].Stories
+                    img(src=story.imageUrl class='individual-user-story-image')

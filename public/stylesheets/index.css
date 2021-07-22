@@ -123,3 +123,55 @@ h1 {
 .login-text:hover {
 	text-decoration: underline;
 }
+
+.homepage-content {
+	display: flex;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+	width: 970px;
+	margin-top: 20px;
+	margin-bottom: 90px;
+}
+
+.currently-reading-examples-container {
+	display: flex;
+	flex-direction: column;
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+	background-color: #F4F2E9;
+	border-radius: 30px;
+	padding: 15px 0 30px 0;
+}
+
+.currently-reading-examples-title {
+	margin: 0 0 15px 15px;
+	color: #000;
+	font-size: 18px;
+}
+
+.individual-user-container {
+	display: flex;
+	flex-direction: column;
+	background-image: linear-gradient(#F4F2E9, #C6C2A0);
+	padding-bottom: 10px;
+	border-bottom: 2px solid #dfddd4;
+}
+
+.individual-user-container-title {
+	margin-bottom: 18px;
+	font-size: 12px;
+	color: #181818;
+}
+
+.individual-user-images-container{
+	display: flex;
+}
+
+.individual-user-story-image {
+	height: 120px;
+	width: 80px;
+	object-fit: cover;
+	margin-right: 12px;
+	cursor: pointer;
+}

@@ -25,6 +25,11 @@ module.exports = {
         deleteAllowed: false,
       },
       {
+        userId: 1,
+        name: 'LitRpg',
+        deleteAllowed: true,
+      },
+      {
         userId: 2,
         name: 'Read',
         deleteAllowed: false,

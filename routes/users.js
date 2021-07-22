@@ -191,17 +191,17 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
       }
     }
   })
-  const allStories = new Set();
+  const allStories = [];
   user.Bookshelves.forEach(bookshelf => {
     bookshelf.Stories.forEach(story => {
-      allStories.add(story)
-      allStories.add(story)
+      if (!allStories.map(s => s.id).includes(story.id)) {
+        allStories.push(story)
+      }
     })
   })
-  const allArr = Array.from(allStories)
-  const allCount = allArr.length;
+  const allCount = allStories.length;
 
-  const loadedStories = allArr;
+  const loadedStories = allStories;
   res.render('bookshelf-page', { user, loadedStories, allCount })
   // res.json({ loadedStories })
 }))
