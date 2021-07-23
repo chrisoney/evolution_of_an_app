@@ -7,8 +7,6 @@ const { asyncHandler, csrfProtection, pageChecker, addStories } = require('./uti
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 const { User, Bookshelf, Story, Placement } = require('../db/models')
 
-router.use(pageChecker)
-
 const loginValidators = [
   check('username')
     .exists({ checkFalsy: true })

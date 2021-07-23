@@ -9,8 +9,7 @@ router.post('/color', function (req, res, next) {
 });
 router.post('/stage', function (req, res, next) {
   const { stage } = req.body
-  console.log(stage)
-  req.session.ui = {mode: stage};
+  req.session.ui = { mode: stage };
   res.json({success: 'success'})
 });
 

@@ -38,7 +38,6 @@ router.post('/', asyncHandler(async (req, res) => {
 router.delete('/', asyncHandler(async (req, res) => {
   const { storyId } = req.body;
   const userId = req.session.auth.userId;
-  console.log(storyId, userId)
   const bookshelves = await Bookshelf.findAll({
     where: { userId },
     include: {
@@ -46,7 +45,6 @@ router.delete('/', asyncHandler(async (req, res) => {
       where: { id: storyId }
     }
   })
-  console.log(bookshelves);
   for (let i = 0; i < bookshelves.length; i++){
     const bookshelf = bookshelves[i];
     const placement = await Placement.findOne({

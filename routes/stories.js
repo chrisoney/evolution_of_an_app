@@ -3,8 +3,6 @@ const { asyncHandler, pageChecker } = require('./utils');
 const { Story, Bookshelf } = require('../db/models')
 const router = express.Router();
 
-router.use(pageChecker)
-
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = req.params.id;
   let wantToReadId;

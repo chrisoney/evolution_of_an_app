@@ -15,7 +15,8 @@ const bookshelvesRouter = require('./routes/bookshelves');
 const storiesRouter = require('./routes/stories');
 const apiRouter = require('./routes/api')
 
-const { restoreUser, requireAuth } = require('./auth')
+const { restoreUser, requireAuth } = require('./auth');
+const { pageChecker } = require('./routes/utils');
 
 const app = express();
 
@@ -61,17 +62,19 @@ cron.schedule('0 0 12 * * *', async () => {
       await users[i].destroy()
     }
   } catch(err) {
-    console.log( err)
+    console.log(err)
   }
 })
 
 app.use(restoreUser)
+app.use('/api', apiRouter)
+app.use(pageChecker)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(requireAuth)
 app.use('/bookshelves', bookshelvesRouter);
 app.use('/stories', storiesRouter);
-app.use('/api', apiRouter)
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
