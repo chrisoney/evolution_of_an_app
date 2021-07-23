@@ -155,6 +155,7 @@ h1 {
 	flex-direction: column;
 	background-image: linear-gradient(#F4F2E9 0%, #F4F2E9 74%, #C2BFAA 75%, #E0DCC7 100%);
 	padding-bottom: 15px;
+	padding-left: 15px;
 	border-bottom: 2px solid #dfddd4;
 }
 

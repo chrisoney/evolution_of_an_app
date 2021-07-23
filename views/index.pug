@@ -37,11 +37,24 @@ block content
             a(href='/users/login' class="login-text") Sign in
       if(parseInt(mode) >= 3)
         .homepage-content
-          .currently-reading-examples-container
-            div(class='currently-reading-examples-title') Here's what people are reading
-            each user in currentlyReadingUsers
-              div(class='individual-user-container')
-                div(class='individual-user-container-title') #{user.username} is currently reading
-                div(class="individual-user-images-container")
-                  each story in user.Bookshelves[0].Stories
-                    img(src=story.imageUrl class='individual-user-story-image')
+          .homepage-left
+            .currently-reading-examples-container
+              div(class='currently-reading-examples-title') Here's what people are reading
+              each user in currentlyReadingUsers
+                div(class='individual-user-container')
+                  div(class='individual-user-container-title') #{user.username} is currently reading
+                  div(class="individual-user-images-container")
+                    each story in user.Bookshelves[0].Stories
+                      a(href=`/stories/${story.id}`)
+                        img(src=story.imageUrl class='individual-user-story-image' title=story.title)
+          .homepage-right
+            .list-container
+              div(class='homepage-list-section-title') Love Lists?
+              each user in customBookshelfUsers
+                -var bookshelf = user.Bookshelves[0]
+                div(class='homepage-list-left')
+                  div(class='list-section-list-title')= bookshelf.title
+                div(class='homepage-list-right')
+                  each story in bookshelf.stories
+                    img(class='homepage-list-right-image' src=story.imageUrl)
+
