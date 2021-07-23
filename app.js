@@ -47,7 +47,7 @@ app.use(
 // create Session table if it doesn't already exist
 store.sync();
 
-cron.schedule('0 0 0 * * *', async () => {
+cron.schedule('0 0 12 * * *', async () => {
   try {
     const users = await User.findAll({
       where: {
