@@ -154,7 +154,7 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
   bookshelves.push(newEditShelf);
   
   
-  await addStories(bookshelves, 5)
+  await addStories(bookshelves)
 
   loginUser(req, res, user);
   return req.session.save(err => {
@@ -185,7 +185,10 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
       model: Bookshelf,
       include: {
         model: Story,
-        include: [Bookshelf, {
+        include: [{
+          model: Bookshelf,
+          where: { userId: req.session.auth.userId }
+        }, {
           model: Placement
         }],
       }

@@ -34,14 +34,17 @@ const pageChecker = (req, res, next) => {
   }
 }
 
-const addStories = async (shelves, num) => {
+const addStories = async (shelves) => {
   const stories = await Story.findAll({
     order: sequelize.random(),
     limit: 6
   })
-
   const faveStories = stories.filter(story => story.id % 2 === 1)
+  console.log(shelves.map(shelf => shelf.name))
   const otherShelf = shelves.pop();
+  console.log(stories.map(story => story.title))
+  console.log(faveStories.map(story => story.title))
+  console.log(shelves.map(shelf => shelf.name))
 
   const distribution = [1,3,2]
   for (let i = 0; i < shelves.length; i++){
@@ -50,7 +53,7 @@ const addStories = async (shelves, num) => {
     while (numStories > 0) {
       const story = stories.shift();
       await Placement.create({ bookshelfId: shelf.id, storyId: story.id })
-      numStories -= 1;
+      numStories--;
     }
   }
   for (let j = 0; j < faveStories.length; j++){
