@@ -24,7 +24,7 @@ router.get('/', asyncHandler(async(req, res,) => {
       include: Story
     },
     order: sequelize.random(),
-    limit: 5
+    limit: 7
   })
   res.render('index', {
     title: res.locals.mode === '0' ? 'a/A Express Skeleton Home' : 'RoyalReads',

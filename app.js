@@ -15,7 +15,7 @@ const bookshelvesRouter = require('./routes/bookshelves');
 const storiesRouter = require('./routes/stories');
 const apiRouter = require('./routes/api')
 
-const { restoreUser } = require('./auth')
+const { restoreUser, requireAuth } = require('./auth')
 
 const app = express();
 
@@ -68,6 +68,7 @@ cron.schedule('0 0 12 * * *', async () => {
 app.use(restoreUser)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use(requireAuth)
 app.use('/bookshelves', bookshelvesRouter);
 app.use('/stories', storiesRouter);
 app.use('/api', apiRouter)

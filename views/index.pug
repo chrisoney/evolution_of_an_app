@@ -35,7 +35,7 @@ block content
           .login-container
             div.login-description Already a member?
             a(href='/users/login' class="login-text") Sign in
-      if(parseInt(mode) >= 3)
+      if (parseInt(mode) >= 3)
         .homepage-content
           .homepage-left
             .currently-reading-examples-container
@@ -55,7 +55,9 @@ block content
                 div(class='homepage-list-container')
                   div(class='homepage-list-left')
                     div(class='list-section-list-title')= bookshelf.name
+                    div(class='list-section-author')= user.username
                   div(class='homepage-list-right')
-                    each story in bookshelf.Stories
-                      img(class='homepage-list-right-image' src=story.imageUrl)
+                    each story in bookshelf.Stories.slice(0, 6)
+                      a(href=`/stories/${story.id}`)
+                        img(class='homepage-list-right-image' src=story.imageUrl)
 
