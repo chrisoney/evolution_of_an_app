@@ -141,7 +141,7 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
   const user = await User.create({
     username: faker.name.findName(),
     email: faker.internet.email(),
-    hashedPassword: bcrypt.hashSync('hunter12')
+    hashedPassword: bcrypt.hashSync('hunter12', 10)
   });
   const choices = ['Read', 'Currently Reading', 'Want To Read']
   const bookshelves = [];

@@ -8,6 +8,37 @@ module.exports = {
 
       Example:
       */
+    const standardNames = ['Read', 'Currently Reading', 'Want To Read']
+    const customNames = ['Favorites', 'LitRpg', 'Fantasy', 'Action', 'Comedy', 'Easy Reads', 'Longer Stories', 'New Authors', 'Best Series']
+    const otherShelves = []
+
+    for (let i = 4; i <= 20; i++){
+      for (let j = 0; j < standardNames.length; j++){
+        const newShelf = {
+          userId: i,
+          name: standardNames[j],
+          deleteAllowed: false
+        }
+        otherShelves.push(newShelf)
+      }
+
+      const num = Math.floor(Math.random() * 2 + 1);
+      let firstIdx = null;
+      for (let k = 0; k < num; k++){
+        let idx = Math.floor(Math.random() * customNames.length);
+        while (firstIdx === idx) {
+          idx = Math.floor(Math.random() * customNames.length);
+        }
+        const newShelf = {
+          userId: i,
+          name: customNames[idx],
+          deleteAllowed: true
+        }
+        otherShelves.push(newShelf)
+        firstIdx = idx;
+      }
+    }
+    
     return queryInterface.bulkInsert('Bookshelves', [
       {
         userId: 1,
@@ -64,6 +95,7 @@ module.exports = {
         name: 'Want To Read',
         deleteAllowed: false,
       },
+      ...otherShelves,
     ], {});
   },
 
