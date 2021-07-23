@@ -126,16 +126,15 @@ h1 {
 
 .homepage-content {
 	display: flex;
-	flex-direction: column;
 	margin-left: auto;
 	margin-right: auto;
-	width: 970px;
 	margin-top: 20px;
 	margin-bottom: 90px;
 }
 
 .currently-reading-examples-container {
 	display: flex;
+	width: 625px;
 	flex-direction: column;
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 18px;
@@ -174,5 +173,58 @@ h1 {
 	width: 80px;
 	object-fit: cover;
 	margin-right: 12px;
+	cursor: pointer;
+}
+
+.homepage-right {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+}
+
+.list-container{
+	display: flex;
+	flex-direction: column;
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.homepage-list-section-title{
+	margin-bottom: 10px;
+	color: #000;
+	font-size: 18px;
+}
+
+.homepage-list-container {
+	display: flex;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid black;
+}
+
+.homepage-list-left, .homepage-list-right {
+	width: 50%
+}
+
+.list-section-list-title{
+	font-size: 14px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	padding-left: 5px;
+}
+
+.homepage-list-right {
+	margin-left: 20px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.homepage-list-right-image {
+	height: 40px;
+	width: 25px;
+	object-fit: cover;
+	margin-right: 2px;
+	border: 1px solid black;
 	cursor: pointer;
 }

@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  margin-left: 10px;
 }
 .bookshelf-header {
   margin-top: 15px;
@@ -12,7 +13,7 @@
   padding-bottom: 5px;
   border-bottom: 1px solid #EBE8D5;
   color: #BBB596;
-  width: 970px;
+  width: 100%;
 }
 
 .bookshelf-header > h3 {
@@ -26,7 +27,7 @@
 .page-content{ 
   display: flex;
   margin-left: 5px;
-  width: 970px;
+  width: 100%;
 }
 
 .sidebar {
