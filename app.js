@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const cron = require('node-cron')
 const moment = require('moment')
 const logger = require('morgan');
-const { sequelize, User } = require('./db/models');
+const { sequelize, User, Placement, Story } = require('./db/models');
 const { Op } = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -16,7 +16,7 @@ const storiesRouter = require('./routes/stories');
 const apiRouter = require('./routes/api')
 
 const { restoreUser, requireAuth } = require('./auth');
-const { pageChecker } = require('./routes/utils');
+const { pageChecker, asyncHandler } = require('./routes/utils');
 
 const app = express();
 
@@ -65,6 +65,31 @@ cron.schedule('0 0 12 * * *', async () => {
     console.log(err)
   }
 })
+
+// Dark Magicks
+// app.get('/update-placements', asyncHandler(async (req, res) => {
+  
+//   const placementsBefore = await Placement.findAll({
+//     include: Story,
+//     order: [['updatedAt', 'DESC']],
+//     limit: 5,
+//   })
+//   const random = await Placement.findAll({
+//     order: sequelize.random(),
+//     limit: 10,
+//   })
+//   for (let i = 0; i < random.length; i++){
+//     const placement = random[i]
+//     placement.changed('updatedAt', true)
+//     await placement.save();
+//   }
+//   const placementsAfter = await Placement.findAll({
+//     include: Story,
+//     order: [['updatedAt', 'DESC']],
+//     limit: 5,
+//   })
+//   res.json({ placementsBefore, placementsAfter })
+// }))
 
 app.use(restoreUser)
 app.use('/api', apiRouter)
