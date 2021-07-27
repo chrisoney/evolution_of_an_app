@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler } = require('../utils');
-const { Bookshelf, Story } = require('../../db/models');
+const { Bookshelf, Story, Placement } = require('../../db/models');
 
 
 router.get('/:id(\\d+)/standard', asyncHandler(async (req, res) => {
@@ -57,7 +57,15 @@ router.post('/', asyncHandler(async (req, res) => {
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
   const bookshelf = await Bookshelf.findByPk(id, {
-    include: Story
+    include: {
+      model: Story,
+        include: [{
+          model: Bookshelf,
+          where: { userId: req.session.auth.userId }
+        }, {
+          model: Placement
+        }],
+    }
   });
   res.json({ bookshelf })
 }))
