@@ -177,6 +177,7 @@ router.post('/logout', asyncHandler(async(req, res, next) => {
 
 router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
+  const selected = req.query.selected.split('-').join(' ') || '';
   const user = await User.findByPk(id, {
     attributes: { exclude: ['hashedPassword']},
     include: {
@@ -201,8 +202,13 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
     })
   })
   const allCount = allStories.length;
-
-  const loadedStories = allStories;
+  let loadedStories;
+  if (selected === '') {
+    loadedStories = allStories;
+  } else {
+    const shelf = user.Bookshelves.filter(shelf => shelf.name === selected)[0];
+    loadedStories = shelf.Stories;
+  }
   res.render('bookshelf-page', { user, loadedStories, allCount })
   // res.json({ loadedStories })
 }))
