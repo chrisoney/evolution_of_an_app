@@ -20,14 +20,22 @@ block content
             .currently-reading-example-section-container
               .currently-reading-example-title= curr_reading.name
               .currently-reading-example-body-container
-                img(src=curr_reading_story.imageUrl class='currently-reading-example-image')
+                a(href=`/stories/${curr_reading_story.id}`)
+                  img(src=curr_reading_story.imageUrl class='currently-reading-example-image')
                 .currently-reading-example-details-container
                   .currently-reading-example-story-title= curr_reading_story.title
                   .currently-reading-example-story-author By #{curr_reading_story.author}
               .currently-reading-example-button-section
                 a(href='/' class='currently-reading-section-button') View all books
-
+            -const want_read = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0]
+            -const want_read_stories = want_read.Stories.slice(0,3)
             .want-to-read-examples-section-container
+              .want-to-read-examples-title= want_read.name
+              .want-to-read-story-images-container
+                each story in want_read_stories
+                  a(href=`/stories/${story.id}`): img(src=story.imageUrl class='want-to-read-story-image')
+              .want-to-read-example-button-section
+                a(href='/' class='want-to-read-section-button') View all books
             .bookshelves-listing-section-container
           .homepage-right
             .social-feed-section-container
