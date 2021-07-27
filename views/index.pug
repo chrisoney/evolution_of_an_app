@@ -12,10 +12,25 @@ block content
     p Welcome to your Project Skeleton
   else
     if authenticated
-      //- This area should be solely for content on the home page
-      //- .logo-container
-        a(href='/' class="logo-link")
-          img(src='/images/logo.png' class="auth-logo")
+      if (parseInt(mode) >= 3)
+        .homepage-content
+          .homepage-left
+            -const curr_reading = userInfo.Bookshelves.filter(shelf => shelf.name === 'Currently Reading')[0]
+            -const curr_reading_story = curr_reading.Stories[0]
+            .currently-reading-example-section-container
+              .currently-reading-example-title= curr_reading.name
+              .currently-reading-example-body-container
+                img(src=curr_reading_story.imageUrl class='currently-reading-example-image')
+                .currently-reading-example-details-container
+                  .currently-reading-example-story-title= curr_reading_story.title
+                  .currently-reading-example-story-author By #{curr_reading_story.author}
+              .currently-reading-example-button-section
+                a(href='/' class='currently-reading-section-button') View all books
+
+            .want-to-read-examples-section-container
+            .bookshelves-listing-section-container
+          .homepage-right
+            .social-feed-section-container
     else
       .logo-container
         a(href='/' class="logo-link")

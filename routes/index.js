@@ -21,8 +21,12 @@ router.get('/', asyncHandler(async (req, res,) => {
       order: [['updatedAt', 'DESC']],
       include: [Story, {
         model: Bookshelf,
-        include: User
-      }]
+        include: {
+          model: User,
+          attributes: { exclude : ['hashedPassword']},
+        },
+      }],
+      limit: 10
     })
   } else {
     currentlyReadingUsers = await User.findAll({
@@ -53,7 +57,7 @@ router.get('/', asyncHandler(async (req, res,) => {
     userInfo,
     feed
   });
-  // res.json({ currentlyReadingUsers, customBookshelfUsers })
+  // res.json({ userInfo, feed })
 }));
 
 module.exports = router;

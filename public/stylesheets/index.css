@@ -190,16 +190,16 @@ h1 {
 }
 
 .homepage-list-section-title{
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	color: #000;
 	font-size: 18px;
 }
 
 .homepage-list-container {
 	display: flex;
-	padding-bottom: 5px;
+	/* padding-bottom: 5px; */
 	margin-bottom: 5px;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #EBECE7;
 }
 
 .homepage-list-left, .homepage-list-right {
@@ -217,6 +217,7 @@ h1 {
 }
 
 .list-section-author {
+	padding-top: 3px;
 	color: grey;
 	font-size: 13px;
 	text-overflow: ellipsis;
@@ -235,4 +236,59 @@ h1 {
 	margin-right: 2px;
 	border: 1px solid black;
 	cursor: pointer;
+}
+
+/* Logged in view */
+
+.currently-reading-example-section-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.currently-reading-example-title {
+	color: #333333;
+	/* font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; */
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.15;
+	margin: 12px 0;
+	text-transform: uppercase;
+}
+
+.currently-reading-example-body-container {
+	display: flex;
+	margin-bottom: 12px;
+}
+
+.currently-reading-example-image {
+	margin-right: 8px;
+	box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+	width: 95px;
+	height: 140px;
+	object-fit: cover;
+}
+.currently-reading-example-details-container {
+	display: flex;
+	flex-direction: column;
+	font-family: "Merriweather", "Georgia", serif;
+}
+
+.currently-reading-example-story-title{
+	color: #333333;
+	font-weight: bold;
+}
+
+.currently-reading-example-story-author {
+	margin-top: 4px;
+	color: #333333;
+	font-size: 12px;
+}
+
+.currently-reading-example-button-section {
+	display: flex;
+}
+
+.currently-reading-section-button {
+	color: #00635D;
+	text-decoration: none;
 }
