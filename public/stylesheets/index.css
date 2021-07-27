@@ -187,6 +187,14 @@ body {
 	margin-left: 20px;
 }
 
+.homepage-right.logged-in {
+	width: 460px;
+	/* display: flex;
+	flex-direction: column;
+	margin-left: 20px; */
+	margin-top: 12px;
+}
+
 .list-container{
 	display: flex;
 	flex-direction: column;
@@ -342,4 +350,102 @@ body {
 .social-feed-section-container{
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 90px;
+}
+
+.feed-instance-container {
+	border: 1px solid #D8D8D8;
+	border-radius: 2px;
+	background-color: #FFFFFF;
+	margin-bottom: 16px;
+	margin-left: 20px;
+	padding-top: 8px;
+	padding-left: 32px;
+	hyphens: auto;
+	line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+}
+
+.feed-instance-top-section {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 0 8px 0;
+}
+
+.feed-instance-username-section {
+	display: flex;
+	font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+	font-size: 14px;
+	color: #333333;
+	line-height: 1.5;
+}
+
+.feed-instance-username {
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.feed-instance-update-date {
+	font-size: 12px;
+	line-height: 1.15;
+	padding-right: 8px;
+}
+
+.feed-instance-main-content-section {
+	display: flex;
+	padding-right: 16px;
+}
+
+.feed-instance-image {
+	margin-right: 8px;
+	width: 120px;
+	height: 180px;
+	object-fit: cover;
+}
+
+.feed-instance-details-section{
+	display: flex;
+	flex-direction: column;
+}
+
+.feed-instance-title {
+	font-size: 16px;
+	line-height: 1.15;
+	color: #333333;
+	font-family: "Merriweather", "Georgia", serif;
+	font-weight: bold;
+}
+
+.feed-instance-author {
+	color: #333333;
+	font-size: 14px;
+	font-family: "Merriweather", "Georgia", serif;
+}
+
+.feed-instance-description {
+	margin-top: 16px;
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+	overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.feed-instance-link-container{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	color: #00635D;
+}
+.feed-instance-link {
+	font-size: 14px;
+	line-height: 1.4;
+	text-decoration: none;
+}
+.feed-instance-link:hover {
+	text-decoration: underline;
 }

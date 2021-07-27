@@ -26,7 +26,7 @@ block content
                   .currently-reading-example-story-title= curr_reading_story.title
                   .currently-reading-example-story-author By #{curr_reading_story.author}
               .currently-reading-example-button-section
-                a(href=`/users/${user.id}/bookshelves?selected=Want-To-Read` class='currently-reading-section-button') View all books
+                a(href=`/users/${user.id}/bookshelves?selected=Currently-Reading` class='currently-reading-section-button') View all books
             -const want_read = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0]
             -const want_read_stories = want_read.Stories.slice(0,3)
             .want-to-read-examples-section-container
@@ -35,7 +35,7 @@ block content
                 each story in want_read_stories
                   a(href=`/stories/${story.id}`): img(src=story.imageUrl class='want-to-read-story-image')
               .want-to-read-example-button-section
-                a(href='/' class='want-to-read-section-button') View all books
+                a(href=`/users/${user.id}/bookshelves?selected=Want-To-Read` class='want-to-read-section-button') View all books
             .bookshelves-listing-section-container
               .bookshelves-listing-title Bookshelves
               .bookshelves-listing-shelves-container
@@ -44,8 +44,29 @@ block content
                   a(href=`/users/${user.id}/bookshelves?selected=${queryVar}` class='bookshelves-listing-shelf-container')
                     .shelf-count= shelf.Stories.length
                     .shelf-name= shelf.name
-          .homepage-right
+          .homepage-right.logged-in
             .social-feed-section-container
+              each placement in feed
+                .feed-instance-container
+                  .feed-instance-top-section
+                    .feed-instance-username-section
+                      -const shelf = placement.Bookshelf
+                      -const action = shelf.name === 'Want To Read' ? 'wants to read' : shelf.name === 'Currently Reading' ? 'is reading' : shelf.name === 'Read' ? 'has read' : 'is breaking my app';
+                      .feed-instance-username= placement.Bookshelf.User.username
+                      | #{action}
+                    -const date = placement.updatedAt.toString().slice(4, 16)
+                    .feed-instance-update-date #{date.slice(0,6) + ',' + date.slice(6)}
+                  -const story = placement.Story
+                  .feed-instance-main-content-section
+                    a(href=`/stories/${story.id}`)
+                      img(src=story.imageUrl class='feed-instance-image')
+                    .feed-instance-details-section
+                      .feed-instance-title= story.title
+                      .feed-instance-author By #{story.author}
+                      .feed-instance-description= story.description
+                      .feed-instance-link-container
+                        a(href=`/stories/${story.id}` class='feed-instance-link') Continue Reading
+
     else
       .logo-container
         a(href='/' class="logo-link")

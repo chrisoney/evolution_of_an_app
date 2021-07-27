@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { User, Bookshelf, Story, Placement, sequelize } = require('../db/models');
+const { User, Bookshelf, Story, Placement, Sequelize, sequelize } = require('../db/models');
+const { Op } = Sequelize;
 const { asyncHandler } = require('./utils')
 
 
@@ -21,9 +22,11 @@ router.get('/', asyncHandler(async (req, res,) => {
       order: [['updatedAt', 'DESC']],
       include: [Story, {
         model: Bookshelf,
+        where: { name: ['Want To Read','Currently Reading', 'Read']},
         include: {
           model: User,
-          attributes: { exclude : ['hashedPassword']},
+          attributes: { exclude: ['hashedPassword'] },
+          where: { id: {[Op.ne]: req.session.auth.userId} }
         },
       }],
       limit: 10
