@@ -88,10 +88,10 @@ const selectorEvent = async (e) => {
       // Consider taking this out tbh
       const dateReadDetail = document.createElement('td');
       dateReadDetail.className = 'story-date-read';
-      dateReadDetail.innerText = 'Not Set';
+      dateReadDetail.innerText = 'Not set';
       row.appendChild(dateReadDetail);
 
-      let date = story.Placements[0].createdAt.toString().slice(4, 16);
+      let date = new Date(story.Placements[0].createdAt).toString().slice(4, 16);
       const dateAddedDetail = document.createElement('td');
       dateAddedDetail.className = 'story-date-added'
       dateAddedDetail.innerText = date.slice(0, 6) + ',' + date.slice(6);
