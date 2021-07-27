@@ -337,3 +337,9 @@ body {
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+/* Social Feed Section */
+.social-feed-section-container{
+	display: flex;
+	flex-direction: column;
+}
