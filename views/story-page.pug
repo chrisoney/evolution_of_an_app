@@ -32,3 +32,11 @@ block content
           else
             .story-description.shortened= story.description
             button(class='expand') ...more
+        .story-warnings-section
+          if story.warnings.warnings.length === 0
+            .warnings-none No Warnings
+          else
+            .warnings-toggle Reveal Warnings
+            .story-warnings-container.hidden
+              each warning in story.warnings.warnings
+                .story-warning= warning

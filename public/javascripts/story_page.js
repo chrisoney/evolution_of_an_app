@@ -1,6 +1,12 @@
 const description_expand_button = document.querySelector('.expand');
+const warning_toggle = document.querySelector('.warning-toggle')
 const selectedCustomShelves = new Set();
 
+if (warning_toggle) {
+  warning_toggle.addEventListener('click', (e) => {
+    
+  })
+}
 
 description_expand_button.addEventListener('click', (e) => {
   const button = e.target;

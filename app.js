@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const cron = require('node-cron')
 const moment = require('moment')
 const logger = require('morgan');
-const { sequelize, User, Placement, Story } = require('./db/models');
+const { sequelize, User, Bookshelf, Placement, Story } = require('./db/models');
 const { Op } = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -65,6 +65,21 @@ cron.schedule('0 0 12 * * *', async () => {
     console.log(err)
   }
 })
+
+// app.get('/testing', asyncHandler(async (req, res) => {
+//   const user = await User.findByPk(1, {
+//     attributes: { exclude: ['hashedPassword']},
+//     include: {
+//       model: Bookshelf,
+//       // include: {
+//       //   model: Placement,
+//       //   include: Story
+//       // }
+//       include: Story
+//     }
+//   })
+//   res.json({ user })
+// }))
 
 // Dark Magicks
 // app.get('/update-placements', asyncHandler(async (req, res) => {

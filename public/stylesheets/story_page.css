@@ -134,6 +134,18 @@
   cursor: pointer;
 }
 
+.story-warnings-section {
+  margin-top: 20px;
+  display: flex;
+  font-size: 18px;
+}
+.warnings-none {
+  color: red;
+}
+
+.warnings-toggle {
+  cursor: pointer;
+}
 
 /* Modal stuff */
 .modal-title-container {
