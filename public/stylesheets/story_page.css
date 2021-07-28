@@ -137,15 +137,43 @@
 .story-warnings-section {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   font-size: 18px;
 }
 .warnings-none {
-  color: red;
+  color: #777;
+  margin-bottom: 15px;
 }
 
 .warnings-toggle {
   cursor: pointer;
+  margin-bottom: 15px;
 }
+.warnings-toggle:hover {
+  color: #333;
+}
+
+.story-warnings-container {
+  display: flex;
+}
+
+.story-warning {
+  background-color: red;
+  color: #FFF;
+  height: 36px;
+  font-size: 14px;
+  line-height: 36px;
+  padding: 0px 12px;
+  cursor: pointer;
+  border-radius: 30px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 8px;
+  user-select: none;
+}
+
+
 
 /* Modal stuff */
 .modal-title-container {

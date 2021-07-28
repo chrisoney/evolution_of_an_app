@@ -1,10 +1,17 @@
 const description_expand_button = document.querySelector('.expand');
-const warning_toggle = document.querySelector('.warning-toggle')
+const warning_toggle = document.querySelector('.warnings-toggle')
 const selectedCustomShelves = new Set();
 
 if (warning_toggle) {
   warning_toggle.addEventListener('click', (e) => {
-    
+    const warningsList = e.target.nextSibling;
+    warningsList.classList.toggle('hidden');
+    const toggleButton = e.target;
+    if (toggleButton.innerText === 'Reveal Warnings') {
+      toggleButton.innerText = 'Hide Warnings';
+    } else {
+      toggleButton.innerText = 'Reveal Warnings';
+    }
   })
 }
 
@@ -31,13 +38,14 @@ const closeModal = (e) => {
 
 const customShelfEvent = (e) => {
   const ele = e.target;
+  const id = parseInt(ele.id)
   if (ele.classList.contains('modal-custom-shelf')) {
-    if (ele.classList.contains('selected')) {
-      ele.classList.remove('selected');
-      selectedCustomShelves.delete(ele.id);
+    if (selectedCustomShelves.has(id)) {
+      ele.classList.toggle('selected');
+      selectedCustomShelves.delete(id);
     } else {
-      ele.classList.add('selected');
-      selectedCustomShelves.add(ele.id);
+      ele.classList.toggle('selected');
+      selectedCustomShelves.add(id);
     }
   }
 }
@@ -268,7 +276,7 @@ const secondStoryModal = (data) => {
     customShelfDiv.className = 'modal-custom-shelf';
     customShelfDiv.innerText = shelf.name;
     customShelfDiv.id = shelf.id;
-    if(shelf.Stories.length > 0) {
+    if (shelf.Stories.length > 0) {
       customShelfDiv.classList.add('selected');
     }
     customShelfDiv.addEventListener('click', customShelfEvent);

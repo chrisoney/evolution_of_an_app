@@ -5,8 +5,10 @@ const { asyncHandler } = require('../utils');
 
 router.post('/', asyncHandler(async (req, res) => {
   const { bookshelfId, storyId } = req.body
+  console.log('-------------------------', bookshelfId, storyId)
   const bookshelf = await Bookshelf.findByPk(bookshelfId);
   if (!bookshelf.deleteAllowed) {
+    console.log("################################")
     const bookshelves = await Bookshelf.findAll({
       where: {
         userId: req.session.auth.userId,
@@ -27,10 +29,22 @@ router.post('/', asyncHandler(async (req, res) => {
       }
     }
   }
-  const placement = await Placement.create({
-    bookshelfId,
-    storyId
-  })
+  let placement = await Placement.findOne({
+    where: {
+      bookshelfId,
+      storyId
+    }
+  });
+  console.log('------------------', placement)
+  if (placement) {
+    await placement.destroy();
+  }
+  else {
+    placement = await Placement.create({
+      bookshelfId,
+      storyId
+    })
+  }
 
   res.json( { placement, bookshelf })
 }))
