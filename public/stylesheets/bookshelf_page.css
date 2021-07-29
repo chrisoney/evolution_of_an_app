@@ -164,6 +164,7 @@
   font-size: 12px;
   line-height: 18px;
   vertical-align: bottom;
+  min-width: 80px;
 }
 
 .stories-list-table td {

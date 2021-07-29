@@ -106,6 +106,8 @@
 
 .story-description-container {
   position: relative;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .story-description {
@@ -126,7 +128,7 @@
   position: absolute;
   background: transparent;
   border: transparent;
-  bottom: -20px;
+  bottom: 0;
   right: 0;
   font-size: 16px;
   font-weight: bold;
@@ -139,6 +141,7 @@
   display: flex;
   flex-direction: column;
   font-size: 18px;
+  border-bottom: 1px solid #ddd;
 }
 .warnings-none {
   color: #777;
@@ -155,6 +158,7 @@
 
 .story-warnings-container {
   display: flex;
+  padding-bottom: 10px;
 }
 
 .story-warning {
@@ -173,7 +177,38 @@
   user-select: none;
 }
 
+.story-other-details-section {
+  padding: 10px 0;
+  font-size: 12px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+}
 
+.other-details-status {
+  display: flex;
+}
+
+.status-green, .status-red {
+  margin-left: 3px;
+}
+
+.status-green {
+  color: green;
+}
+
+.status-red {
+  color: red;
+}
+
+.other-details-link > a {
+  text-decoration: none;
+}
+.other-details-link > a:hover {
+  text-decoration: underline;
+  color: #777;
+}
 
 /* Modal stuff */
 .modal-title-container {

@@ -40,3 +40,8 @@ block content
             .story-warnings-container.hidden
               each warning in story.warnings.warnings
                 .story-warning= warning
+        .story-other-details-section
+          .other-details-page-count Royal Road Version, #{story.pageCount} pages
+          .other-details-status Current Status: 
+            div(class=`${story.status === 'Ongoing' ? 'status-green':'status-red'}`) #{story.status}
+          .other-details-link: a(href=story.linkUrl) Link to Story
