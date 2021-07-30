@@ -5,10 +5,8 @@ const { asyncHandler } = require('../utils');
 
 router.post('/', asyncHandler(async (req, res) => {
   const { bookshelfId, storyId } = req.body
-  console.log('-------------------------', bookshelfId, storyId)
   const bookshelf = await Bookshelf.findByPk(bookshelfId);
   if (!bookshelf.deleteAllowed) {
-    console.log("################################")
     const bookshelves = await Bookshelf.findAll({
       where: {
         userId: req.session.auth.userId,
@@ -35,7 +33,6 @@ router.post('/', asyncHandler(async (req, res) => {
       storyId
     }
   });
-  console.log('------------------', placement)
   if (placement) {
     await placement.destroy();
   }

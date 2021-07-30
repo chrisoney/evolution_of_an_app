@@ -440,6 +440,7 @@ body {
 	display: flex;
 	justify-content: flex-end;
 	color: #00635D;
+	padding-bottom: 8px;
 }
 .feed-instance-link {
 	font-size: 14px;
@@ -498,6 +499,7 @@ body {
 }
 
 .feed-modal-button {
+	cursor: pointer;
 	height: 30px;
 	line-height: 20px;
 	color: white;
@@ -507,6 +509,10 @@ body {
 	border-left: 1px solid #38883d;
 	/* float: left; */
 	padding: 6px 8px;
+}
+
+.feed-modal-button:hover, .feed-bookshelf-wtr-button:hover {
+	background-color: #3d9363;
 }
 
 .feed-check {

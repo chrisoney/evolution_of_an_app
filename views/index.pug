@@ -68,11 +68,11 @@ block content
                       if shelf_id === undefined
                         -const wtr_id = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0].id
                         .feed-bookshelf-selector-container
-                          div(class='feed-bookshelf-wtr-button' id=wtr_id) Want To Read
+                          div(class='feed-bookshelf-wtr-button' data-story-id=story.id id=wtr_id) Want To Read
                           i(class='feed-modal-button fas fa-chevron-down')
                       else
                         .feed-bookshelf-selector-container
-                          div(class='feed-bookshelf-selected' id=shelf_id data-story-id=story.id)
+                          div(class='feed-bookshelf-selected' id=shelf_id)
                             i.fas.fa-check.feed-check
                             .feed-bookshelf-selected-name #{shelf_name}
                           i(class='feed-modal-button fas fa-chevron-down')
