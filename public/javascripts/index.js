@@ -33,11 +33,13 @@ const wtrEvent = async (e) => {
     shelfName.innerText = 'Want To Read';
     leftContainer.appendChild(shelfName)
     parent.appendChild(leftContainer);
-
+    const modalContainer = document.createElement('div');
+    modalContainer.className = 'feed-modal-container';
     const modalButton = document.createElement('i');
     modalButton.className = 'feed-modal-button fas fa-chevron-down';
     // Add the event listener for the modal button here
-    parent.appendChild(modalButton)
+    modalContainer.appendChild(modalButton)
+    parent.appendChild(modalContainer)
 }
 
 const wtr_buttons = document.querySelectorAll('.feed-bookshelf-wtr-button');

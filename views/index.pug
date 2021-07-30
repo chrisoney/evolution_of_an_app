@@ -64,18 +64,34 @@ block content
                       .feed-instance-title= story.title
                       .feed-instance-author By #{story.author}
                       - let shelf_name, shelf_id
-                      - Object.values(currentUserBookshelfIds).forEach(shelf =>{ if (shelf.stories.includes(story.id)) {shelf_name = shelf.name; shelf_id = shelf.id}})
+                      - Object.values(currentUserBookshelfIds).forEach(shelf =>{ if (shelf.stories.includes(story.id) && shelf.standard) {shelf_name = shelf.name; shelf_id = shelf.id}})
                       if shelf_id === undefined
                         -const wtr_id = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0].id
                         .feed-bookshelf-selector-container
                           div(class='feed-bookshelf-wtr-button' data-story-id=story.id id=wtr_id) Want To Read
-                          i(class='feed-modal-button fas fa-chevron-down')
+                          div(class='feed-modal-container')
+                            i(class='feed-modal-button fas fa-chevron-down')
+                            .feed-modal
+                              each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
+                                .standard-shelf= shelf.name
+                              each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
+                                .nonstandard-shelf-container
+                                  input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
+                                  .standard-shelf= shelf.name
                       else
                         .feed-bookshelf-selector-container
                           div(class='feed-bookshelf-selected' id=shelf_id)
                             i.fas.fa-check.feed-check
                             .feed-bookshelf-selected-name #{shelf_name}
-                          i(class='feed-modal-button fas fa-chevron-down')
+                          div(class='feed-modal-container')
+                            i(class='feed-modal-button fas fa-chevron-down')
+                            .feed-modal
+                              each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
+                                .standard-shelf= shelf.name
+                              each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
+                                .nonstandard-shelf-container
+                                  input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
+                                  .standard-shelf= shelf.name
                       .feed-instance-description #{story.description || 'No description provided'}
                       .feed-instance-link-container
                         a(href=`/stories/${story.id}` class='feed-instance-link') Continue Reading

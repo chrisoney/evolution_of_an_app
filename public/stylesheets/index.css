@@ -498,6 +498,10 @@ body {
 	text-overflow: ellipsis;
 }
 
+.feed-modal-container {
+	position: relative;
+}
+
 .feed-modal-button {
 	cursor: pointer;
 	height: 30px;
@@ -510,6 +514,41 @@ body {
 	/* float: left; */
 	padding: 6px 8px;
 }
+
+.feed-modal {
+	display: none;
+	background: #FFFFFF;
+	border: 1px #767676 solid;
+	font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+	max-width: 220px;
+	min-width: 140px;
+	position: absolute;
+	right: 0px;
+	top: 25px;
+	z-index: 5;
+}
+
+.feed-modal-container:hover .feed-modal {
+	display: block;
+}
+
+.standard-shelf {
+	cursor: pointer;
+	font-size: 12px;
+	font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+	list-style-type: none;
+	text-align: left;
+	white-space: nowrap;
+	padding: 2px 16px 2px 8px;
+}
+.nonstandard-shelf-container {
+	display: flex;
+}
+
+.standard-shelf:hover, .nonstandard-shelf-container:hover {
+	background-color: #D8D8D8;
+}
+
 
 .feed-modal-button:hover, .feed-bookshelf-wtr-button:hover {
 	background-color: #3d9363;

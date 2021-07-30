@@ -21,10 +21,9 @@ router.get('/', asyncHandler(async (req, res,) => {
     })
     for (let x = 0; x < Object.values(userInfo.Bookshelves).length; x++){
       const shelf = Object.values(userInfo.Bookshelves)[x];
-      if (!["Read", "Currently Reading", "Want To Read"].includes(shelf.name)) continue;
       for (let y = 0; y < Object.values(shelf.Stories).length; y++){
         const story = Object.values(shelf.Stories)[y];
-        if (!currentUserBookshelfIds[shelf.name]) currentUserBookshelfIds[shelf.name] = { id: shelf.id, name: shelf.name, stories: []};
+        if (!currentUserBookshelfIds[shelf.name]) currentUserBookshelfIds[shelf.name] = { id: shelf.id, name: shelf.name, standard: !shelf.deleteAllowed, stories: []};
         currentUserBookshelfIds[shelf.name].stories.push(story.id)
       }
     }
