@@ -73,11 +73,11 @@ block content
                             i(class='feed-modal-button fas fa-chevron-down')
                             .feed-modal
                               each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
-                                .standard-shelf= shelf.name
+                                div(class='standard-shelf' id=shelf.id)= shelf.name
                               each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
                                 .nonstandard-shelf-container
                                   input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
-                                  .standard-shelf= shelf.name
+                                  div(class='standard-shelf' id=shelf.id)= shelf.name
                       else
                         .feed-bookshelf-selector-container
                           div(class='feed-bookshelf-selected' id=shelf_id)
@@ -87,11 +87,11 @@ block content
                             i(class='feed-modal-button fas fa-chevron-down')
                             .feed-modal
                               each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
-                                .standard-shelf= shelf.name
+                                div(class='standard-shelf' id=shelf.id)= shelf.name
                               each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
                                 .nonstandard-shelf-container
                                   input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
-                                  .standard-shelf= shelf.name
+                                  div(class='standard-shelf' id=shelf.id)= shelf.name
                       .feed-instance-description #{story.description || 'No description provided'}
                       .feed-instance-link-container
                         a(href=`/stories/${story.id}` class='feed-instance-link') Continue Reading

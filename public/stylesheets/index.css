@@ -500,6 +500,8 @@ body {
 
 .feed-modal-container {
 	position: relative;
+	display: inline-block;
+	width: 30px;
 }
 
 .feed-modal-button {
@@ -524,7 +526,7 @@ body {
 	min-width: 140px;
 	position: absolute;
 	right: 0px;
-	top: 25px;
+	top: 30px;
 	z-index: 5;
 }
 
@@ -541,6 +543,11 @@ body {
 	white-space: nowrap;
 	padding: 2px 16px 2px 8px;
 }
+
+.standard-shelf.bold-shelf {
+	font-weight: bold;
+}
+
 .nonstandard-shelf-container {
 	display: flex;
 }

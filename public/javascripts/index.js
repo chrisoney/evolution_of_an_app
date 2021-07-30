@@ -37,8 +37,43 @@ const wtrEvent = async (e) => {
     modalContainer.className = 'feed-modal-container';
     const modalButton = document.createElement('i');
     modalButton.className = 'feed-modal-button fas fa-chevron-down';
-    // Add the event listener for the modal button here
     modalContainer.appendChild(modalButton)
+    const feedModal = document.createElement('div');
+    feedModal.className = 'feed-modal';
+    
+    const resStandard = await fetch(`/api/bookshelves/${placement.storyId}/standard`);
+
+    const dataStandard = await resStandard.json();
+    Object.values(dataStandard).forEach((shelf) => {
+        const shelfDiv = document.createElement('div')
+        shelfDiv.className = 'standard-shelf';
+        if (shelf.name === 'Want To Read') shelfDiv.classList.add('bold-shelf')
+        shelfDiv.id = shelf.id;
+        shelfDiv.innerText = shelf.name;
+        // Event listener for shelf addition
+        feedModal.appendChild(shelfDiv)
+    })
+
+    const resCustom = await fetch(`/api/bookshelves/${placement.storyId}/custom`);
+
+    const dataCustom = await resCustom.json();
+
+    Object.values(dataCustom).forEach((shelf) => {
+        const shelfContainer = document.createElement('div');
+        shelfContainer.className = 'nonstandard-shelf-container';
+        const shelfCheckbox = document.createElement('input');
+        shelfCheckbox.type = 'checkbox';
+        if (shelf.Stories[0]) shelfCheckbox.checked = true;
+        shelfContainer.appendChild(shelfCheckbox);
+        const shelfDiv = document.createElement('div')
+        shelfDiv.className = 'standard-shelf';
+        shelfDiv.id = shelf.id;
+        shelfDiv.innerText = shelf.name;
+        shelfContainer.appendChild(shelfDiv);
+        // Event listener for shelf addition
+        feedModal.appendChild(shelfContainer)
+    })
+    modalContainer.appendChild(feedModal)
     parent.appendChild(modalContainer)
 }
 
