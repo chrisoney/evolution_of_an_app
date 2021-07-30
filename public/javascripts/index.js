@@ -5,6 +5,34 @@ window.addEventListener("load", (event) => {
     }
 })
 
+const standardShelfEvent = async (e) => {
+    const bookshelfId = e.target.id;
+    const storyId = e.target.dataset.storyId;
+    const res = await fetch('/api/placements', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ bookshelfId, storyId })
+    })
+    const { placement } = await res.json();
+    if (res.ok) {
+        const otherShelves = e.target.parentElement.querySelectorAll('.standard-shelf')
+        otherShelves.forEach(ele => ele.classList.remove('bold-shelf'))
+        e.target.classList.add('bold-shelf')
+        const otherContainer = e.target.parentElement.parentElement.previousSibling;
+        otherContainer.className = 'feed-bookshelf-selected';
+        otherContainer.innerHTML = '';
+        const checkmark = document.createElement('i');
+        checkmark.className = 'fas fa-check feed-check';
+        otherContainer.appendChild(checkmark);
+        const shelfName = document.createElement('div');
+        shelfName.className = 'feed-bookshelf-selected-name';
+        shelfName.innerText = e.target.innerText;
+        otherContainer.appendChild(shelfName)
+    }
+}
+
 const wtrEvent = async (e) => {
     const bookshelfId = e.target.id;
     const storyId = e.target.dataset.storyId;
@@ -49,6 +77,7 @@ const wtrEvent = async (e) => {
         shelfDiv.className = 'standard-shelf';
         if (shelf.name === 'Want To Read') shelfDiv.classList.add('bold-shelf')
         shelfDiv.id = shelf.id;
+        shelfDiv.dataset.storyId = placement.storyId;
         shelfDiv.innerText = shelf.name;
         // Event listener for shelf addition
         feedModal.appendChild(shelfDiv)
@@ -61,6 +90,8 @@ const wtrEvent = async (e) => {
     Object.values(dataCustom).forEach((shelf) => {
         const shelfContainer = document.createElement('div');
         shelfContainer.className = 'nonstandard-shelf-container';
+        shelfContainer.id = shelf.id;
+        shelfContainer.dataset.shelfId = placement.storyId;
         const shelfCheckbox = document.createElement('input');
         shelfCheckbox.type = 'checkbox';
         if (shelf.Stories[0]) shelfCheckbox.checked = true;
@@ -77,6 +108,10 @@ const wtrEvent = async (e) => {
     parent.appendChild(modalContainer)
 }
 
-const wtr_buttons = document.querySelectorAll('.feed-bookshelf-wtr-button');
+const wtrButtons = document.querySelectorAll('.feed-bookshelf-wtr-button');
 
-wtr_buttons.forEach(button => button.addEventListener('click', wtrEvent))
+wtrButtons.forEach(button => button.addEventListener('click', wtrEvent))
+
+const standardShelfButtons = document.querySelectorAll('.feed-modal > .standard-shelf')
+
+standardShelfButtons.forEach(button => button.addEventListener('click', standardShelfEvent))
