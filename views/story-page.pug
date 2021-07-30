@@ -43,5 +43,5 @@ block content
         .story-other-details-section
           .other-details-page-count Royal Road Version, #{story.pageCount} pages
           .other-details-status Current Status: 
-            div(class=`${story.status === 'Ongoing' ? 'status-green':'status-red'}`) #{story.status}
+            div(class=`${story.status === 'HIATUS' ? 'status-red':'status-green'}`) #{story.status[0] + story.status.slice(1).toLowerCase()}
           .other-details-link: a(href=story.linkUrl) Link to Story

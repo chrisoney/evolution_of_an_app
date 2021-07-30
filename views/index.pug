@@ -63,6 +63,7 @@ block content
                     .feed-instance-details-section
                       .feed-instance-title= story.title
                       .feed-instance-author By #{story.author}
+                      //- Button section ugh
                       .feed-instance-description #{story.description || 'No description provided'}
                       .feed-instance-link-container
                         a(href=`/stories/${story.id}` class='feed-instance-link') Continue Reading

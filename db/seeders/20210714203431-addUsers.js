@@ -15,7 +15,7 @@ module.exports = {
 
     for (let i = 4; i <= 20; i++){
       let newUser = {
-        username: faker.internet.userName(),
+        username: faker.name.findName(),
         email: faker.internet.email(),
         hashedPassword: bcrypt.hashSync(`password${i}`, 10),
         demo: false,
