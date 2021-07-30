@@ -63,7 +63,19 @@ block content
                     .feed-instance-details-section
                       .feed-instance-title= story.title
                       .feed-instance-author By #{story.author}
-                      //- Button section ugh
+                      - let shelf_name, shelf_id
+                      - Object.values(currentUserBookshelfIds).forEach(shelf =>{ if (shelf.stories.includes(story.id)) {shelf_name = shelf.name; shelf_id = shelf.id}})
+                      if shelf_id === undefined
+                        -const wtr_id = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0].id
+                        .feed-bookshelf-selector-container
+                          div(class='feed-bookshelf-wtr-button' id=wtr_id) Want To Read
+                          i(class='feed-modal-button fas fa-chevron-down')
+                      else
+                        .feed-bookshelf-selector-container
+                          div(class='feed-bookshelf-selected' id=shelf_id data-story-id=story.id)
+                            i.fas.fa-check.feed-check
+                            .feed-bookshelf-selected-name #{shelf_name}
+                          i(class='feed-modal-button fas fa-chevron-down')
                       .feed-instance-description #{story.description || 'No description provided'}
                       .feed-instance-link-container
                         a(href=`/stories/${story.id}` class='feed-instance-link') Continue Reading
