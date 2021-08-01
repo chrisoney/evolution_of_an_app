@@ -100,8 +100,9 @@ const wtrEvent = async (e) => {
         shelfDiv.className = 'standard-shelf';
         shelfDiv.id = shelf.id;
         shelfDiv.innerText = shelf.name;
+        // new event listener. is this right?
+        shelfDiv.addEventListener('click', standardShelfEvent);
         shelfContainer.appendChild(shelfDiv);
-        // Event listener for shelf addition
         feedModal.appendChild(shelfContainer)
     })
     modalContainer.appendChild(feedModal)
