@@ -37,12 +37,27 @@ const customShelfEvent = async (e) => {
     e.preventDefault();
     console.log('target', e.target)
     console.log('event target', e.currentTarget);
-    // if checkbox
-    //
-    // if shelfname
-    //
-    // if container
-    //
+    let container, checkbox, shelfName;
+    switch (e.target.className) {
+        case 'nonstandard-shelf-container':
+            container = e.target;
+            checkbox = e.target.children[0];
+            shelfName = e.target.children[1];
+            break;
+        case 'nonstandard-shelf-checkbox':
+            container = e.target.parentElement;
+            checkbox = e.target;
+            shelfName = e.target.nextSibling;
+            break;
+        case 'standard-shelf':
+            container = e.target.parentElement;
+            checkbox = e.target.previousSibling;
+            shelfName = e.target;
+            break;
+        default:
+            console.log('Uh oh, what\'s this?')
+    }
+    
 }
 
 const wtrEvent = async (e) => {
@@ -107,6 +122,7 @@ const wtrEvent = async (e) => {
         shelfContainer.dataset.shelfId = placement.storyId;
         const shelfCheckbox = document.createElement('input');
         shelfCheckbox.type = 'checkbox';
+        shelfCheckbox.className = 'nonstandard-shelf-checkbox';
         if (shelf.Stories[0]) shelfCheckbox.checked = true;
         shelfContainer.appendChild(shelfCheckbox);
         const shelfDiv = document.createElement('div')

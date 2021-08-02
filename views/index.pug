@@ -76,7 +76,7 @@ block content
                                 div(class='standard-shelf' data-story-id=story.id id=shelf.id)= shelf.name
                               each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
                                 div(class='nonstandard-shelf-container' data-story-id=story.id id=shelf.id)
-                                  input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
+                                  input(type='checkbox' class='nonstandard-shelf-checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
                                   div(class='standard-shelf' id=shelf.id)= shelf.name
                       else
                         .feed-bookshelf-selector-container
