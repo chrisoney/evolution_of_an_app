@@ -566,3 +566,10 @@ body {
 	line-height: 20px;
 	margin-right: 5px;
 }
+
+.nonstandard-shelf-container {
+	cursor: pointer;
+}
+
+/* .nonstandard-shelf-container > input {
+} */

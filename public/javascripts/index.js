@@ -33,6 +33,18 @@ const standardShelfEvent = async (e) => {
     }
 }
 
+const customShelfEvent = async (e) => {
+    e.preventDefault();
+    console.log('target', e.target)
+    console.log('event target', e.currentTarget);
+    // if checkbox
+    //
+    // if shelfname
+    //
+    // if container
+    //
+}
+
 const wtrEvent = async (e) => {
     const bookshelfId = e.target.id;
     const storyId = e.target.dataset.storyId;
@@ -115,3 +127,7 @@ wtrButtons.forEach(button => button.addEventListener('click', wtrEvent))
 const standardShelfButtons = document.querySelectorAll('.feed-modal > .standard-shelf')
 
 standardShelfButtons.forEach(button => button.addEventListener('click', standardShelfEvent))
+
+const customShelfButtons = document.querySelectorAll('.nonstandard-shelf-container');
+
+customShelfButtons.forEach(button => button.addEventListener('click', customShelfEvent))
