@@ -35,8 +35,8 @@ const standardShelfEvent = async (e) => {
 
 const customShelfEvent = async (e) => {
     e.preventDefault();
-    console.log('target', e.target)
-    console.log('event target', e.currentTarget);
+    // console.log('target', e.target)
+    // console.log('event target', e.currentTarget);
     let container, checkbox, shelfName;
     switch (e.target.className) {
         case 'nonstandard-shelf-container':
@@ -57,7 +57,17 @@ const customShelfEvent = async (e) => {
         default:
             console.log('Uh oh, what\'s this?')
     }
-    
+
+    const storyId = container.dataset.storyId;
+    const bookshelfId = container.id;
+    const res = await fetch('/api/placements', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ bookshelfId, storyId })
+    })
+    if (res.ok) checkbox.checked = !checkbox.checked;
 }
 
 const wtrEvent = async (e) => {
