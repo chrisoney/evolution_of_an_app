@@ -130,6 +130,7 @@ const wtrEvent = async (e) => {
         shelfContainer.className = 'nonstandard-shelf-container';
         shelfContainer.id = shelf.id;
         shelfContainer.dataset.shelfId = placement.storyId;
+        shelfContainer.addEventListener('click', customShelfEvent);
         const shelfCheckbox = document.createElement('input');
         shelfCheckbox.type = 'checkbox';
         shelfCheckbox.className = 'nonstandard-shelf-checkbox';
