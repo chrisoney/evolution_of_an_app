@@ -1,0 +1,8 @@
+.background-container {
+  /* background image */
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+}
