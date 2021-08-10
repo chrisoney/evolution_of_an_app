@@ -8,7 +8,10 @@
 }
 
 .info-container {
+  height: 50%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   background-color: white;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
