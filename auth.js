@@ -22,8 +22,10 @@ const restoreUser = async (req, res, next) => {
   // to assist with debugging.
   if (req.session.ui) {
     res.locals.mode = req.session.ui.mode
+    res.locals.newUser = 'false';
   } else {
-    res.locals.mode = '0'
+    res.locals.mode = '0';
+    res.locals.newUser = 'true';
   }
 
   if (req.session.auth) {

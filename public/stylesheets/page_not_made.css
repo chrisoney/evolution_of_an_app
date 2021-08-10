@@ -20,6 +20,11 @@
   border: 2px solid #787674;
 }
 
+.info-container.modal-version {
+  width: 100%;
+  border: 0;
+}
+
 .top-section {
   padding-bottom: 10px;
   margin-bottom: 10px;
