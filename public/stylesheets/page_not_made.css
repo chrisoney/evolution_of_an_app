@@ -8,10 +8,30 @@
 }
 
 .info-container {
-  height: 50%;
+  /* height: 50%; */
   width: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: white;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 16px 14px;
+  border-radius: 5px;
+  border: 2px solid #787674;
+}
+
+.top-section {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #787674;
+}
+
+.pnf-title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.top-section, .mid-section {
+  text-align: justify;
 }
