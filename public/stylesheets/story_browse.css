@@ -1,9 +1,39 @@
+.main-content {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
 .main-content-left {
+  width: 500px;
+  margin-right: 20px;
+  /* padding-left: 8px; */
+  margin-left: auto;
+}
+
+.left-story-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  width: 500px;
-  padding-right: 10px;
-  padding-left: 8px;
+}
+
+.story-browse-title {
+  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  color: #382110;
+  padding: 0px 0px 2px 0px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 24px;
+  border-bottom: 1px solid #D8D8D8;
+}
+
+h2.story-browse-title {
+  margin-top: 20px;
+  height: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .story-browse-image {
@@ -11,10 +41,19 @@
   height: 120px;
   object-fit: cover;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .main-content-right {
+  width: 300px;
+  padding-right: 8px;
+  margin-right: auto;
+}
 
+.right-story-container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .story-browse-image.smaller-image {

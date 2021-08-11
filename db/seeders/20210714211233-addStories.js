@@ -689,7 +689,7 @@ module.exports = {
           "description":"Full disclosure, the cover image isn't mine. Check out the full image here.\nI put all the warning tags to give myself creative freedom, but I'm not going to write a story filled with gore or swearing.\nThis is my first time writing, other than for school projects. I put the gender-bender tag because I wanted to try writing from a female's perspective, and needed an excuse for why my MC reads a little tomboyish. The gender-bender fades into the background over the first few chapters, please don't let the tag keep you away from trying out my story.\nSynopsis:\nSecond chances are rarely earned, and even rarer given. Follow a new life in a new world, where anything is possible. Our MC wakes up, stuck as a baby, needing to decide how she will live her new life. Let's see what future she can forge for herself, when hard work is rewarded with status points and skill levels.",
           "pageCount":1422,
           "linkUrl":"https://www.royalroad.com/fiction/31474",
-          "imageUrl":"/Content/Images/nocover-new-min.png",
+          "imageUrl":"/images/royal.jpg",
           "warnings":JSON.stringify({ warnings: ["Gore","Profanity","Sexual Content","Traumatising content"]}),
           "status":"HIATUS"
       },
@@ -949,7 +949,7 @@ module.exports = {
           "description":"Real Fantasy Online. The flagship product for the latest generation neural-interface headset. Touting: \"The Best NPC AIs\", \"Better than Life Realism\" and \"Total Immersion\", RFO promises to be a virtual world like no other. But when the line between one's real self and one's digital identity becomes blurred, and the \"Gods\" have their own agenda, who is the player, and which is the game?\n \nMarcus has played any number of VR games, beta-tested dangerous and unstable systems and lived to tell the tale. He even has a certain amount of fame and influence within...certain circles. He usually disdains the idea of pre-orders and their respective \"perks\" as blatent commerical exploitation, but this time the bonus is too tempting to pass up. The ability to craft your character's backstory and have it integrated into the game's lore is enough for him to sign up for the Early Access program. He isn't interested in being all-powerful. Frankly, he's been there and done that enough to be bored of the whole thing. Instead, he opts to make a character purely for the purpose of having fun. Things aren't quite what they seem however, and his \"backstory\" and character class have implications he never would have imagined.\n \nAuthor Note: First time posting a story online, and I'd appreciate any feedback. Updates may be slow, as each \"chapter\" will likely be in the 10,000 word range and I tend to revise several times before being (tentatively) satisfied. If people seem to like this I'll try to establish a regular post schedule.",
           "pageCount":321,
           "linkUrl":"https://www.royalroad.com/fiction/12088",
-          "imageUrl":"/Content/Images/nocover-new-min.png",
+          "imageUrl":"/images/royal.jpg",
           "warnings":JSON.stringify({ warnings: ["Gore","Profanity","Sexual Content","Traumatising content"]}),
           "status":"HIATUS"
       },
