@@ -57,12 +57,12 @@ if (newUser === 'true') {
 
   const title = document.createElement('div');
   title.className = 'pnf-title';
-  title.innerText = 'This page hadn\'t been made at this point.';
+  title.innerText = 'Welcome to RoyalReads!';
   top_section.appendChild(title);
 
   const description = document.createElement('div');
   description.className = 'pnf-description';
-  description.innerText = 'Which means that it\'s part of a later iteration of this app. Please choose a later mode to see if it includes this page.';
+  description.innerText = 'If this modal appeared, you might be a new user. This site is meant to look like a GoodReads clone at several different stages of development.';
   top_section.appendChild(description);
 
   info_container.appendChild(top_section);
@@ -72,7 +72,7 @@ if (newUser === 'true') {
   
   const mode_description = document.createElement('div');
   mode_description.className = 'pnf-mode-description';
-  mode_description.innerText = 'As a reminder, you can click the sandwich button the left hand side of the page to reveal the different iterations of this app. If you navigated to this page and switched the mode, you can select a later mode than than the current one to find when this page was incorporated. You can also drag the button up and down to move it out of the way if it overlaps with a feature.'
+  mode_description.innerText = 'You can click the sandwich button the left hand side of the page to reveal the different iterations of this app. You can click the names of the iterations to see what a page looks like at that stage of development. \n\n Sometimes the page would not have existed at that stage, so you will need to switch back to a later iteration to continue navigating through the site. You can also drag the button up and down to move it out of the way if it overlaps with a feature.'
   mid_section.appendChild(mode_description);
 
   info_container.appendChild(mid_section);

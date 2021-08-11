@@ -1,7 +1,24 @@
 const express = require('express');
 const { asyncHandler, pageChecker } = require('./utils');
-const { Story, Bookshelf } = require('../db/models')
+const { Story, Bookshelf, Placement } = require('../db/models')
 const router = express.Router();
+
+router.get('/', asyncHandler(async (req, res) => {
+  const stories = await Story.findAll({
+    order: [['title']],
+  });
+
+  const newStories = await Story.findAll({
+    include: {
+      model: Placement,
+      order: [["createdAt", "DESC"]]
+    },
+    limit: 15,
+  })
+
+  // res.json({newStories})
+  res.render('story-browse', { stories, newStories })
+}))
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = req.params.id;
