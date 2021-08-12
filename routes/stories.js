@@ -1,6 +1,6 @@
 const express = require('express');
 const { asyncHandler, pageChecker } = require('./utils');
-const { Story, Bookshelf, Placement } = require('../db/models')
+const { Story, Bookshelf, Placement, Review } = require('../db/models')
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
@@ -27,11 +27,13 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     where: { userId: req.session.auth.userId }
   })
   const story = await Story.findByPk(id, {
-    include: {
+    include: [{
       model: Bookshelf,
       where: { userId: req.session.auth.userId },
       required: false
-    }
+    }, {
+      model: Review,
+    }]
   });
   for (let i = 0; i < bookshelves.length; i++){
     if (bookshelves[i].name === 'Want To Read') wantToReadId = bookshelves[i].id;

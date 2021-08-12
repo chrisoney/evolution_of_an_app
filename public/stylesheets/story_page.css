@@ -347,6 +347,21 @@
   background-color: #4F4F4D;
 }
 
+/* Review styling */
+
+.fa-star.user-rating {
+  height: 30px;
+  width: 30px;
+}
+
+.far.fa-star {
+  color: #D6D6D6;
+}
+
+.fas.fa-star {
+  color: #F6A623;
+}
+
 /* Important styling */
 
 .hidden { display: none; }

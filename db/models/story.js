@@ -13,12 +13,15 @@ module.exports = (sequelize, DataTypes) => {
   Story.associate = function(models) {
     Story.hasMany(models.Placement, { foreignKey: 'storyId', onDelete: 'CASCADE', hooks: true })
     
+    Story.hasMany(models.Review, { foreignKey: 'storyId', onDelete: 'CASCADE', hooks: true })
+    
     const columnMapping = {
       through: 'Placement',
       foreignKey: 'storyId',
       otherKey: 'bookshelfId'
     }
-    Story.belongsToMany(models.Bookshelf, columnMapping)
+    Story.belongsToMany(models.Bookshelf, columnMapping);
+
   };
   return Story;
 };

@@ -45,3 +45,21 @@ block content
           .other-details-status Current Status: 
             div(class=`${story.status === 'HIATUS' ? 'status-red':'status-green'}`) #{story.status[0] + story.status.slice(1).toLowerCase()}
           .other-details-link: a(href=story.linkUrl) Link to Story
+      if parseInt(mode) >= 4
+        .reviews-section
+          - const reviews = story.Reviews
+          - const userReview = reviews.filter(review => review.userId === user.id)[0]
+          if (userReview)
+            - var i = 0, j = userReview.rating + 1
+            while i < userReview.rating
+              span(id=(i+1) class="fas fa-star user-rating theme")
+              - i++
+            while j <= 5
+              span(id=j class="far fa-star user-rating")
+              - j++
+          else
+            .new-review-prompt #{user.username}, start your review of #{story.title}
+            - var i = 0
+            while i <= 5
+              span(id=j class="far fa-star user-rating")
+              - i++
