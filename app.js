@@ -66,20 +66,13 @@ cron.schedule('0 0 12 * * *', async () => {
   }
 })
 
-// app.get('/testing', asyncHandler(async (req, res) => {
-//   const user = await User.findByPk(1, {
-//     attributes: { exclude: ['hashedPassword']},
-//     include: {
-//       model: Bookshelf,
-//       // include: {
-//       //   model: Placement,
-//       //   include: Story
-//       // }
-//       include: Story
-//     }
-//   })
-//   res.json({ user })
-// }))
+app.get('/testing', asyncHandler(async (req, res) => {
+  const stories = await Story.findAll({
+    order: [['id', 'DESC']],
+    limit: 1
+  })
+  res.json({ stories })
+}))
 
 // Dark Magicks
 // app.get('/update-placements', asyncHandler(async (req, res) => {

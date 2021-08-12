@@ -80,6 +80,6 @@ module.exports = {
 
       Example:
       */
-   return queryInterface.bulkDelete('Placements', null, { truncate: true,cascade: true, resetIdentity: true });
+   return queryInterface.bulkDelete('Placements', null, { truncate: true,cascade: true, restartIdentity: true });
   }
 };
