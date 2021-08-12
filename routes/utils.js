@@ -6,7 +6,7 @@ const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).ca
 
 const authPages = ['/users/login', '/users/signup']
 const bookShelfPages = [/users\/\d+\/bookshelves/,/bookshelves\/edit/]
-const storiesPages = [/stories\/\d+/]
+const storiesPages = [/stories\/\d+/, /stories/]
 
 const pageChecker = (req, res, next) => {
   const url = req.originalUrl;

@@ -38,6 +38,8 @@ html
       .navbar-lower
         a(href='/' class="navbar-text-link") Home
         a(href=`/users/${user.id}/bookshelves` class="navbar-text-link") My Books
+        if parseInt(mode) >= 3
+          a(href='/stories' class="navbar-text-link") Browse
 
     block content
 
