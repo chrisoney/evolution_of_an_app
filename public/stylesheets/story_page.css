@@ -352,6 +352,7 @@
 .fa-star.user-rating {
   height: 30px;
   width: 30px;
+  color: #F6A623;
 }
 
 .far.fa-star {
@@ -359,7 +360,12 @@
 }
 
 .fas.fa-star {
-  color: #F6A623;
+  color: red;
+}
+
+.other-reviews {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Important styling */
