@@ -369,6 +369,10 @@
   flex-direction: column;
 }
 
+.other-reviews-title-section, .other-reviews-general-info-section {
+  display: flex;
+}
+
 /* Important styling */
 
 .hidden { display: none; }
