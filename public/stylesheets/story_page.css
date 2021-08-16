@@ -373,6 +373,17 @@
   display: flex;
 }
 
+.new-review-prompt {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.logged-in-user-review-section {
+  border-bottom: 1px solid #ddd;
+}
+
 /* Important styling */
 
 .hidden { display: none; }
