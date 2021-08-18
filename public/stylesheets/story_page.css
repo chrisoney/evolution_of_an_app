@@ -351,8 +351,6 @@
 /* Review styling */
 
 .fa-star.user-rating {
-  height: 30px;
-  width: 30px;
   color: #F6A623;
 }
 
@@ -374,14 +372,57 @@
 }
 
 .new-review-prompt {
-  margin-top: 8px;
+  margin: 8px 0;
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .logged-in-user-review-section {
   border-bottom: 1px solid #ddd;
+}
+
+.other-reviews-title-section {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.other-reviews-title {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 2px 0;
+  height: 24px;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.other-reviews-numbers {
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  color: #181818;
+}
+
+
+.other-reviews-general-info-section{
+  display: flex;
+  width: fit-content;
+  margin: 0;
+}
+
+.avg-star-section {
+  font-size: 15px;
+}
+
+.dot, .num-review-parts {
+  color: #999;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  margin-left: 3px;
 }
 
 /* Important styling */
