@@ -350,6 +350,10 @@
 
 /* Review styling */
 
+.ratings-container {
+  display: flex;
+}
+
 .fas.fa-star {
   color: red;
 }
@@ -358,6 +362,7 @@
 }
 .fa-star.user-rating {
   color: #F6A623;
+  cursor: pointer;
 }
 
 
@@ -430,6 +435,48 @@
 .other-reviews-social-container {
   display: flex;
   flex-direction: column;
+}
+
+.review-container {
+  margin-bottom: 10px;
+}
+
+.review-header {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.review-header-left {
+  display: flex;
+  font-size: 14px;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  margin-bottom: 10px;
+  line-height: 14px;
+  vertical-align: middle;
+}
+
+.review-header-left > .ratings-container {
+  margin-left: 3px;
+}
+
+.review-username {
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.review-date {
+  color: #BBB;
+  font-size: 14px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.review-content-container {
+  font-family: "Merriweather", "Georgia", serif;
+  line-height: 21px;
+  font-size: 16px;
 }
 
 /* Important styling */

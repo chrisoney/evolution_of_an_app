@@ -87,8 +87,13 @@ block content
               each review in otherReviews
                 .review-container
                   .review-header
-                    .review-username= review.User.username
-                    | rated it
-                    +ratingsSection(review.rating, false)
+                    .review-header-left
+                      .review-username= review.User.username
+                      | rated it
+                      +ratingsSection(review.rating, false)
+                    .review-header-right
+                      .review-date= review.createdAt.toString().slice(4, 16)
+                  .review-content-container
+                    .review-content= review.content
 
             

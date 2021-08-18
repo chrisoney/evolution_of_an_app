@@ -14,7 +14,7 @@ block content
     +validationErrorSummary(errors)
     form(action='/users/login' method='post')
       input(type='hidden' name='_csrf' value=token)
-      +field('Username', 'username', username, 'me@me.io')
+      +field('Username', 'username', username, 'my-username')
       +field('Password', 'password', null, null, 'password')
       div(class="form-buttons")
         button(type='submit' class="positive-button") Sign in
