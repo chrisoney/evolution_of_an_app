@@ -350,19 +350,19 @@
 
 /* Review styling */
 
+.fas.fa-star {
+  color: red;
+}
+.far.fa-star {
+  color: #D6D6D6;
+}
 .fa-star.user-rating {
   color: #F6A623;
 }
 
-.far.fa-star {
-  color: #D6D6D6;
-}
 
-.fas.fa-star {
-  color: red;
-}
 
-.other-reviews {
+.other-reviews-section {
   display: flex;
   flex-direction: column;
 }
@@ -409,8 +409,10 @@
 
 .other-reviews-general-info-section{
   display: flex;
-  width: fit-content;
+  width: 100%;
   margin: 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
 .avg-star-section {
@@ -423,6 +425,11 @@
   font-size: 14px;
   line-height: 18px;
   margin-left: 3px;
+}
+
+.other-reviews-social-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Important styling */

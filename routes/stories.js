@@ -1,6 +1,6 @@
 const express = require('express');
 const { asyncHandler, pageChecker } = require('./utils');
-const { Story, Bookshelf, Placement, Review } = require('../db/models')
+const { Story, Bookshelf, Placement, Review, User } = require('../db/models')
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
@@ -33,6 +33,12 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
       required: false
     }, {
       model: Review,
+      include: {
+        model: User,
+        attributes: {
+          exclude: ['hashedPassword']
+        }
+      }
     }]
   });
   for (let i = 0; i < bookshelves.length; i++){
