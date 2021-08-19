@@ -461,7 +461,26 @@ const starClickEvent = (e) => {
   const storyId = parent.dataset.storyId;
   const currentRating = parent.dataset.currentRating;
 
-  
+  const rating = 3;
+  for (let i = 0; i < parent.children.length; i++){
+    const star = parent.children[i];
+    star.classList.remove('fas');
+    star.classList.remove('far');
+    if (i < rating) {
+      star.classList.add('fas');
+    } else {
+      star.classList.add('far');
+    }
+  }
+  parent.dataset.currentRating = rating;
+  // for (let j = 0; j < rating; j++){
+  //   const star = parent.children[j];
+  //   star.classList.add('fas')
+  // }
+  // for (let k = rating; i < 5; j++){
+
+  // }
+
 }
 
 
