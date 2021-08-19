@@ -56,13 +56,14 @@ block content
           - const userReview = reviews.filter(review => review.userId === user.id)[0]
           .logged-in-user-review-section
             if (userReview)
-              +ratingsSection(userReview.rating, true)
+              +ratingsSection(userReview.rating, story.id, true)
             else
               .new-review-prompt #{user.username}, start your review of #{story.title}
-              - var i = 0
-              while i < 5
-                span(id=j class="far fa-star user-rating")
-                - i++
+              div(class='ratings-container' data-story-id=storyId data-current-rating=rating)
+                - var i = 0
+                while i < 5
+                  span(data-score=i+1 class="far fa-star user-rating")
+                  - i++
           .other-reviews-section
             .other-reviews-title-section
               .other-reviews-title Community Reviews
@@ -77,7 +78,7 @@ block content
               .avg-star-section
                 if ratings.length === 0
                   .no-ratings No ratings yet
-                +ratingsSection(avgRating, false)
+                +ratingsSection(avgRating, story.id, false)
               .dot &#183;
               .num-review-parts #{reviewContents.length} Reviews
               .dot &#183;
@@ -90,7 +91,7 @@ block content
                     .review-header-left
                       .review-username= review.User.username
                       | rated it
-                      +ratingsSection(review.rating, false)
+                      +ratingsSection(review.rating, story.id, false)
                     .review-header-right
                       .review-date= review.createdAt.toString().slice(4, 16)
                   .review-content-container

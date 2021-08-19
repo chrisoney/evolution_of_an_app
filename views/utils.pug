@@ -10,18 +10,18 @@ mixin validationErrorSummary(errors)
         li.error= error
 
 
-mixin ratingsSection(rating, loggedin)
-  .ratings-container
+mixin ratingsSection(rating, storyId, loggedin)
+  div(class='ratings-container' data-story-id=storyId data-current-rating=rating)
     if rating
       - var i = 0, j = rating + 1
       while i < rating
-        span(id=(i+1) class=`fas fa-star ${loggedin ? 'user-rating' : ''}`)
+        span(data-score=(i+1) class=`fas fa-star ${loggedin ? 'user-rating' : ''}`)
         - i++
       while j <= 5
-        span(id=j class=`far fa-star ${loggedin ? 'user-rating' : ''}`)
+        span(data-score=j class=`far fa-star ${loggedin ? 'user-rating' : ''}`)
         - j++
     else
         - var i = 0
         while i < 5
-        span(id=(i+1) class=`far fa-star ${loggedin ? 'user-rating' : ''}`)
+        span(data-score=(i+1) class=`far fa-star ${loggedin ? 'user-rating' : ''}`)
         - i++

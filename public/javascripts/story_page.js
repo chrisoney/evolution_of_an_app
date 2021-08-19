@@ -454,3 +454,17 @@ if (want_to_read_button && select_bookshelf_chevron_button) {
 } else {
   change_bookshelf_button.addEventListener('click', switchBookshelfChoice)
 }
+
+// Rating section
+const starClickEvent = (e) => {
+  const parent = e.target.parentElement;
+  const storyId = parent.dataset.storyId;
+  const currentRating = parent.dataset.currentRating;
+
+  
+}
+
+
+const user_stars = document.querySelectorAll('.fa-star.user-rating');
+
+user_stars.forEach((button) => button.addEventListener('click', starClickEvent))

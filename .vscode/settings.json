@@ -193,6 +193,8 @@
         }
       }
     ]
-  }
-}
+  },
+},
+// "editor.detectIndentation": false,
+// "editor.tabSize": 6
 }
