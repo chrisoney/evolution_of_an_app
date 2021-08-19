@@ -483,7 +483,41 @@ const starClickEvent = (e) => {
 
 }
 
+const starHoverEvent = (e) => {
+  const parent = e.target.parentElement;
+  const rating = parseInt(e.target.dataset.score, 10);
+  for (let i = 0; i < parent.children.length; i++){
+    const star = parent.children[i];
+    star.classList.remove('fas');
+    star.classList.remove('far');
+    if (i < rating) {
+      star.classList.add('fas');
+    } else {
+      star.classList.add('far');
+    }
+  }
+}
+
+const starContainerEvent = (e) => {
+  const container = e.currentTarget;
+  const currentRating = parseInt(container.dataset.currentRating, 10);
+  for (let i = 0; i < container.children.length; i++){
+    const star = container.children[i];
+    star.classList.remove('fas');
+    star.classList.remove('far');
+    if (i < currentRating) {
+      star.classList.add('fas');
+    } else {
+      star.classList.add('far');
+    }
+  }
+}
+
 
 const user_stars = document.querySelectorAll('.fa-star.user-rating');
+const star_container = user_stars[0].parentElement;
 
 user_stars.forEach((button) => button.addEventListener('click', starClickEvent))
+user_stars.forEach((button) => button.addEventListener('mouseover', starHoverEvent))
+
+star_container.addEventListener('mouseout', starContainerEvent);
