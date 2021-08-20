@@ -12,7 +12,6 @@ router.post('/', asyncHandler(async (req, res) => {
       storyId
     }
   })
-  console.log(review)
   if (review) {
     if (content) review.content = content;
     if (rating) review.rating = rating;
