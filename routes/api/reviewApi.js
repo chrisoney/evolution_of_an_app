@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler } = require('../utils');
-const { Review } = require('../../db/models');
+const { Review } = require('../../db/models')
 
-router.post('/ratings', asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
   const { rating, content, storyId } = req.body;
   const userId = req.session.auth.userId;
   let review = await Review.findOne({
@@ -12,7 +12,7 @@ router.post('/ratings', asyncHandler(async (req, res) => {
       storyId
     }
   })
-
+  console.log(review)
   if (review) {
     if (content) review.content = content;
     if (rating) review.rating = rating;
