@@ -456,12 +456,19 @@ if (want_to_read_button && select_bookshelf_chevron_button) {
 }
 
 // Rating section
-const starClickEvent = (e) => {
+const starClickEvent = async (e) => {
   const parent = e.target.parentElement;
   const storyId = parent.dataset.storyId;
-  const currentRating = parent.dataset.currentRating;
+  const currentRating = parseInt(parent.dataset.currentRating, 10);
+  const res = await fetch('/api/reviews', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ rating: currentRating })
+  })
+  const { review: { rating } } = await res.json();
 
-  const rating = 3;
   for (let i = 0; i < parent.children.length; i++){
     const star = parent.children[i];
     star.classList.remove('fas');
