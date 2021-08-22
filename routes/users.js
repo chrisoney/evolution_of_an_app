@@ -134,6 +134,8 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
   }
 }))
 
+// Credit to Nathaniel for the idea
+
 router.post('/demo', asyncHandler(async (req, res, next) => {
   // const user = await User.findOne({ where: { username: 'Main_Character' }});
   const user = await User.create({
