@@ -60,11 +60,12 @@ block content
               +ratingsSection(userReview.rating, story.id, true)
             else
               .new-review-prompt #{user.username}, start your review of #{story.title}
-              div(class='ratings-container' data-story-id=story.id data-current-rating=0)
-                - var i = 0
-                while i < 5
-                  span(data-score=i+1 class="far fa-star user-rating")
-                  - i++
+              +ratingsSection(0, story.id, true)
+              //- div(class='ratings-container' data-story-id=story.id data-current-rating=0)
+              //-   - var i = 0
+              //-   while i < 5
+              //-     span(data-score=i+1 class="far fa-star user-rating")
+              //-     - i++
           .other-reviews-section
             .other-reviews-title-section
               .other-reviews-title Community Reviews
@@ -97,5 +98,3 @@ block content
                       .review-date= review.createdAt.toString().slice(4, 16)
                   .review-content-container
                     .review-content= review.content
-
-            

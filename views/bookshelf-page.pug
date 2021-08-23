@@ -50,6 +50,8 @@ block content
                   td.story-title: a(href=`/stories/${story.id}`)=story.title
                   td.story-author=story.author
                   if parseInt(mode) >= 4
+                    -const userReview = story.Reviews.filter(review => review.userId === user.id)[0]
+                    -const otherReviews = story.Reviews.filter(review => review.userId !== user.id)[0]
                     td=story.avg_rating
                     th=story.rating
                   td.story-shelf-list=story.Bookshelves.map(shelf => shelf.name).join(', ')

@@ -33,18 +33,23 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
       required: false
     }, {
       model: Review,
+      attributes: ['storyId', 'userId', 'content', 'rating'],
       include: {
         model: User,
-        attributes: {
-          exclude: ['hashedPassword']
-        }
-      }
+        attributes: ['id', 'username']
+      },
+      required: false
     }]
   });
   for (let i = 0; i < bookshelves.length; i++){
     if (bookshelves[i].name === 'Want To Read') wantToReadId = bookshelves[i].id;
   }
-  res.render('story-page', { story, bookshelves, wantToReadId })
+  return res.render('story-page',
+    {
+      story,
+      wantToReadId,
+      // userReview: story.Reviews.filter(review => review.userId === user.id)[0]
+    })
   // res.json({ story })
 }))
 

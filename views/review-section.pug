@@ -1,0 +1,47 @@
+.reviews-section
+  - const reviews = story.Reviews
+  - const userReview = reviews.filter(review => review.userId === user.id)[0]
+  .logged-in-user-review-section
+    if (userReview)
+      .new-review-prompt Your rating
+      +ratingsSection(userReview.rating, story.id, true)
+    else
+      .new-review-prompt #{user.username}, start your review of #{story.title}
+      +ratingsSection(0, story.id, true)
+      //- div(class='ratings-container' data-story-id=story.id data-current-rating=0)
+      //-   - var i = 0
+      //-   while i < 5
+      //-     span(data-score=i+1 class="far fa-star user-rating")
+      //-     - i++
+  .other-reviews-section
+    .other-reviews-title-section
+      .other-reviews-title Community Reviews
+      if reviews.length > 0
+        .other-reviews-numbers Showing 1 - #{reviews.length - (userReview ? 1 : 0)}
+      else
+        .other-reviews-numbers Showing 0 - 0
+    .other-reviews-general-info-section
+      -const ratings = reviews.map(review => review.rating)
+      -const reviewContents = reviews.map(review => review.content)
+      -const avgRating = ratings.reduce((a,b) => {return a + b}, 0) / ratings.length
+      .avg-star-section
+        if ratings.length === 0
+          .no-ratings No ratings yet
+        +ratingsSection(avgRating, story.id, false)
+      .dot &#183;
+      .num-review-parts #{reviewContents.length} Reviews
+      .dot &#183;
+      .num-review-parts #{ratings.length} Ratings
+    .other-reviews-social-container
+      -const otherReviews = reviews.filter(review => review.userId !== user.id)
+      each review in otherReviews
+        .review-container
+          .review-header
+            .review-header-left
+              .review-username= review.User.username
+              | rated it
+              +ratingsSection(review.rating, story.id, false)
+            .review-header-right
+              .review-date= review.createdAt.toString().slice(4, 16)
+          .review-content-container
+            .review-content= review.content
