@@ -1,3 +1,5 @@
+import { starClickEvent, starHoverEvent, starContainerEvent } from './events/star_events.js';
+
 const add_bookshelf_button = document.querySelector('.add-new-bookshelf-button');
 const new_bookshelf_form_container = document.querySelector('.add-new-bookshelf-form-container');
 const new_bookshelf_input = document.querySelector('.add-new-bookshelf-input')
@@ -103,3 +105,11 @@ const selectorEvent = async (e) => {
 
 
 bookshelf_selectors.forEach(button => button.addEventListener('click', selectorEvent));
+
+const user_stars = document.querySelectorAll('.fa-star.user-rating');
+const star_container = document.querySelectorAll('.ratings-container')
+
+user_stars.forEach((button) => button.addEventListener('click', starClickEvent))
+user_stars.forEach((button) => button.addEventListener('mouseover', starHoverEvent))
+
+star_container.forEach(container => container.addEventListener('mouseout', starContainerEvent));

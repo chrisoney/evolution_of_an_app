@@ -73,7 +73,6 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
         }
       }
     });
-    console.log(user)
     let stories = user.Bookshelves.map(shelf => shelf.Stories);
     stories.forEach(arr => bookshelf.Stories.push(...arr));
   } else {
