@@ -33,7 +33,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
       required: false
     }, {
       model: Review,
-      attributes: ['storyId', 'userId', 'content', 'rating'],
+      attributes: ['storyId', 'userId', 'content', 'rating', 'createdAt'],
       include: {
         model: User,
         attributes: ['id', 'username']
