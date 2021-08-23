@@ -385,7 +385,6 @@
 }
 
 .logged-in-user-rating-section {
-  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   display: flex;
   align-items: center;
@@ -404,9 +403,14 @@
   margin-left: 20px;
 }
 
+.reveal-form:hover {
+  background-color: #EDE6D6;
+}
+
 .logged-in-user-review-content-section {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #ddd;
 }
 
 .new-review-content-input {
@@ -414,6 +418,9 @@
   resize: vertical;
   height: 50px;
   width: 80%;
+}
+.new-review-content-input:focus {
+  outline: none;
 }
 
 .cancel-review-content-button, .submit-review-content-button {
@@ -428,10 +435,21 @@
   padding: 8px 12px;
 }
 
+.cancel-review-content-button:hover, .submit-review-content-button:hover {
+  background-color: #EDE6D6;
+}
+
 .user-review-form-button-section {
   display: flex;
   width: 80%;
   justify-content: space-between;
+}
+
+.user-review-content {
+  margin: 5px 0;
+  line-height: 1.37;
+  font: 400 16px "Proxima Nova",Montserrat,Arial,sans-serif;
+  color: #1E1915;
 }
 
 .other-reviews-title-section {
@@ -468,6 +486,11 @@
 
 .avg-star-section {
   font-size: 15px;
+}
+
+.no-ratings {
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .dot, .num-review-parts {

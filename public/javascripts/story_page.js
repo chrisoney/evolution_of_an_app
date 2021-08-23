@@ -469,6 +469,7 @@ star_container.addEventListener('mouseout', starContainerEvent);
 
 
 // Review content section
+const review_content = document.querySelector('.user-review-content')
 
 const reveal_form_button = document.querySelector('.reveal-form')
 
@@ -484,5 +485,30 @@ const cancel_form_button = document.querySelector('.cancel-review-content-button
 cancel_form_button.addEventListener('click', (e) => {
   e.target.parentElement.previousSibling.value = '';
   e.target.parentElement.parentElement.classList.add('hidden')
-  reveal_form_button.classList.remove('hidden')
+  if (reveal_form_button) {
+    reveal_form_button.classList.remove('hidden')
+  }
+})
+
+const submit_form_button = document.querySelector('.submit-review-content-button')
+
+submit_form_button.addEventListener('click', async (e) => {
+  const content = e.target.parentElement.previousSibling.value;
+  if (content === '') return;
+  const storyId = e.target.dataset.storyId;
+  const res = await fetch('/api/reviews', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ content, storyId })
+  })
+  if (res.ok) {
+    e.target.parentElement.parentElement.classList.add('hidden');
+    if (reveal_form_button) {
+      reveal_form_button.remove()
+      review_content.innerText = content;
+      review_content.classList.remove('hidden')
+    }
+  }
 })

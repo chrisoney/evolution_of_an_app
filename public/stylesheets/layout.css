@@ -141,6 +141,7 @@ body {
   padding: 8px 0;
   box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
   font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  z-index: 10;
 }
 
 .hidden {
