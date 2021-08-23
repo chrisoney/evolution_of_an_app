@@ -495,7 +495,7 @@ const cancel_form_button = document.querySelector('.cancel-review-content-button
 cancel_form_button.addEventListener('click', (e) => {
   e.target.parentElement.previousSibling.value = '';
   e.target.parentElement.parentElement.classList.add('hidden')
-  if (reveal_form_button) {
+  if (document.querySelector('.reveal-form')) {
     reveal_form_button.classList.remove('hidden')
   } else {
     reveal_form_edit_button.parentElement.classList.remove('hidden')

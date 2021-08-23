@@ -438,6 +438,7 @@
   background-color: #F4F1EA;
   line-height: 1;
   padding: 8px 12px;
+  margin-bottom: 5px;
 }
 
 .cancel-review-content-button:hover, .submit-review-content-button:hover {

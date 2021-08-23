@@ -82,11 +82,11 @@ block content
           .logged-in-user-review-content-section
             if (userReview)
               .user-content-container
-                div(class=`user-review-content ${userReview.content ? '' : 'hidden'}`)= userReview.content
+                div(class=`user-review-content`)= userReview.content
                 button(class='reveal-form-edit') Edit review
             else
-              .user-content-container
-                div(class=`user-review-content hidden`)= ''
+              .user-content-container.hidden
+                div(class=`user-review-content`)= ''
                 button(class='reveal-form-edit') Edit review
             
             .user-review-form-section.hidden
