@@ -390,7 +390,7 @@
   align-items: center;
 }
 
-.reveal-form {
+.reveal-form, .reveal-form-edit {
   color: #333333;
   border-radius: 3px;
   border: 1px solid #D6D0C4;
@@ -403,7 +403,12 @@
   margin-left: 20px;
 }
 
-.reveal-form:hover {
+.reveal-form-edit {
+  margin-left: 0;
+  margin-bottom: 5px;
+}
+
+.reveal-form:hover, .reveal-form-edit:hover {
   background-color: #EDE6D6;
 }
 

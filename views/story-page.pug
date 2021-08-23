@@ -81,9 +81,14 @@ block content
                 button(class='reveal-form') Write a Review
           .logged-in-user-review-content-section
             if (userReview)
-              div(class=`user-review-content ${userReview.content ? '' : 'hidden'}`)= userReview.content
+              .user-content-container
+                div(class=`user-review-content ${userReview.content ? '' : 'hidden'}`)= userReview.content
+                button(class='reveal-form-edit') Edit review
             else
-              div(class=`user-review-content hidden`)= ''
+              .user-content-container
+                div(class=`user-review-content hidden`)= ''
+                button(class='reveal-form-edit') Edit review
+            
             .user-review-form-section.hidden
               textarea(class='new-review-content-input')
               .user-review-form-button-section

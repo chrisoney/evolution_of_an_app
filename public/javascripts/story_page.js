@@ -472,14 +472,24 @@ star_container.addEventListener('mouseout', starContainerEvent);
 const review_content = document.querySelector('.user-review-content')
 
 const reveal_form_button = document.querySelector('.reveal-form')
+const reveal_form_edit_button = document.querySelector('.reveal-form-edit')
+const form = document.querySelector('.user-review-form-section')
 
 if (reveal_form_button) {
   reveal_form_button.addEventListener('click', (e) => {
     e.target.classList.add('hidden');
-    const form = document.querySelector('.user-review-form-section')
     form.classList.remove('hidden')
   })
 }
+
+if (reveal_form_edit_button) {
+  reveal_form_edit_button.addEventListener('click', (e) => {
+    e.target.parentElement.classList.add('hidden');
+    form.classList.remove('hidden');
+  })
+}
+
+
 const cancel_form_button = document.querySelector('.cancel-review-content-button')
 
 cancel_form_button.addEventListener('click', (e) => {
@@ -487,6 +497,8 @@ cancel_form_button.addEventListener('click', (e) => {
   e.target.parentElement.parentElement.classList.add('hidden')
   if (reveal_form_button) {
     reveal_form_button.classList.remove('hidden')
+  } else {
+    reveal_form_edit_button.parentElement.classList.remove('hidden')
   }
 })
 
@@ -507,8 +519,8 @@ submit_form_button.addEventListener('click', async (e) => {
     e.target.parentElement.parentElement.classList.add('hidden');
     if (reveal_form_button) {
       reveal_form_button.remove()
-      review_content.innerText = content;
-      review_content.classList.remove('hidden')
     }
+    review_content.innerText = content;
+    review_content.parentElement.classList.remove('hidden')
   }
 })
