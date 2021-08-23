@@ -178,6 +178,10 @@
   width: 25%;
 }
 
+.user-rating-header {
+  width: 90px;
+}
+
 .story-row {
   border-bottom: 1px solid #eee;
 }
@@ -190,6 +194,10 @@
 
 .story-title, .story-author, .story-shelf-list {
   color: #00635d;
+}
+
+.avg-rating, .user-rating {
+  text-align: center;
 }
 
 .story-title > a {

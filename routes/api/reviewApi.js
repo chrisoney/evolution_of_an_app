@@ -5,6 +5,7 @@ const { Review } = require('../../db/models')
 
 router.post('/', asyncHandler(async (req, res) => {
   const { rating, content, storyId } = req.body;
+  console.log(rating, content, storyId)
   const userId = req.session.auth.userId;
   let review = await Review.findOne({
     where: {

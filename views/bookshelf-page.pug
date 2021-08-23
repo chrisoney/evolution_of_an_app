@@ -39,7 +39,7 @@ block content
                 // This number may change based on review completion
                 if parseInt(mode) >= 4
                   th avg rating
-                  th rating
+                  th.user-rating-header rating
                 th shelves
                 th date read
                 th date added
@@ -50,10 +50,25 @@ block content
                   td.story-title: a(href=`/stories/${story.id}`)=story.title
                   td.story-author=story.author
                   if parseInt(mode) >= 4
-                    -const userReview = story.Reviews.filter(review => review.userId === user.id)[0]
-                    -const otherReviews = story.Reviews.filter(review => review.userId !== user.id)[0]
-                    td=story.avg_rating
-                    th=story.rating
+                    -const userReview = story.Reviews.filter(review => review.userId === user.id && review.rating >= 0)[0]
+                    -const allReviews = story.Reviews.map(review => review.rating);
+                    td.avg-rating= Math.round(allReviews.reduce((a,b) => {return a + b }, 0) / allReviews.length * 100) / 100 || 0
+                    td.user-rating
+                      if (userReview && userReview.rating)
+                        div(class='ratings-container' data-story-id=storyId data-current-rating=userReview.rating)
+                          - let i = 0, j = userReview.rating + 1
+                          while i < userReview.rating
+                            span(data-score=(i+1) class='fas fa-star user-rating')
+                            - i++
+                          while j <= 5
+                            span(data-score=j class='far fa-star user-rating')
+                            - j++
+                      else
+                        div(class='ratings-container' data-story-id=storyId data-current-rating=rating)
+                          - let i = 0
+                          while i < 5
+                            span(data-score=(i+1) class='far fa-star user-rating')
+                            - i++
                   td.story-shelf-list=story.Bookshelves.map(shelf => shelf.name).join(', ')
                   td.story-date-read Not set
                   - var date = story.Placements[0].createdAt.toString().slice(4, 16)
