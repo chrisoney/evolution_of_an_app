@@ -49,9 +49,9 @@ block content
                   td: img(src=story.imageUrl class='image-preview')
                   td.story-title: a(href=`/stories/${story.id}`)=story.title
                   td.story-author=story.author
-                  //- if parseInt(mode) >= 4 // This number may change based on review completion
-                  //-   td=story.avg_rating
-                  //-   th=story.rating
+                  if parseInt(mode) >= 4
+                    td=story.avg_rating
+                    th=story.rating
                   td.story-shelf-list=story.Bookshelves.map(shelf => shelf.name).join(', ')
                   td.story-date-read Not set
                   - var date = story.Placements[0].createdAt.toString().slice(4, 16)

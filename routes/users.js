@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const { asyncHandler, csrfProtection, pageChecker, addStories } = require('./utils');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
-const { User, Bookshelf, Story, Placement } = require('../db/models')
+const { User, Bookshelf, Story, Placement, Review } = require('../db/models')
 
 const loginValidators = [
   check('username')
@@ -191,6 +191,8 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
           where: { userId: req.session.auth.userId }
         }, {
           model: Placement
+        },{
+          model: Review
         }],
       }
     }
