@@ -178,10 +178,6 @@
   width: 25%;
 }
 
-.user-rating-header {
-  width: 90px;
-}
-
 .story-row {
   border-bottom: 1px solid #eee;
 }
@@ -198,6 +194,18 @@
 
 .avg-rating, .user-rating {
   text-align: center;
+}
+
+.ratings-container {
+  min-width: 90px;
+}
+
+.far.fa-star {
+  color: #D6D6D6;
+}
+.fa-star.user-rating {
+  color: #F6A623;
+  cursor: pointer;
 }
 
 .story-title > a {

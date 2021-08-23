@@ -458,70 +458,6 @@ if (want_to_read_button && select_bookshelf_chevron_button) {
 }
 
 // Rating section
-// const starClickEvent = async (e) => {
-//   const parent = e.target.parentElement;
-//   const storyId = parent.dataset.storyId;
-//   const newRating = parseInt(e.target.dataset.score, 10);
-//   const res = await fetch('/api/reviews', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ rating: newRating, storyId })
-//   })
-//   const { review: { rating } } = await res.json();
-
-//   for (let i = 0; i < parent.children.length; i++){
-//     const star = parent.children[i];
-//     star.classList.remove('fas');
-//     star.classList.remove('far');
-//     if (i < rating) {
-//       star.classList.add('fas');
-//     } else {
-//       star.classList.add('far');
-//     }
-//   }
-//   parent.dataset.currentRating = rating;
-//   // for (let j = 0; j < rating; j++){
-//   //   const star = parent.children[j];
-//   //   star.classList.add('fas')
-//   // }
-//   // for (let k = rating; i < 5; j++){
-
-//   // }
-
-// }
-
-// const starHoverEvent = (e) => {
-//   const parent = e.target.parentElement;
-//   const rating = parseInt(e.target.dataset.score, 10);
-//   for (let i = 0; i < parent.children.length; i++){
-//     const star = parent.children[i];
-//     star.classList.remove('fas');
-//     star.classList.remove('far');
-//     if (i < rating) {
-//       star.classList.add('fas');
-//     } else {
-//       star.classList.add('far');
-//     }
-//   }
-// }
-
-// const starContainerEvent = (e) => {
-//   const container = e.currentTarget;
-//   const currentRating = parseInt(container.dataset.currentRating, 10);
-//   for (let i = 0; i < container.children.length; i++){
-//     const star = container.children[i];
-//     star.classList.remove('fas');
-//     star.classList.remove('far');
-//     if (i < currentRating) {
-//       star.classList.add('fas');
-//     } else {
-//       star.classList.add('far');
-//     }
-//   }
-// }
-
 
 const user_stars = document.querySelectorAll('.fa-star.user-rating');
 const star_container = user_stars[0].parentElement;
@@ -530,3 +466,23 @@ user_stars.forEach((button) => button.addEventListener('click', starClickEvent))
 user_stars.forEach((button) => button.addEventListener('mouseover', starHoverEvent))
 
 star_container.addEventListener('mouseout', starContainerEvent);
+
+
+// Review content section
+
+const reveal_form_button = document.querySelector('.reveal-form')
+
+if (reveal_form_button) {
+  reveal_form_button.addEventListener('click', (e) => {
+    e.target.classList.add('hidden');
+    const form = document.querySelector('.user-review-form-section')
+    form.classList.remove('hidden')
+  })
+}
+const cancel_form_button = document.querySelector('.cancel-review-content-button')
+
+cancel_form_button.addEventListener('click', (e) => {
+  e.target.parentElement.previousSibling.value = '';
+  e.target.parentElement.parentElement.classList.add('hidden')
+  reveal_form_button.classList.remove('hidden')
+})

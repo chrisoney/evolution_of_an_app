@@ -53,31 +53,38 @@ block content
         .reviews-section
           - const reviews = story.Reviews
           - const userReview = reviews.filter(review => review.userId === user.id)[0]
-          .logged-in-user-review-section
+          .logged-in-user-rating-section
             if (userReview)
-              .new-review-prompt Your rating
-              //- +ratingsSection(userReview.rating, story.id, true)
-              div(class='ratings-container' data-story-id=story.id data-current-rating=userReview.rating)
-                - let i = 0, j = userReview.rating + 1
-                while i < userReview.rating
-                  span(data-score=(i+1) class='fas fa-star user-rating')
-                  - i++
-                while j <= 5
-                  span(data-score=j class='far fa-star user-rating')
-                  - j++
+              .new-user-review-left
+                .new-review-prompt Your review
+                //- +ratingsSection(userReview.rating, story.id, true)
+                div(class='ratings-container' data-story-id=story.id data-current-rating=userReview.rating)
+                  - let i = 0, j = userReview.rating + 1
+                  while i < userReview.rating
+                    span(data-score=(i+1) class='fas fa-star user-rating')
+                    - i++
+                  while j <= 5
+                    span(data-score=j class='far fa-star user-rating')
+                    - j++
+              .new-user-review-right
+                button(class='reveal-form') Write a Review
             else
-              .new-review-prompt #{user.username}, start your review of #{story.title}
-              div(class='ratings-container' data-story-id=story.id data-current-rating=rating)
-                - let i = 0
-                while i < 5
-                  span(data-score=(i+1) class='far fa-star user-rating')
-                  - i++
-              //- +ratingsSection(null, story.id, true)
-              //- div(class='ratings-container' data-story-id=story.id data-current-rating=0)
-              //-   - var i = 0
-              //-   while i < 5
-              //-     span(data-score=i+1 class="far fa-star user-rating")
-              //-     - i++
+              .new-user-review-left
+                .new-review-prompt #{user.username}, start your review of #{story.title}
+                div(class='ratings-container' data-story-id=story.id data-current-rating=rating)
+                  - let i = 0
+                  while i < 5
+                    span(data-score=(i+1) class='far fa-star user-rating')
+                    - i++
+              .new-user-review-right
+                button(class='reveal-form') Write a Review
+          .logged-in-user-review-content-section
+            div(class=`user-review-content ${userReview && userReview.content ? '' : 'hidden'}`)= userReview.content || ''
+            .user-review-form-section.hidden
+              textarea(class='new-review-content-input')
+              .user-review-form-button-section
+                button(class='cancel-review-content-button') Cancel
+                button(class='submit-review-content-button') Submit
           .other-reviews-section
             .other-reviews-title-section
               .other-reviews-title Community Reviews
@@ -95,10 +102,10 @@ block content
                 //- +ratingsSection(avgRating, story.id, false)
                 else
                   div(class='ratings-container' data-story-id=story.id data-current-rating=avgRating)
-                        - let x = 0, y = avgRating + 1
+                        - let i = 0, j = avgRating + 1
                         while i < avgRating
                           span(data-score=(i+1) class='fas fa-star')
-                          - x++
+                          - i++
                         while j <= 5
                           span(data-score=j class='far fa-star')
                           - j++
