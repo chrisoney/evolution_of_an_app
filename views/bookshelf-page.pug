@@ -53,21 +53,21 @@ block content
                     -const userReview = story.Reviews.filter(review => review.userId === bookshelfUser.id && review.rating >= 0)[0]
                     -const allReviews = story.Reviews.map(review => review.rating);
                     td.avg-rating= Math.round(allReviews.reduce((a,b) => {return a + b }, 0) / allReviews.length * 100) / 100 || 0
-                    td.user-rating
+                    td.user-rating-detail
                       if (userReview && userReview.rating)
                         div(class='ratings-container' data-story-id=story.id data-current-rating=userReview.rating)
                           - let i = 0, j = userReview.rating + 1
                           while i < userReview.rating
-                            span(data-score=(i+1) class='fas fa-star user-rating')
+                            span(data-score=(i+1) class=`fas fa-star ${bookshelfUser.id === user.id ? 'user-rating': ''}`)
                             - i++
                           while j <= 5
-                            span(data-score=j class='far fa-star user-rating')
+                            span(data-score=j class=`far fa-star ${bookshelfUser.id === user.id ? 'user-rating': ''}`)
                             - j++
                       else
                         div(class='ratings-container' data-story-id=story.id data-current-rating=rating)
                           - let i = 0
                           while i < 5
-                            span(data-score=(i+1) class='far fa-star user-rating')
+                            span(data-score=(i+1) class=`far fa-star ${bookshelfUser.id === user.id ? 'user-rating': ''}`)
                             - i++
                   td.story-shelf-list=story.Bookshelves.map(shelf => shelf.name).join(', ')
                   td.story-date-read Not set
