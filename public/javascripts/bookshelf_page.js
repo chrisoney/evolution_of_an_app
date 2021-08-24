@@ -47,7 +47,8 @@ const selectorEvent = async (e) => {
   if (parseInt(mode) >= 3) {
     // This is where we'll replace the stories
     const id = e.target.id;
-    const res = await fetch(`/api/bookshelves/${id}`);
+    const userId = e.target.dataset.userId;
+    const res = await fetch(`/api/bookshelves/${id}?userId=${userId}`);
     const { bookshelf } = await res.json();
     const table_body = document.querySelector('tbody');
     table_body.innerHTML = ''

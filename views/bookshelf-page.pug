@@ -15,10 +15,10 @@ block content
         h6 Bookshelves
           a(href='/bookshelves/edit' class='bookshelf-edit-link') (edit)
         div(class='bookshelves-container')
-          div(class=`bookshelf-selector ${selected === '' ? 'selected' : ''}` id=0) All 
+          div(class=`bookshelf-selector ${selected === '' ? 'selected' : ''}` id=0 data-user-id=bookshelfUser.id) All 
             if parseInt(mode) >= 3
               |(#{allCount})
-          each bookshelf in user.Bookshelves
+          each bookshelf in bookshelfUser.Bookshelves
             div(class=`bookshelf-selector ${selected === bookshelf.name ? 'selected' : ''}` id=bookshelf.id) #{bookshelf.name} 
               if parseInt(mode) >= 3
                 |(#{bookshelf.Stories.length})
@@ -50,7 +50,7 @@ block content
                   td.story-title: a(href=`/stories/${story.id}`)=story.title
                   td.story-author=story.author
                   if parseInt(mode) >= 4
-                    -const userReview = story.Reviews.filter(review => review.userId === user.id && review.rating >= 0)[0]
+                    -const userReview = story.Reviews.filter(review => review.userId === bookshelfUser.id && review.rating >= 0)[0]
                     -const allReviews = story.Reviews.map(review => review.rating);
                     td.avg-rating= Math.round(allReviews.reduce((a,b) => {return a + b }, 0) / allReviews.length * 100) / 100 || 0
                     td.user-rating

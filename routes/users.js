@@ -180,7 +180,7 @@ router.post('/logout', asyncHandler(async(req, res, next) => {
 router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
   const selected = req.query.selected ? req.query.selected.split('-').join(' ') : '';
-  const user = await User.findByPk(id, {
+  const bookshelfUser = await User.findByPk(id, {
     attributes: { exclude: ['hashedPassword']},
     include: {
       model: Bookshelf,
@@ -188,7 +188,7 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
         model: Story,
         include: [{
           model: Bookshelf,
-          where: { userId: req.session.auth.userId }
+          where: { userId: id }
         }, {
           model: Placement
         },{
@@ -198,7 +198,7 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
     }
   })
   const allStories = [];
-  user.Bookshelves.forEach(bookshelf => {
+  bookshelfUser.Bookshelves.forEach(bookshelf => {
     bookshelf.Stories.forEach(story => {
       if (!allStories.map(s => s.id).includes(story.id)) {
         allStories.push(story)
@@ -213,7 +213,7 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
     const shelf = user.Bookshelves.filter(shelf => shelf.name === selected)[0];
     loadedStories = shelf.Stories;
   }
-  res.render('bookshelf-page', { user, loadedStories, allCount, selected })
+  res.render('bookshelf-page', { bookshelfUser, loadedStories, allCount, selected })
   // res.json({ loadedStories })
 }))
 

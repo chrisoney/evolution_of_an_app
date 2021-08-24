@@ -56,9 +56,13 @@ router.post('/', asyncHandler(async (req, res) => {
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
+  const userBookshelf = await Bookshelf.findByPk(id)
   let bookshelf = { Stories: [] };
+
+  // Here I switched req.session.auth.userId for userBookshelf.userId
+
   if (id === 0) {
-    const user = await User.findByPk(req.session.auth.userId, {
+    const user = await User.findByPk(userBookshelf.userId, {
       include: {
         model: Bookshelf,
         where: { deleteAllowed: false },
@@ -66,7 +70,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
           model: Story,
           include: [{
             model: Bookshelf,
-            where: { userId: req.session.auth.userId }
+            where: { userId: userBookshelf.userId }
           }, {
             model: Placement
           }],
@@ -81,7 +85,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
         model: Story,
         include: [{
           model: Bookshelf,
-          where: { userId: req.session.auth.userId }
+          where: { userId: userBookshelf.userId }
         }, {
           model: Placement
         }],
