@@ -56,13 +56,14 @@ router.post('/', asyncHandler(async (req, res) => {
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
+  const userId = parseInt(req.query.userId, 10);
   const userBookshelf = await Bookshelf.findByPk(id)
   let bookshelf = { Stories: [] };
 
   // Here I switched req.session.auth.userId for userBookshelf.userId
 
   if (id === 0) {
-    const user = await User.findByPk(userBookshelf.userId, {
+    const user = await User.findByPk(userId, {
       include: {
         model: Bookshelf,
         where: { deleteAllowed: false },
@@ -70,7 +71,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
           model: Story,
           include: [{
             model: Bookshelf,
-            where: { userId: userBookshelf.userId }
+            where: { userId: userId }
           }, {
             model: Placement
           }],
