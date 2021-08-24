@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler } = require('../utils');
-const { Bookshelf, Story, Placement, User } = require('../../db/models');
+const { Bookshelf, Story, Placement, User, Review } = require('../../db/models');
 
 
 router.get('/:id(\\d+)/standard', asyncHandler(async (req, res) => {
@@ -74,6 +74,8 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
             where: { userId: userId }
           }, {
             model: Placement
+          }, {
+            model: Review
           }],
         }
       }
@@ -89,6 +91,8 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
           where: { userId: userBookshelf.userId }
         }, {
           model: Placement
+        }, {
+          model: Review
         }],
       }
     });

@@ -76,13 +76,83 @@ const selectorEvent = async (e) => {
       authorDetail.className = 'story-author';
       authorDetail.innerText = story.author;
       row.appendChild(authorDetail);
-      //   //- if parseInt(mode) >= 4 // This number may change based on review completion
-      //   //-   td=story.avg_rating
-      //   //-   th=story.rating
-      // Keep these notes around for when ratings are included
+        // - if parseInt(mode) >= 4 // This number may change based on review completion
+        // -   td=story.avg_rating
+        // -   th=story.rating
+      if (parseInt(mode) > 3) {
+        const allRatings = story.Reviews.map(review => review.rating);
+        let avgRating;
+        if (allRatings.length === 0) {
+          avgRating = 0;
+        }
+        else {
+          avgRating = Math.round(allRatings.reduce((a, b) => { return a + b }, 0) / allRatings.length * 100) / 100;
+        }
+        const userId = parseInt(window.location.pathname.split('/')[2], 10);
+        const userReview = story.Reviews.filter(review => review.userId === userId && review.rating >= 0)[0]
+        const loggedIn = document.querySelector('.logged-in-user')
 
-      //   - var date = story.Placements[0].createdAt.toString().slice(4, 16)
-      //   td.story-date-added #{date.slice(0,6) + ',' + date.slice(6)}
+        // First detail
+        const avgRatingDetail = document.createElement('td');
+        avgRatingDetail.className = 'avg-rating';
+        avgRatingDetail.innerText = avgRating;
+        row.appendChild(avgRatingDetail);
+        // Second detail
+
+        const ratingsContainer = document.createElement('div')
+        ratingsContainer.className = 'ratings-container';
+        ratingsContainer.dataset.storyId = story.id;
+        const userRatingDetail = document.createElement('td');
+        userRatingDetail.className = 'user-rating-detail';
+        if (userReview && userReview.rating) {
+          let i = 0, j = userReview.rating + 1
+          while (i < userReview.rating) {
+            const starEle = document.createElement('span')
+            starEle.dataset.score = i + 1;
+            starEle.className = `fas fa-star ${userReview.userId === parseInt(loggedIn.id, 10) ? 'user-rating' : ''}`;
+            if (userReview.userId === parseInt(loggedIn.id, 10)) {
+              starEle.addEventListener('click', starClickEvent);
+              starEle.addEventListener('mouseover', starHoverEvent)
+            }
+            i++
+            ratingsContainer.appendChild(starEle)
+          }
+          while (j <= 5){
+            const starEle = document.createElement('span')
+            starEle.dataset.score = j;
+            starEle.className = `far fa-star ${userReview.userId === parseInt(loggedIn.id, 10) ? 'user-rating' : ''}`;
+            if (userReview.userId === parseInt(loggedIn.id, 10)) {
+              starEle.addEventListener('click', starClickEvent);
+              starEle.addEventListener('mouseover', starHoverEvent)
+            }
+            j++
+            ratingsContainer.appendChild(starEle)
+          }
+          ratingsContainer.dataset.currentRating = userReview.rating;
+        } else {
+          let i = 0;
+          while (i < 5) {
+            const starEle = document.createElement('span')
+            starEle.dataset.score = i + 1;
+            starEle.className = `far fa-star ${userId === parseInt(loggedIn.id, 10) ? 'user-rating' : ''}`;
+            if (userId === parseInt(loggedIn.id, 10)) {
+              starEle.addEventListener('click', starClickEvent);
+              starEle.addEventListener('mouseover', starHoverEvent)
+            }
+            i++
+            ratingsContainer.appendChild(starEle)
+          }
+          ratingsContainer.dataset.currentRating = 0;
+        }
+        if (userId === parseInt(loggedIn.id, 10)) {
+          ratingsContainer.addEventListener('mouseout', starContainerEvent);
+        }
+        userRatingDetail.appendChild(ratingsContainer);
+        row.appendChild(userRatingDetail);
+      }
+
+        // - var date = story.Placements[0].createdAt.toString().slice(4, 16)
+        // td.story-date-added #{date.slice(0,6) + ',' + date.slice(6)}
       const shelfListDetail = document.createElement('td');
       shelfListDetail.className = 'story-shelf-list';
       shelfListDetail.innerText = story.Bookshelves.map(shelf => shelf.name).join(', ');
@@ -90,8 +160,14 @@ const selectorEvent = async (e) => {
 
       // Consider taking this out tbh
       const dateReadDetail = document.createElement('td');
-      dateReadDetail.className = 'story-date-read';
-      dateReadDetail.innerText = 'Not set';
+      const readShelf = story.Bookshelves.filter(shelf => shelf.name === 'Read');
+      if (readShelf.length > 0) {
+        dateReadDetail.className = 'story-date-added';
+        dateReadDetail.innerText = readShelf[0].updatedAt.toString().slice(4, 16);
+      } else {
+        dateReadDetail.className = 'story-date-read';
+        dateReadDetail.innerText = 'Not set';
+      }
       row.appendChild(dateReadDetail);
 
       let date = new Date(story.Placements[0].createdAt).toString().slice(4, 16);

@@ -7,6 +7,7 @@ append head
   script(src="/javascripts/bookshelf_page.js" type="module" defer)
 
 block content
+  div(class='logged-in-user hidden' id=user.id)
   .page-container
     .bookshelf-header
       h3 My Stories
@@ -64,12 +65,16 @@ block content
                             span(data-score=j class=`far fa-star ${bookshelfUser.id === user.id ? 'user-rating': ''}`)
                             - j++
                       else
-                        div(class='ratings-container' data-story-id=story.id data-current-rating=rating)
+                        div(class='ratings-container' data-story-id=story.id data-current-rating=0)
                           - let i = 0
                           while i < 5
                             span(data-score=(i+1) class=`far fa-star ${bookshelfUser.id === user.id ? 'user-rating': ''}`)
                             - i++
                   td.story-shelf-list=story.Bookshelves.map(shelf => shelf.name).join(', ')
-                  td.story-date-read Not set
+                  - const readShelf = story.Bookshelves.filter(shelf => shelf.name === 'Read')
+                  if (readShelf.length > 0)
+                    td.story-date-added #{readShelf[0].updatedAt.toString().slice(4, 16)}
+                  else
+                    td.story-date-read Not set
                   - var date = story.Placements[0].createdAt.toString().slice(4, 16)
                   td.story-date-added #{date.slice(0,6) + ',' + date.slice(6)}
