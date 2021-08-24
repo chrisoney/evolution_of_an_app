@@ -1,6 +1,6 @@
 const express = require('express');
 const { asyncHandler } = require('./utils');
-const { Story, Bookshelf, Placement, Review, User } = require('../db/models')
+const { Story, Bookshelf, Placement, Review, User, Tag} = require('../db/models')
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
@@ -39,17 +39,14 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
         attributes: ['id', 'username']
       },
       required: false
+    }, {
+      model: Tag
     }]
   });
   for (let i = 0; i < bookshelves.length; i++){
     if (bookshelves[i].name === 'Want To Read') wantToReadId = bookshelves[i].id;
   }
-  return res.render('story-page',
-    {
-      story,
-      wantToReadId,
-      // userReview: story.Reviews.filter(review => review.userId === user.id)[0]
-    })
+  return res.render('story-page', { story, wantToReadId, })
   // res.json({ story })
 }))
 

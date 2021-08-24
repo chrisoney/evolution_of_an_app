@@ -22,6 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     }
     Story.belongsToMany(models.Bookshelf, columnMapping);
 
+    const columnMapping2 = {
+      through: 'TagJoin',
+      foreignKey: 'storyId',
+      otherKey: 'tagId'
+    }
+    Story.belongsToMany(models.Tag, columnMapping2);
+
   };
   return Story;
 };

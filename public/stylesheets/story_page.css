@@ -137,6 +137,38 @@
   cursor: pointer;
 }
 
+.story-tags-section {
+  display: inline-block;
+}
+.story-tags-section {
+  margin-top: 10px;
+  overflow-x:auto;
+}
+.story-tags-inner-section{
+  /* display: flex; */
+}
+
+.tag-element, .tag-toggle {
+  background-color: #3F8363;
+  color: #FFF;
+  height: 36px;
+  font-size: 14px;
+  line-height: 36px;
+  padding: 0px 12px;
+  cursor: pointer;
+  border-radius: 30px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 8px;
+  user-select: none;
+  word-break:keep-all;
+}
+
+.tag-element:hover, .tag-toggle:hover {
+  background-color: #409970;
+}
+
 .story-warnings-section {
   margin-top: 20px;
   display: flex;
@@ -381,6 +413,8 @@
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

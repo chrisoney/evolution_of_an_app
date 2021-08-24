@@ -524,3 +524,19 @@ submit_form_button.addEventListener('click', async (e) => {
     review_content.parentElement.classList.remove('hidden')
   }
 })
+
+
+// Tags
+
+const tag_toggle_button = document.querySelector('.tag-toggle');
+
+tag_toggle_button.addEventListener('click', (e) => {
+  document.querySelector('.story-tags-inner-section').classList.toggle('hidden')
+  if (e.target.classList.contains('fa-plus')) {
+    e.target.classList.remove('fa-plus')
+    e.target.classList.add('fa-minus')
+  } else {
+    e.target.classList.add('fa-plus')
+    e.target.classList.remove('fa-minus')
+  }
+})

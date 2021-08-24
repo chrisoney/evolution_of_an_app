@@ -36,6 +36,15 @@ block content
           else
             .story-description.shortened= story.description
             button(class='expand') ...more
+        if (parseInt(mode) >= 5)
+          .story-tags-section
+            each tag in story.Tags.slice(0,3)
+              .tag-element= tag.name
+            if story.Tags.length > 3
+              .tag-toggle.fas.fa-plus
+              .story-tags-inner-section.hidden
+                each tag in story.Tags.slice(3)
+                  .tag-element= tag.name
         .story-warnings-section
           if story.warnings.warnings.length === 0
             .warnings-none No Warnings
