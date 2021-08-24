@@ -1,5 +1,5 @@
 const express = require('express');
-const { asyncHandler, pageChecker } = require('./utils');
+const { asyncHandler } = require('./utils');
 const { Story, Bookshelf, Placement, Review, User } = require('../db/models')
 const router = express.Router();
 

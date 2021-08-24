@@ -571,18 +571,6 @@ module.exports = {
         ]
       },
       {
-        title: "Blue Core",
-        tags: [
-          "Action",
-          "Adventure",
-          "Fantasy",
-          "Dungeon",
-          "LitRPG",
-          "Magic",
-          "Non-Human lead"
-        ]
-      },
-      {
         title: "The Devil's Foundry",
         tags: [
           "Action",
@@ -1481,6 +1469,7 @@ module.exports = {
     for (let i = 0; i < data.length; i++){
       const storyInfo = data[i];
       const story = await Story.findOne({ where: { title: storyInfo.title } })
+      if (!story) continue;
       for (let j = 0; j < storyInfo.tags.length; j++){
         const tagInfo = storyInfo.tags[j];
         const tag = await Tag.findOne({ where: { name: tagInfo } });
