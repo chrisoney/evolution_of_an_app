@@ -55,9 +55,21 @@ block content
                   .feed-instance-top-section
                     .feed-instance-username-section
                       -const shelf = placement.Bookshelf
-                      -const action = shelf.name === 'Want To Read' ? 'wants to read' : shelf.name === 'Currently Reading' ? 'is reading' : shelf.name === 'Read' ? 'has read' : 'is breaking my app';
-                      .feed-instance-username= placement.Bookshelf.User.username
-                      | #{action}
+                      if (shelf)
+                        -const action = shelf.name === 'Want To Read' ? 'wants to read' : shelf.name === 'Currently Reading' ? 'is reading' : shelf.name === 'Read' ? 'has read' : 'is breaking my app';
+                        .feed-instance-username= placement.Bookshelf.User.username
+                        | #{action}
+                      else
+                        .feed-instance-username= placement.User.username
+                        | rated this 
+                        div(class='ratings-container' data-story-id=placement.storyId data-current-rating=placement.rating)
+                          - let i = 0, j = placement.rating + 1
+                          while i < placement.rating
+                            span(data-score=(i+1) class='fas fa-star')
+                            - i++
+                          while j <= 5
+                            span(data-score=j class='far fa-star')
+                            - j++
                     -const date = placement.updatedAt.toString().slice(4, 16)
                     .feed-instance-update-date #{date.slice(0,6) + ',' + date.slice(6)}
                   -const story = placement.Story

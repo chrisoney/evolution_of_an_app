@@ -394,6 +394,18 @@ body {
 	padding-right: 8px;
 }
 
+
+.ratings-container {
+  margin-left: 5px;
+}
+
+.fas.fa-star {
+  color: red;
+}
+.far.fa-star {
+  color: #D6D6D6;
+}
+
 .feed-instance-main-content-section {
 	display: flex;
 	padding-right: 16px;

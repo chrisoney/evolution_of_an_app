@@ -14,7 +14,6 @@ const tagsSelected = new Set();
 const preSelected = document.querySelector('.selected-tag')
 if (preSelected && preSelected.id !== '') {
   tagsSelected.add(preSelected.id)
-  console.log(tagsSelected)
 }
 
 const checkboxEvent = async (e) => {

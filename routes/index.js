@@ -48,6 +48,21 @@ router.get('/', asyncHandler(async (req, res,) => {
       }],
       limit: 10
     })
+    if (parseInt(res.locals.mode, 10) >= 4) {
+      reviews = await Review.findAll({
+        order: [['updatedAt', 'DESC']],
+        include: [Story, User],
+        limit: 10
+      })
+      feed = feed.concat(reviews)
+    }
+
+    feed = feed.sort((a, b) => {
+      if (a.dataValues.updatedAt > b.dataValues.updatedAt) return -1;
+      else return 1;
+    })
+
+    feed = feed.slice(0,10)
   } else {
     currentlyReadingUsers = await User.findAll({
       attributes: { exclude : ['hashedPassword']},

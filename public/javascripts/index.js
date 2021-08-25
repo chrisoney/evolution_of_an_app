@@ -35,8 +35,7 @@ const standardShelfEvent = async (e) => {
 
 const customShelfEvent = async (e) => {
     e.preventDefault();
-    // console.log('target', e.target)
-    // console.log('event target', e.currentTarget);
+
     let container, checkbox, shelfName;
     switch (e.target.className) {
         case 'nonstandard-shelf-container':

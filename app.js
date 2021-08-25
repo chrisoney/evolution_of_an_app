@@ -96,29 +96,29 @@ app.get('/testing', asyncHandler(async (req, res) => {
 // }))
 
 // Dark Magicks
-// app.get('/update-placements', asyncHandler(async (req, res) => {
+app.get('/update-placements', asyncHandler(async (req, res) => {
   
-//   const placementsBefore = await Placement.findAll({
-//     include: Story,
-//     order: [['updatedAt', 'DESC']],
-//     limit: 5,
-//   })
-//   const random = await Placement.findAll({
-//     order: sequelize.random(),
-//     limit: 10,
-//   })
-//   for (let i = 0; i < random.length; i++){
-//     const placement = random[i]
-//     placement.changed('updatedAt', true)
-//     await placement.save();
-//   }
-//   const placementsAfter = await Placement.findAll({
-//     include: Story,
-//     order: [['updatedAt', 'DESC']],
-//     limit: 5,
-//   })
-//   res.json({ placementsBefore, placementsAfter })
-// }))
+  const placementsBefore = await Placement.findAll({
+    include: Story,
+    order: [['updatedAt', 'DESC']],
+    limit: 5,
+  })
+  const random = await Placement.findAll({
+    order: sequelize.random(),
+    limit: 10,
+  })
+  for (let i = 0; i < random.length; i++){
+    const placement = random[i]
+    placement.changed('updatedAt', true)
+    await placement.save();
+  }
+  const placementsAfter = await Placement.findAll({
+    include: Story,
+    order: [['updatedAt', 'DESC']],
+    limit: 5,
+  })
+  res.json({ placementsBefore, placementsAfter })
+}))
 
 app.use(restoreUser)
 app.use('/api', apiRouter)
