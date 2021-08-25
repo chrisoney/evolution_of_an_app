@@ -13,7 +13,7 @@ block content
       if (parseInt(mode) >= 5)
         div(class='hidden selected-tag' id=selectedTag)
         .tag-section-reveal-container
-          .tag-section-reveal Filter by Tags
+          .tag-section-reveal #{selectedTag ? 'Close' : 'Filter by Tags'}
         div(class=`tag-section ${selectedTag ? '' : 'hidden'}`)
           for tag in tags
             .tag-container
