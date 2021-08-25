@@ -73,4 +73,24 @@ router.get('/', asyncHandler(async (req, res,) => {
   // res.json({ test: userInfo })
 }));
 
+router.get('/search', asyncHandler(async (req, res) => {
+  const term = req.query.term;
+
+  const stories = await Story.findAll({
+    where: {
+      [Op.or]: [{
+        title: {
+          [Op.iLike]: `%${term}%`
+        }
+      },
+      {
+        description: {
+          [Op.iLike]: `%${term}%`
+        }
+      }]
+    }
+  })
+  res.json({ stories })
+}))
+
 module.exports = router;
