@@ -7,51 +7,79 @@ append head
   script(src="/javascripts/search.js" type="module" defer)
 
 block content
-  .search-page-container
-    .search-page-title Search
-    form(method='GET' action='/search' class='search-page-form')
-      .search-form-top-bar
-        input(type='text' name='term' class='search-page-input' placeholder="Search by Story Title, Author, or Description")
-        button(type='submit' class='search-page-submit') Search
-      .search-page-options
-        .radio-container
-          input(type='radio' name='filter' id='all' value='all')
-          label(for='all') all
-        .radio-container
-          input(type='radio' name='filter' id='title' value='title')
-          label(for='title') title
-        .radio-container
-          input(type='radio' name='filter' id='author' value='author')
-          label(for='author') author
-        .radio-container
-          input(type='radio' name='filter' id='description' value='description')
-          label(for='description') description
-    .search-page-story-section
-      each story in stories
-        .story-container
-          .story-left
-            a(href=`/stories/${story.id}`)
-              img(src=story.imageUrl class='search-story-image')
-          .story-right
-            a(href=`/stories/${story.id}`)
-              .search-page-story-title= story.title
-            .search-page-story-author by #{story.author}
-            .search-page-review-info-section
-              -const ratings = story.Reviews.map(review => review.rating).filter(rating => rating !== null)
-              //- -const reviewContents = otherReviews.map(review => review.content).filter(content => content !== null && content !== '')
-              -const avgRating = Math.round(ratings.reduce((a,b) => {return a + b}, 0) / ratings.length * 100) / 100
-              if ratings.length === 0
-                .no-ratings No ratings yet
-              //- +ratingsSection(avgRating, story.id, false)
+  .search-page-parent-container
+    .search-page-container
+      .search-page-title Search
+      form(method='GET' action='/search' class='search-page-form')
+        .search-form-top-bar
+          input(type='text' name='term' class='search-page-input' placeholder="Search by Story Title, Author, or Description")
+          button(type='submit' class='search-page-submit') Search
+        .search-page-options
+          .radio-container
+            input(type='radio' name='filter' id='all' value='all')
+            label(for='all') all
+          .radio-container
+            input(type='radio' name='filter' id='title' value='title')
+            label(for='title') title
+          .radio-container
+            input(type='radio' name='filter' id='author' value='author')
+            label(for='author') author
+          .radio-container
+            input(type='radio' name='filter' id='description' value='description')
+            label(for='description') description
+      .search-page-story-section
+        each story in stories
+          .story-container
+            .story-left
+              a(href=`/stories/${story.id}`)
+                img(src=story.imageUrl class='search-story-image')
+            .story-right
+              a(href=`/stories/${story.id}`)
+                .search-page-story-title= story.title
+              .search-page-story-author by #{story.author}
+              .search-page-review-info-section
+                -const ratings = story.Reviews.map(review => review.rating).filter(rating => rating !== null)
+                //- -const reviewContents = otherReviews.map(review => review.content).filter(content => content !== null && content !== '')
+                -const avgRating = Math.round(ratings.reduce((a,b) => {return a + b}, 0) / ratings.length * 100) / 100
+                if ratings.length === 0
+                  .no-ratings No ratings yet
+                //- +ratingsSection(avgRating, story.id, false)
+                else
+                  div(class='ratings-container' data-story-id=story.id data-current-rating=avgRating)
+                        - let i = 0, j = avgRating + 1
+                        while i < avgRating
+                          span(data-score=(i+1) class='fas fa-star')
+                          - i++
+                        while j <= 5
+                          span(data-score=j class='far fa-star')
+                          - j++
+                | #{avgRating || 0} avg rating - #{ratings.length} ratings
+              - let shelf_name, shelf_id
+              - Object.values(currentUserBookshelfIds).forEach(shelf =>{ if (shelf.stories.includes(story.id) && shelf.standard) {shelf_name = shelf.name; shelf_id = shelf.id}})
+              if shelf_id === undefined
+                -const wtr_id = userInfo.Bookshelves.filter(shelf => shelf.name === 'Want To Read')[0].id
+                .feed-bookshelf-selector-container
+                  div(class='feed-bookshelf-wtr-button' data-story-id=story.id id=wtr_id) Want To Read
+                  div(class='feed-modal-container')
+                    i(class='feed-modal-button fas fa-chevron-down')
+                    .feed-modal
+                      each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
+                        div(class='standard-shelf' data-story-id=story.id id=shelf.id)= shelf.name
+                      each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
+                        div(class='nonstandard-shelf-container' data-story-id=story.id id=shelf.id)
+                          input(type='checkbox' class='nonstandard-shelf-checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
+                          div(class='standard-shelf' id=shelf.id)= shelf.name
               else
-                div(class='ratings-container' data-story-id=story.id data-current-rating=avgRating)
-                      - let i = 0, j = avgRating + 1
-                      while i < avgRating
-                        span(data-score=(i+1) class='fas fa-star')
-                        - i++
-                      while j <= 5
-                        span(data-score=j class='far fa-star')
-                        - j++
-              | #{avgRating} avg rating - #{ratings.length} ratings
-
-      
+                .feed-bookshelf-selector-container
+                  div(class='feed-bookshelf-selected' id=shelf_id)
+                    i.fas.fa-check.feed-check
+                    .feed-bookshelf-selected-name #{shelf_name}
+                  div(class='feed-modal-container')
+                    i(class='feed-modal-button fas fa-chevron-down')
+                    .feed-modal
+                      each shelf in userInfo.Bookshelves.filter(shelf => !shelf.deleteAllowed)
+                        div(class='standard-shelf' data-story-id=story.id id=shelf.id)= shelf.name
+                      each shelf in userInfo.Bookshelves.filter(shelf => shelf.deleteAllowed)
+                        div(class='nonstandard-shelf-container' data-story-id=story.id id=shelf.id)
+                          input(type='checkbox' checked=shelf.Stories.map(story => story.id).includes(story.id))
+                          div(class='standard-shelf' id=shelf.id)= shelf.name

@@ -48,7 +48,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
     }
 
     // Otherwise display an error message to the user.
-    errors.push('Login failed for the provided email address and password');
+    errors.push('Login failed for the provided username and password');
   } else {
     errors = validatorErrors.array().map((error) => error.msg);
   }
@@ -119,6 +119,13 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
     await user.save();
+    const choices = ['Read', 'Currently Reading', 'Want To Read']
+
+    for (let i = 0; i < choices.length; i++){
+      const name = choices[i];
+      await Bookshelf.create({ name, userId: user.id, deleteAllowed: false })
+    }
+
     loginUser(req, res, user);
     return req.session.save(err => {
       if (err) next(err)
@@ -166,7 +173,7 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
 
 router.post('/logout', asyncHandler(async(req, res, next) => {
   const user = await User.findByPk(req.session.auth.userId)
-  await user.destroy();
+  if(user.demo) await user.destroy();
   logoutUser(req, res);
   req.session.save(err => {
     if (err) {

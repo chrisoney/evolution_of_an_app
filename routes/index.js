@@ -124,7 +124,23 @@ router.get('/search', requireAuth, asyncHandler(async (req, res) => {
       ]
     })
   }
-  res.render('search-page', { stories })
+  let currentUserBookshelfIds = {}
+  const userInfo = await User.findByPk(req.session.auth.userId, {
+    attributes: { exclude : ['hashedPassword']},
+    include: {
+      model: Bookshelf,
+      include: Story
+    }
+  })
+  for (let x = 0; x < Object.values(userInfo.Bookshelves).length; x++){
+    const shelf = Object.values(userInfo.Bookshelves)[x];
+    for (let y = 0; y < Object.values(shelf.Stories).length; y++){
+      const story = Object.values(shelf.Stories)[y];
+      if (!currentUserBookshelfIds[shelf.name]) currentUserBookshelfIds[shelf.name] = { id: shelf.id, name: shelf.name, standard: !shelf.deleteAllowed, stories: []};
+      currentUserBookshelfIds[shelf.name].stories.push(story.id)
+    }
+  }
+  res.render('search-page', { stories, userInfo, currentUserBookshelfIds})
 }))
 
 module.exports = router;
