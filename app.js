@@ -95,9 +95,10 @@ app.get('/testing', asyncHandler(async (req, res) => {
 //   res.json({ user })
 // }))
 
+app.use(restoreUser)
 // Dark Magicks
-app.get('/update-placements', asyncHandler(async (req, res) => {
-  
+app.get('/update-placements', asyncHandler(async (req, res, next) => {
+  if (req.session.auth.userId !== 17) next();
   const placementsBefore = await Placement.findAll({
     include: Story,
     order: [['updatedAt', 'DESC']],
@@ -120,7 +121,6 @@ app.get('/update-placements', asyncHandler(async (req, res) => {
   res.json({ placementsBefore, placementsAfter })
 }))
 
-app.use(restoreUser)
 app.use('/api', apiRouter)
 app.use(pageChecker)
 app.use('/', indexRouter);
@@ -131,7 +131,7 @@ app.use('/stories', storiesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  res.render('page-not-found')
 });
 
 // error handler

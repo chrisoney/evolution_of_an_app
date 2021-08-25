@@ -1,0 +1,13 @@
+extends layout.pug
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/page_not_found.css")
+  //- add page specific js
+block content
+  .background-container.four-oh-four
+    .info-container
+      .top-section
+        .pnf-title This page doesn't exist.
+        .pnf-description Which means you've found yourself off the beaten path
+      .mid-section
+        .pnf-mode-description Please navigate to an existing page to continue using the app, and have a wonderful day!
