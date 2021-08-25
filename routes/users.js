@@ -217,7 +217,7 @@ router.get('/:id(\\d+)/bookshelves', requireAuth, asyncHandler(async (req, res) 
   if (selected === '') {
     loadedStories = allStories;
   } else {
-    const shelf = user.Bookshelves.filter(shelf => shelf.name === selected)[0];
+    const shelf = bookshelfUser.Bookshelves.filter(shelf => shelf.name === selected)[0];
     loadedStories = shelf.Stories;
   }
   res.render('bookshelf-page', { bookshelfUser, loadedStories, allCount, selected })

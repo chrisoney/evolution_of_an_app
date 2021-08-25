@@ -32,7 +32,9 @@ block content
               td(class='delete-shelf-container')
                 i(class=`fas fa-times delete-shelf ${shelf.deleteAllowed ? 'allow' : ''}` id=shelf.id)
               td(class='shelf-name')
-                div=shelf.name
+                -const queryVar = shelf.name.split(' ').join('-');
+                a(href=`/users/${user.id}/bookshelves?selected=${queryVar}` class="shelf-link")
+                  div=shelf.name
                 div(class='shelf-name-update-container hidden')
                   input(type='text' class='shelf-name-update-input' value=shelf.name)
                   button(class='shelf-name-update-submit' id=shelf.id) Save

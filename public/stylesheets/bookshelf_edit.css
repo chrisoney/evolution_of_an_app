@@ -114,6 +114,10 @@
   cursor: pointer;
 }
 
+.shelf-link {
+  text-decoration: none;
+}
+
 .shelf-name{
   vertical-align: middle;
   width: 390px;
