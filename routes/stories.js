@@ -1,12 +1,26 @@
 const express = require('express');
 const { asyncHandler } = require('./utils');
-const { Story, Bookshelf, Placement, Review, User, Tag} = require('../db/models')
+const { Story, Bookshelf, Placement, Review, User, Tag } = require('../db/models')
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
-  const stories = await Story.findAll({
-    order: [['title']],
-  });
+  const tag = req.query.selectedTag;
+  let stories;
+  if (tag) {
+    stories = await Story.findAll({
+      order: [['title']],
+      include: {
+        model: Tag,
+        where: {
+          name: tag
+        }
+      }
+    });
+  } else {
+    stories = await Story.findAll({
+      order: [['title']],
+    });
+  }
 
   const newStories = await Story.findAll({
     include: {
@@ -16,8 +30,10 @@ router.get('/', asyncHandler(async (req, res) => {
     limit: 15,
   })
 
-  // res.json({newStories})
-  res.render('story-browse', { stories, newStories })
+  const tags = await Tag.findAll();
+
+  // res.json({stories})
+  res.render('story-browse', { stories, newStories, tags })
 }))
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {

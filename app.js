@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const cron = require('node-cron')
 const moment = require('moment')
 const logger = require('morgan');
-const { sequelize, User, Bookshelf, Placement, Story } = require('./db/models');
+const { sequelize, User, Bookshelf, Placement, Story, Review } = require('./db/models');
 const { Op } = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -73,6 +73,23 @@ app.get('/testing', asyncHandler(async (req, res) => {
   })
   res.json({ stories })
 }))
+
+// Sample routes for teaching students how the nesting works
+
+// app.get('/example', asyncHandler(async (req, res) => {
+//   const user = await Story.findByPk(3, {
+//     include:
+//     {
+//       model: Review,
+//       include: {
+//         attributes: ['hashedPassword'],
+//         model: User
+//       }
+//     },
+//     // User
+//   })
+//   res.json({ user })
+// }))
 
 // Dark Magicks
 // app.get('/update-placements', asyncHandler(async (req, res) => {

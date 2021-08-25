@@ -4,12 +4,20 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/story_browse.css")
   //- add page specific js
-  //- script(src="/javascripts/story_browse.js" type="module" defer)
+  script(src="/javascripts/story_browse.js" type="module" defer)
 
 block content
   .main-content
     .main-content-left
       h1.story-browse-title Browse Stories
+      if (parseInt(mode) >= 5)
+        .tag-section-reveal-container
+          .tag-section-reveal Filter by Tags
+        .tag-section.hidden
+          for tag in tags
+            .tag-container
+              input(class='tag-checkbox' type='checkbox')
+              .tag-name= tag.name
       .left-story-container
         each story in stories
           a(href=`/stories/${story.id}`)

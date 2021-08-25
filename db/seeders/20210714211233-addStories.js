@@ -459,7 +459,7 @@ module.exports = {
            description:"When a new dungeon is born, it wants nothing more than to have the most vicious monsters, the most cunning traps and the most shiny of loot. There is only one problem, but it's a rather big one; it finished its first floor years ago, but it still hasn't been visited by any adventurers! In order to find someone or something to explore its floors, or perhaps just to find someone to talk to, this dungeon will have to go way off script. But it soon discovers that going off script brings problems of its own, and that adventurers are not the only thing this world is missing.\nA shortish story about a dungeon's journey of exploration and self-discovery in a devastated world. Cover made (poorly) with POV-Ray.\nPrequel to An Unbound Soul\nPublished here, scribblehub and amazon. Join the discord at https://discord.gg/ZxmZWhTm4e",
            pageCount:213,
            linkUrl:"https://www.royalroad.com/fiction/37231",
-           imageUrl:"https://royalroadcdn.com/public/covers-full/a-lonely-dungeon-aaaac9ysta4.jpg?time=1604216228",
+           imageUrl: "https://www.royalroadcdn.com/public/covers-full/a-lonely-dungeon-aaaac9ysta4.jpg?time=1604216228",
            warnings: JSON.stringify({ warnings: []}),
            status:"COMPLETED"
         },
@@ -969,7 +969,7 @@ module.exports = {
            description:"The world is a wide, wide place. And that's without taking into account the many creatures that inhabit it. When a new Dungeon Core is born deep below the surface, it faces challenge after challenge. The only question is; is it up to the challenge of living in this world?\n\nThis is my first attempt at writing a Dungeon Core story. I'll gladly take any and all advice, comments, or criticism. \n\nReleases on Tuesdays and Fridays. Mostly.",
            pageCount:256,
            linkUrl:"https://www.royalroad.com/fiction/40503",
-           imageUrl:"https://www.royalroad.com/fiction/40503/the-obsidian-core",
+           imageUrl:"https://www.royalroadcdn.com/public/covers-full/the-obsidian-core-aabazyampq8.jpg?time=1613408482",
            warnings: JSON.stringify({ warnings: ['Gore','Profanity','Traumatising content']}),
            status:"HIATUS"
         },
