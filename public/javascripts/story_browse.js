@@ -11,6 +11,12 @@ if (tag_section_reveal_button) {
 }
 const tagsSelected = new Set();
 
+const preSelected = document.querySelector('.selected-tag')
+if (preSelected && preSelected.id !== '') {
+  tagsSelected.add(preSelected.id)
+  console.log(tagsSelected)
+}
+
 const checkboxEvent = async (e) => {
   // e.preventDefault()
   const ele = e.currentTarget;

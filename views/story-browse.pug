@@ -11,12 +11,13 @@ block content
     .main-content-left
       h1.story-browse-title Browse Stories
       if (parseInt(mode) >= 5)
+        div(class='hidden selected-tag' id=selectedTag)
         .tag-section-reveal-container
           .tag-section-reveal Filter by Tags
-        .tag-section.hidden
+        div(class=`tag-section ${selectedTag ? '' : 'hidden'}`)
           for tag in tags
             .tag-container
-              input(class='tag-checkbox' type='checkbox')
+              input(class='tag-checkbox' type='checkbox' checked=(selectedTag === tag.name))
               .tag-name= tag.name
       .left-story-container
         each story in stories

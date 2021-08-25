@@ -39,12 +39,14 @@ block content
         if (parseInt(mode) >= 5)
           .story-tags-section
             each tag in story.Tags.slice(0,3)
-              .tag-element= tag.name
+              a(href=`/stories?selectedTag=${tag.name}`)
+                .tag-element= tag.name
             if story.Tags.length > 3
               .tag-toggle.fas.fa-plus
               .story-tags-inner-section.hidden
                 each tag in story.Tags.slice(3)
-                  .tag-element= tag.name
+                  a(href=`/stories?selectedTag=${tag.name}`)
+                    .tag-element= tag.name
         .story-warnings-section
           if story.warnings.warnings.length === 0
             .warnings-none No Warnings

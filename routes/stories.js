@@ -4,15 +4,15 @@ const { Story, Bookshelf, Placement, Review, User, Tag } = require('../db/models
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
-  const tag = req.query.selectedTag;
+  const selectedTag = req.query.selectedTag;
   let stories;
-  if (tag) {
+  if (selectedTag) {
     stories = await Story.findAll({
       order: [['title']],
       include: {
         model: Tag,
         where: {
-          name: tag
+          name: selectedTag
         }
       }
     });
@@ -33,7 +33,7 @@ router.get('/', asyncHandler(async (req, res) => {
   const tags = await Tag.findAll();
 
   // res.json({stories})
-  res.render('story-browse', { stories, newStories, tags })
+  res.render('story-browse', { stories, newStories, tags, selectedTag })
 }))
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
