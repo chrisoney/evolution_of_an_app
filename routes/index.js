@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { User, Bookshelf, Story, Placement, Sequelize, sequelize } = require('../db/models');
+const {
+  User,
+  Bookshelf,
+  Story,
+  Placement,
+  Review,
+  Sequelize } = require('../db/models');
 const { Op } = Sequelize;
-const { asyncHandler } = require('./utils')
+const { asyncHandler } = require('./utils');
+const { requireAuth } = require('../auth');
 
 
 /* GET home page. */
@@ -73,9 +80,8 @@ router.get('/', asyncHandler(async (req, res,) => {
   // res.json({ test: userInfo })
 }));
 
-router.get('/search', asyncHandler(async (req, res) => {
+router.get('/search', requireAuth, asyncHandler(async (req, res) => {
   const term = req.query.term;
-
   const stories = await Story.findAll({
     where: {
       [Op.or]: [{
@@ -88,9 +94,14 @@ router.get('/search', asyncHandler(async (req, res) => {
           [Op.iLike]: `%${term}%`
         }
       }]
-    }
+    },
+    include: [
+      Review,
+      Bookshelf
+
+    ]
   })
-  res.json({ stories })
+  res.render('search-page', { stories })
 }))
 
 module.exports = router;

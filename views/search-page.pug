@@ -1,0 +1,6 @@
+extends layout.pug
+
+block content
+  form(method='GET' action='/search')
+    input(type='text' name='term')
+    button(type='submit') Submit Search
