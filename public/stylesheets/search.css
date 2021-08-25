@@ -1,0 +1,153 @@
+.search-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 625px;
+  margin-top: 20px;
+  margin-bottom: 90px;
+  margin-left: 10px;
+}
+
+.search-page-title {
+  color: #382110;
+  font-size: 20px;
+  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 24px;
+}
+
+.search-page-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #EEE;
+  padding: 10px 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.search-form-top-bar {
+  color: #333333;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  display: flex;
+  height: 32px;
+  width: 100%;
+}
+
+.search-page-input, .search-page-submit {
+  border: none;
+  background-color: transparent;
+}
+
+.search-page-input {
+  flex: 1;
+  padding: 4px 8px;
+  background: #FFFFFF;
+  border-radius: 3px;
+  border: #DCD6CC 1px solid;
+  color: #333333;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  resize: none;
+}
+
+.search-page-submit {
+  border-radius: 3px;
+  border: 1px solid #D6D0C4;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 14px;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  background-color: #F4F1EA;
+  line-height: 1;
+  padding: 8px 12px;
+  margin-left: 5px;
+}
+
+.search-page-options {
+  display: flex;
+  margin-top: 10px;
+}
+
+.radio-container {
+  font-size: 12px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.search-page-story-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.story-container {
+  display: flex;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+.search-story-image {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.story-right {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+.search-page-story-title {
+  color: #333333;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.3;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search-page-story-title:hover {
+  text-decoration: underline;
+}
+
+.search-page-story-author {
+  font-size: 12px;
+  line-height: 150%;
+  color: #333;
+  font-family: "Merriweather", "Georgia", serif;
+}
+
+.search-page-review-info-section {
+  display: flex;
+  color: #999999;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+/* Rating section */
+
+.ratings-container {
+  display: flex;
+  margin-right: 5px;
+}
+
+.fas.fa-star {
+  color: red;
+}
+.far.fa-star {
+  color: #D6D6D6;
+}

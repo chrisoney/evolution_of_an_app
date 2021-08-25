@@ -13,7 +13,7 @@ body {
 .stage-button-container {
   position: fixed;
   top: 50%;
-  left: -120px;
+  left: -135px;
   transform: translateY(-50%);
   z-index: 5;
 }
@@ -33,12 +33,12 @@ body {
     left: 0;
   }
   100% {
-    left: -120px;
+    left: -135px;
   }
 }
 @keyframes slide-out-effect {
   0% {
-    left: -120px;
+    left: -135px;
   }
   100% {
     left: 0;
@@ -331,7 +331,9 @@ body {
   border: #DCD6CC 1px solid;
   color: #333333;
   font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-
+  display: flex;
+  height: 32px;
+  width: 70%;
 }
 
 .search-input, .search-submit {
@@ -340,10 +342,12 @@ body {
 }
 
 .search-input {
-
+  flex: 1;
+  padding: 4px 8px;
 }
 
 .search-submit {
   cursor: pointer;
-
+  color: #999;
+  font-size: 16px;
 }

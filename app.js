@@ -67,9 +67,13 @@ cron.schedule('0 0 12 * * *', async () => {
 })
 
 app.get('/testing', asyncHandler(async (req, res) => {
+  const i = 'title';
   const stories = await Story.findAll({
-    order: [['id', 'DESC']],
-    limit: 1
+    where: {
+      [i]: {
+        [Op.iLike]: '%healer%'
+      }
+    }
   })
   res.json({ stories })
 }))

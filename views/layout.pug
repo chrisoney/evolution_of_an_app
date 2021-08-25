@@ -31,8 +31,8 @@ html
             img(src='/images/logo.png' class="nav-logo")
         if parseInt(mode) >= 6
           form(method='GET' action='/search' class='search-form')
-            input(type='text' name='term' class='search-input')
-            button(type='submit' class='search-submit fas fa-search' placeholder="Search Stories")
+            input(type='text' name='term' class='search-input' placeholder="Search Stories")
+            button(type='submit' class='search-submit fas fa-search')
         .nav-icon-container
           div(class="icon-background")
             i(class="fas fa-book-reader nav-right-icon user-dropdown-button")

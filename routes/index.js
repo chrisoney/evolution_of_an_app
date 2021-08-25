@@ -83,25 +83,47 @@ router.get('/', asyncHandler(async (req, res,) => {
 
 router.get('/search', requireAuth, asyncHandler(async (req, res) => {
   const term = req.query.term;
-  const stories = await Story.findAll({
-    where: {
-      [Op.or]: [{
-        title: {
+  const filter = req.query.filter;
+  let stories;
+  if (filter === 'all' || filter === undefined) {
+    stories = await Story.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${term}%`
+            }
+          },
+          {
+            author: {
+              [Op.iLike]: `%${term}%`
+            }
+          },
+          {
+            description: {
+              [Op.iLike]: `%${term}%`
+            }
+          }
+        ]
+      },
+      include: [
+        Review,
+        Bookshelf
+      ]
+    })
+  } else {
+    stories = await Story.findAll({
+      where: {
+        [filter]: {
           [Op.iLike]: `%${term}%`
         }
       },
-      {
-        description: {
-          [Op.iLike]: `%${term}%`
-        }
-      }]
-    },
-    include: [
-      Review,
-      Bookshelf
-
-    ]
-  })
+      include: [
+        Review,
+        Bookshelf
+      ]
+    })
+  }
   res.render('search-page', { stories })
 }))
 
