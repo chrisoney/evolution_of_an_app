@@ -22,7 +22,7 @@ block content
       .left-story-container
         each story in stories
           a(href=`/stories/${story.id}`)
-            img(src=story.imageUrl class='story-browse-image')
+            img(src=story.imageUrl class='story-browse-image' title=story.title)
     .main-content-right
       h2.story-browse-title Recently Popular Stories
         .right-story-container

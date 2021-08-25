@@ -44,6 +44,7 @@ const checkboxEvent = async (e) => {
     const imgEle = document.createElement('img');
     imgEle.src = story.imageUrl;
     imgEle.className = 'story-browse-image';
+    imgEle.title = story.title;
     linkEle.appendChild(imgEle);
     storyContainer.appendChild(linkEle);
   }
