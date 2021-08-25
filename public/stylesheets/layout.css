@@ -322,3 +322,28 @@ body {
     top: -100%;
   }
 }
+
+/* Search Styling */
+
+.search-form {
+  background: #FFFFFF;
+  border-radius: 3px;
+  border: #DCD6CC 1px solid;
+  color: #333333;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+
+}
+
+.search-input, .search-submit {
+  border: none;
+  background-color: transparent;
+}
+
+.search-input {
+
+}
+
+.search-submit {
+  cursor: pointer;
+
+}

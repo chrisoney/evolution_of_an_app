@@ -6,6 +6,7 @@ const {
   Story,
   Placement,
   Review,
+  sequelize,
   Sequelize } = require('../db/models');
 const { Op } = Sequelize;
 const { asyncHandler } = require('./utils');

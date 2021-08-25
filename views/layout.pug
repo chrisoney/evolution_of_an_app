@@ -29,6 +29,10 @@ html
         .nav-logo-container
           a(href='/' class="nav-logo-link")
             img(src='/images/logo.png' class="nav-logo")
+        if parseInt(mode) >= 6
+          form(method='GET' action='/search' class='search-form')
+            input(type='text' name='term' class='search-input')
+            button(type='submit' class='search-submit fas fa-search' placeholder="Search Stories")
         .nav-icon-container
           div(class="icon-background")
             i(class="fas fa-book-reader nav-right-icon user-dropdown-button")
