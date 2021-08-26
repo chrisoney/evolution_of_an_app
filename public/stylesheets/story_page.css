@@ -144,9 +144,6 @@
   margin-top: 10px;
   overflow-x:auto;
 }
-.story-tags-inner-section{
-  /* display: flex; */
-}
 
 .tag-element, .tag-toggle {
   background-color: #3F8363;
