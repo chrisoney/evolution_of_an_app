@@ -14,7 +14,8 @@ block content
     .page-content
       .sidebar
         h6 Bookshelves
-          a(href='/bookshelves/edit' class='bookshelf-edit-link') (edit)
+          if bookshelfUser.id === user.id
+            a(href='/bookshelves/edit' class='bookshelf-edit-link') (edit)
         div(class='bookshelves-container')
           div(class=`bookshelf-selector ${selected === '' ? 'selected' : ''}` id=0 data-user-id=bookshelfUser.id) All 
             if parseInt(mode) >= 3

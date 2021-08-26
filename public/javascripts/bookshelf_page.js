@@ -163,7 +163,11 @@ const selectorEvent = async (e) => {
       const readShelf = story.Bookshelves.filter(shelf => shelf.name === 'Read');
       if (readShelf.length > 0) {
         dateReadDetail.className = 'story-date-added';
-        dateReadDetail.innerText = readShelf[0].updatedAt.toString().slice(4, 16);
+        // dateReadDetail.innerText = readShelf[0].updatedAt.toString().slice(4, 16);
+        const date = readShelf[0].updatedAt
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        dateReadDetail.innerText = new Date(readShelf[0].updatedAt).toString().slice(4, 16)
+        // console.log(new Date(readShelf[0].updatedAt))
       } else {
         dateReadDetail.className = 'story-date-read';
         dateReadDetail.innerText = 'Not set';
