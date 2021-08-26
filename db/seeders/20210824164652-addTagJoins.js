@@ -925,21 +925,6 @@ module.exports = {
         ]
       },
       {
-        title: "Everybody Loves Large Chests",
-        tags: [
-          "Adventure",
-          "Comedy",
-          "Fantasy",
-          "Satire",
-          "Anti-Hero Lead",
-          "Harem",
-          "LitRPG",
-          "Magic",
-          "Non-Human lead",
-          "Secret Identity"
-        ]
-      },
-      {
         title: "First Contact",
         tags: [
           "Action",
@@ -1435,20 +1420,6 @@ module.exports = {
           "Portal Fantasy / Isekai",
           "Slice of Life",
           "Super Heroes"
-        ]
-      },
-      {
-        title: "Soulshard: Willbender",
-        tags: [
-          "Fantasy",
-          "Sci-fi",
-          "Anti-Hero Lead",
-          "Harem",
-          "LitRPG",
-          "Magic",
-          "Male Lead",
-          "Reincarnation",
-          "Virtual Reality"
         ]
       },
       {

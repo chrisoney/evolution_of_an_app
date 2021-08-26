@@ -644,16 +644,6 @@ module.exports = {
            status:"ONGOING"
         },
         {
-           title:"Everybody Loves Large Chests",
-           author:"Exterminatus",
-           description:"Everybody Loves Large Chests is now available on Amazon and Audible! Featuring lots of editorial love and a more enjoyable reading/listening experience!\nLarge chests are said to encompass all manner of hopes and dreams. Men covet them. Women envy them. But one fact holds true - everyone wants to get their hands on some big ones.\nThe same holds true for one intrepid adventurer - a strapping young lad by the name of Himmel. Armed with his grandfather's trusty longsword and the dream of being the strongest, he sets out on the journey of a lifetime! It is sure to be a long and dangerous road, fraught with danger! And it all starts with a simple test - reach Level 5 in the dungeon called the 'newbie zone' and earn the right to become a full-fledged adventurer!\nHowever, such things get hopelessly derailed when his adolescent mind beholds an exposed chest for the first time. A fateful meeting that would inevitably lead his life in a direction he never even dreamed of!\nThis fiction is written, maintained and owned by Neven Iliev. It is also a participant of the WriTEr's pledge.",
-           pageCount:5765,
-           linkUrl:"https://www.royalroad.com/fiction/8894",
-           imageUrl:"https://www.royalroadcdn.com/public/covers-full/8894-everybody-loves-large-chests.jpg",
-           warnings: JSON.stringify({ warnings: ['Gore','Profanity','Sexual Content']}),
-           status:"COMPLETED"
-        },
-        {
            title:"First Contact",
            author:"Ralts Bloodthorne",
            description:"Eight Thousand Years after the Glassing of Earth, Terran Descent Humanity has largely become a post-scarcity society based on consent and enjoying life. With the discovery of another ancient race beyond the \"Great Gulf\", events and history collide to draw the Terran Confederacy into war against an hundred million year old empire that has always won and believes it always will. With allies and enemies of multiple species, the Orion Galactic Arm Spur will be wracked by warfare the likes of which have not been seen. Cracked, harried, wounded, and damaged, Terran Descent Humanity willfully throws itself against the universe itself.\n\"The universe hates you and will take away everything you love, laughing while it does so.\" - Terran belief.\nA wiki is available (although under construction) at: https://fcgestalt.fandom.com/wiki/First_Contact_Gestalt_Archive_Wiki\nTold largely from the viewpoint of other species, the story is currently ongoing. It involves graphic depictions of violence, war, adult language and situations, drug use, and other mature topics.\nThe story will be updated on weekdays, so keep an eye on this page for more chapters.\nThe story is 400+ chapters, and repeating characters do not start appearing until the Vuxten chapters. If you're in a hurry for repeating characters then this story will not be enjoyable to you. The interwoven plot is not based on a single person but the entire war, with its effects upon multiple people.\n[participant in the Royal Road Writathon challenge]",
@@ -982,16 +972,6 @@ module.exports = {
            imageUrl:"https://www.royalroadcdn.com/public/covers-full/20101-the-law-of-averages.jpg",
            warnings: JSON.stringify({ warnings: ['Profanity']}),
            status:"ONGOING"
-        },
-        {
-           title:"Soulshard: Willbender",
-           author:"pyrowind",
-           description:"Real Fantasy Online. The flagship product for the latest generation neural-interface headset. Touting: \"The Best NPC AIs\", \"Better than Life Realism\" and \"Total Immersion\", RFO promises to be a virtual world like no other. But when the line between one's real self and one's digital identity becomes blurred, and the \"Gods\" have their own agenda, who is the player, and which is the game?\n \nMarcus has played any number of VR games, beta-tested dangerous and unstable systems and lived to tell the tale. He even has a certain amount of fame and influence within...certain circles. He usually disdains the idea of pre-orders and their respective \"perks\" as blatent commerical exploitation, but this time the bonus is too tempting to pass up. The ability to craft your character's backstory and have it integrated into the game's lore is enough for him to sign up for the Early Access program. He isn't interested in being all-powerful. Frankly, he's been there and done that enough to be bored of the whole thing. Instead, he opts to make a character purely for the purpose of having fun. Things aren't quite what they seem however, and his \"backstory\" and character class have implications he never would have imagined.\n \nAuthor Note: First time posting a story online, and I'd appreciate any feedback. Updates may be slow, as each \"chapter\" will likely be in the 10,000 word range and I tend to revise several times before being (tentatively) satisfied. If people seem to like this I'll try to establish a regular post schedule.",
-           pageCount:321,
-           linkUrl:"https://www.royalroad.com/fiction/12088",
-           imageUrl:"/images/royal.jpg",
-           warnings: JSON.stringify({ warnings: ['Gore','Profanity','Sexual Content','Traumatising content']}),
-           status:"HIATUS"
         },
         {
            title:"The Scourged Earth",

@@ -72,7 +72,7 @@ if (newUser === 'true') {
   
   const mode_description = document.createElement('div');
   mode_description.className = 'pnf-mode-description';
-  mode_description.innerText = 'You can click the sandwich button on the left hand side of the page to reveal the different iterations of this app. You can click the names of the iterations to see what a page looks like at that stage of development. \n\n Sometimes the page would not have existed at that stage, so you will need to switch back to a later iteration to continue navigating through the site. You can also drag the button up and down to move it out of the way if it overlaps with a feature. \n\n If you click the demo user button on the login or signup pages, a new user will be generated for you. It will either be destroyed when you log out or after approximately one week.'
+  mode_description.innerText = 'You can click the sandwich button on the left hand side of the page to reveal the different iterations of this app. You can click the names of the iterations to see what a page looks like at that stage of development. \n\n Sometimes the page would not have existed at that stage, so you will need to switch back to a later iteration to continue navigating through the site. You can also drag the button up and down to move it out of the way if it overlaps with a feature. \n\n If you click the demo user button on the login or signup pages, a new user will be generated for you. It will either be destroyed when you log out or after approximately one week. \n\n This app was built with an express backend and Pug templates.'
   mid_section.appendChild(mode_description);
 
   info_container.appendChild(mid_section);
