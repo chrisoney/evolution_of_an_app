@@ -50,6 +50,7 @@ store.sync();
 
 cron.schedule('0 0 12 * * *', async () => {
   try {
+    // Old users
     const users = await User.findAll({
       where: {
         createdAt: {
@@ -61,13 +62,22 @@ cron.schedule('0 0 12 * * *', async () => {
     for (let i = 0; i < users.length; i++){
       await users[i].destroy()
     }
+    // Bringing random placements to the forefront of the social feed
+    const random = await Placement.findAll({
+      order: sequelize.random(),
+      limit: 10,
+    })
+    for (let i = 0; i < random.length; i++){
+      const placement = random[i]
+      placement.changed('updatedAt', true)
+      await placement.save();
+    }
   } catch(err) {
     console.log(err)
   }
 })
 
 app.get('/testing', asyncHandler(async (req, res) => {
-  const i = 'title';
   const stories = await Story.findAll({
     where: {
       [i]: {
@@ -97,29 +107,29 @@ app.get('/testing', asyncHandler(async (req, res) => {
 
 app.use(restoreUser)
 // Dark Magicks
-app.get('/update-placements', asyncHandler(async (req, res, next) => {
-  if (req.session.auth.userId !== 17) next();
-  const placementsBefore = await Placement.findAll({
-    include: Story,
-    order: [['updatedAt', 'DESC']],
-    limit: 5,
-  })
-  const random = await Placement.findAll({
-    order: sequelize.random(),
-    limit: 10,
-  })
-  for (let i = 0; i < random.length; i++){
-    const placement = random[i]
-    placement.changed('updatedAt', true)
-    await placement.save();
-  }
-  const placementsAfter = await Placement.findAll({
-    include: Story,
-    order: [['updatedAt', 'DESC']],
-    limit: 5,
-  })
-  res.json({ placementsBefore, placementsAfter })
-}))
+// app.get('/update-placements', asyncHandler(async (req, res, next) => {
+//   if (req.session.auth.userId !== 17) next();
+//   const placementsBefore = await Placement.findAll({
+//     include: Story,
+//     order: [['updatedAt', 'DESC']],
+//     limit: 5,
+//   })
+//   const random = await Placement.findAll({
+//     order: sequelize.random(),
+//     limit: 10,
+//   })
+//   for (let i = 0; i < random.length; i++){
+//     const placement = random[i]
+//     placement.changed('updatedAt', true)
+//     await placement.save();
+//   }
+//   const placementsAfter = await Placement.findAll({
+//     include: Story,
+//     order: [['updatedAt', 'DESC']],
+//     limit: 5,
+//   })
+//   res.json({ placementsBefore, placementsAfter })
+// }))
 
 app.use('/api', apiRouter)
 app.use(pageChecker)

@@ -8,6 +8,8 @@ html
         script(src="/javascripts/layout.js" type="module" defer)
         link(rel='stylesheet' href='/stylesheets/layout.css')
         link(rel="stylesheet" href="/stylesheets/page_not_made.css")
+        if parseInt(mode) > 0
+          link(rel="shortcut icon" href="favicon2.ico" type="image/x-icon")
   body(class=mode)
     div(class="mode-container" id=mode data-new-user=newUser)
     div(class="modal-section hidden")
