@@ -382,11 +382,19 @@ body {
 	color: #333333;
 	line-height: 1.5;
 }
+.username-link {
+	text-decoration: none;
+}
 
 .feed-instance-username {
 	font-weight: bold;
 	margin-right: 5px;
 }
+
+.feed-instance-username:hover {
+	text-decoration: underline;
+}
+
 
 .feed-instance-update-date {
 	font-size: 12px;

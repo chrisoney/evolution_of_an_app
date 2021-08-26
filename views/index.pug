@@ -57,11 +57,13 @@ block content
                       -const shelf = placement.Bookshelf
                       if (shelf)
                         -const action = shelf.name === 'Want To Read' ? 'wants to read' : shelf.name === 'Currently Reading' ? 'is reading' : shelf.name === 'Read' ? 'has read' : 'is breaking my app';
-                        .feed-instance-username= placement.Bookshelf.User.username
-                        | #{action}
+                        a(href=`/users/${placement.Bookshelf.User.id}/bookshelves` class='username-link')
+                          .feed-instance-username= placement.Bookshelf.User.username
+                        .feed-action= action
                       else
-                        .feed-instance-username= placement.User.username
-                        | rated this 
+                        a(href=`/users/${placement.User.id}/bookshelves`)
+                          .feed-instance-username= placement.User.username
+                        .feed-action rated this
                         div(class='ratings-container' data-story-id=placement.storyId data-current-rating=placement.rating)
                           - let i = 0, j = placement.rating + 1
                           while i < placement.rating

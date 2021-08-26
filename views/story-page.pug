@@ -141,8 +141,9 @@ block content
                 .review-container
                   .review-header
                     .review-header-left
-                      .review-username= review.User.username
-                      | rated it
+                      a(href=`/users/${review.User.id}/bookshelves` class='user-bookshelves-link')
+                        .review-username= review.User.username
+                      .review-action rated it
                       //- +ratingsSection(review.rating, story.id, false)
                       div(class='ratings-container' data-story-id=story.id data-current-rating=review.rating)
                         - let x = 0, y = review.rating + 1

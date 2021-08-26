@@ -570,9 +570,17 @@
   margin-left: 3px;
 }
 
+.user-bookshelves-link {
+  text-decoration: none;
+}
+
 .review-username {
   font-weight: bold;
   margin-right: 3px;
+}
+
+.review-username:hover {
+  text-decoration: underline;
 }
 
 .review-date {
