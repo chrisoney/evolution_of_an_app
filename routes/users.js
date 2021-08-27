@@ -17,13 +17,15 @@ const loginValidators = [
 ];
 
 router.get('/login', csrfProtection, (req, res, next) => {
-  res.render('login', { token: req.csrfToken(), mode: 'auth-background' });
+  const redirect = req.query.redirect;
+  res.render('login', { token: req.csrfToken(), mode: 'auth-background', redirect });
 });
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res, next) => {
   const {
     username,
     password,
+    redirect
   } = req.body;
 
   let errors = [];
@@ -42,7 +44,10 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
         loginUser(req, res, user);
         return req.session.save(err => {
           if (err) next(err);
-          else return res.redirect('/');
+          else {
+            if (redirect) return res.redirect(redirect)
+            return res.redirect('/');
+          }
         })
       }
     }
@@ -144,6 +149,8 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
 // Credit to Nathaniel for the idea
 
 router.post('/demo', asyncHandler(async (req, res, next) => {
+  const { redirect } = req.body
+
   // const user = await User.findOne({ where: { username: 'Main_Character' }});
   const user = await User.create({
     username: faker.name.findName(),
@@ -166,7 +173,10 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
   loginUser(req, res, user);
   return req.session.save(err => {
     if (err) next(err);
-    else return res.redirect('/');
+    else {
+      if (redirect) return res.redirect(redirect)
+      return res.redirect('/');
+    }
   })
 }))
 
@@ -175,11 +185,11 @@ router.post('/logout', asyncHandler(async(req, res, next) => {
   const user = await User.findByPk(req.session.auth.userId)
   if(user.demo) await user.destroy();
   logoutUser(req, res);
-  req.session.save(err => {
+  return req.session.save(err => {
     if (err) {
       next(err)
     } else {
-      res.redirect('/users/login')
+      return res.redirect('/users/login')
     }
   })
 }))

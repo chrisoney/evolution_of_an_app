@@ -14,6 +14,7 @@ block content
     +validationErrorSummary(errors)
     form(action='/users/login' method='post')
       input(type='hidden' name='_csrf' value=token)
+      input(type='hidden' name='redirect' value=redirect)
       +field('Username', 'username', username, 'my-username')
       +field('Password', 'password', null, null, 'password')
       div(class="form-buttons")
