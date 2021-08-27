@@ -10,7 +10,7 @@ block content
   div(class='logged-in-user hidden' id=user.id)
   .page-container
     .bookshelf-header
-      h3 My Stories
+      h3 #{user.id === bookshelfUser.id ? 'My Stories' : `${user.username}'s Stories`}
     .page-content
       .sidebar
         h6 Bookshelves
