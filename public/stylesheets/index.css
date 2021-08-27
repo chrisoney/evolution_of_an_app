@@ -164,10 +164,20 @@ body {
 	border-bottom: 2px solid #dfddd4;
 }
 
-.individual-user-container-title {
+.individual-user-top-section {
+	display: flex;
+}
+
+.individual-user-container-title, .individual-user-action {
 	margin-bottom: 18px;
 	font-size: 12px;
 	color: #181818;
+	margin-right: 3px;
+}
+
+.individual-user-container-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .individual-user-images-container{
@@ -225,6 +235,10 @@ body {
 	padding-left: 5px;
 }
 
+.shelf-link {
+	text-decoration: none;
+}
+
 .list-section-list-title{
 	font-size: 14px;
 	padding-bottom: 3px;
@@ -236,6 +250,10 @@ body {
 	color: grey;
 	font-size: 13px;
 	text-overflow: ellipsis;
+}
+
+.list-section-list-title:hover, .list-section-author:hover {
+	text-decoration: underline;
 }
 
 .homepage-list-right {

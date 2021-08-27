@@ -140,7 +140,10 @@ block content
               div(class='currently-reading-examples-title') Here's what people are reading
               each user in currentlyReadingUsers
                 div(class='individual-user-container')
-                  div(class='individual-user-container-title') #{user.username} is currently reading
+                  div(class='individual-user-top-section')
+                    a(href=`/users/${user.id}/bookshelves` class='shelf-link')
+                      div(class='individual-user-container-title') #{user.username} 
+                    div(class='individual-user-action') is currently reading
                   div(class="individual-user-images-container")
                     each story in user.Bookshelves[0].Stories
                       a(href=`/stories/${story.id}`)
@@ -152,8 +155,11 @@ block content
                 -var bookshelf = user.Bookshelves[0]
                 div(class='homepage-list-container')
                   div(class='homepage-list-left')
-                    div(class='list-section-list-title')= bookshelf.name
-                    div(class='list-section-author')= user.username
+                    -const queryVar = bookshelf.name.split(' ').join('-');
+                    a(href=`/users/${user.id}/bookshelves?selected=${queryVar}` class="shelf-link")
+                      div(class='list-section-list-title')= bookshelf.name
+                    a(href=`/users/${user.id}/bookshelves` class="shelf-link")
+                      div(class='list-section-author')= user.username
                   div(class='homepage-list-right')
                     each story in bookshelf.Stories.slice(0, 6)
                       a(href=`/stories/${story.id}`)
