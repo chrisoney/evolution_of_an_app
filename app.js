@@ -73,7 +73,7 @@ cron.schedule('0 0 12 * * *', async () => {
       await placement.save();
     }
   } catch(err) {
-    console.log(err)
+    console.error(err)
   }
 })
 
