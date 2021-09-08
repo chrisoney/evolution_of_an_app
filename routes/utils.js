@@ -61,9 +61,22 @@ const addStories = async (shelves) => {
   }
 }
 
+const alterFeed = async () => {
+  const random = await Placement.findAll({
+    order: sequelize.random(),
+    limit: 10,
+  })
+  for (let i = 0; i < random.length; i++){
+    const placement = random[i]
+    placement.changed('updatedAt', true)
+    await placement.save();
+  }
+}
+
 module.exports = {
   csrfProtection,
   asyncHandler,
   pageChecker,
-  addStories
+  addStories,
+  alterFeed
 };

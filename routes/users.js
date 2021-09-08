@@ -3,7 +3,7 @@ const router = express.Router();
 const faker = require('faker')
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const { asyncHandler, csrfProtection, pageChecker, addStories } = require('./utils');
+const { asyncHandler, csrfProtection, pageChecker, addStories, alterFeed } = require('./utils');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 const { User, Bookshelf, Story, Placement, Review } = require('../db/models')
 
@@ -169,6 +169,7 @@ router.post('/demo', asyncHandler(async (req, res, next) => {
   
   
   await addStories(bookshelves)
+  await alterFeed()
 
   loginUser(req, res, user);
   return req.session.save(err => {

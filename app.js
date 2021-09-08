@@ -77,16 +77,16 @@ cron.schedule('0 0 12 * * *', async () => {
   }
 })
 
-app.get('/testing', asyncHandler(async (req, res) => {
-  const stories = await Story.findAll({
-    where: {
-      [i]: {
-        [Op.iLike]: '%healer%'
-      }
-    }
-  })
-  res.json({ stories })
-}))
+// app.get('/testing', asyncHandler(async (req, res) => {
+//   const stories = await Story.findAll({
+//     where: {
+//       [i]: {
+//         [Op.iLike]: '%healer%'
+//       }
+//     }
+//   })
+//   res.json({ stories })
+// }))
 
 // Sample routes for teaching students how the nesting works
 
