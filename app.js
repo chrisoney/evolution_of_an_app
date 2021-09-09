@@ -77,10 +77,9 @@ cron.schedule('0 0 12 * * *', async () => {
   }
 })
 app.use((req, res, next) => {
-  if (process.env.NODE_ENV != 'development' && !req.secure) {
-     return res.redirect("https://" + req.headers.host + req.url);
+  if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
+    return res.redirect('https://' + req.get('host') + req.url);
   }
-
   next();
 })
 
