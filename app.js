@@ -76,6 +76,13 @@ cron.schedule('0 0 12 * * *', async () => {
     console.error(err)
   }
 })
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV != 'development' && !req.secure) {
+     return res.redirect("https://" + req.headers.host + req.url);
+  }
+
+  next();
+})
 
 // app.get('/testing', asyncHandler(async (req, res) => {
 //   const stories = await Story.findAll({
