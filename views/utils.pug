@@ -9,7 +9,7 @@ mixin validationErrorSummary(errors)
       each error in errors
         li.error= error
 
-
+//- Overloaded the site when used too much 
 mixin ratingsSection(rating, storyId, loggedin)
   div(class='ratings-container' data-story-id=storyId data-current-rating=rating)
     if rating

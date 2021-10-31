@@ -38,6 +38,7 @@ stage_selector_button.addEventListener('dragend', (e) => {
   const currTop = getComputedStyle(grandparent).top
   const newTop = `calc(${currTop} + ${e.offsetY}px)`;
   grandparent.style.top = newTop;
+  
 })
 
 const mode_container = document.querySelector('.mode-container');
